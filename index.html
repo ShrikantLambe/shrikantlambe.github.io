@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shrikant Lambe — Data & AI Portfolio</title>
+  <meta name="description" content="BI & Analytics leader with 21+ years at Workday and Lyft, now building production AI/ML systems. Stanford AI Driven Leadership."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f0e8; --bg2: #ede8df; --ink: #1a1612; --ink2: #3d3830;
+      --muted: #8a8278; --accent: #c4501a; --accent2: #2d6a4f; --accent3: #1d4e89;
+      --border: rgba(26,22,18,0.1); --border2: rgba(26,22,18,0.06); --card: #fff9f2;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 300; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 64px; background: rgba(245,240,232,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.15rem; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero {
+      position: relative; z-index: 1; padding: 160px 64px 100px; max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 360px; gap: 80px; align-items: start;
+    }
+    .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+    .hero h1 { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(3rem, 5.5vw, 5.2rem); line-height: 1.0; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 28px; }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-bio { font-size: 1.02rem; color: var(--ink2); line-height: 1.8; max-width: 560px; margin-bottom: 32px; }
+    .hero-bio strong { color: var(--ink); font-weight: 500; }
+    .hero-certs { display: flex; flex-direction: column; gap: 9px; margin-bottom: 36px; }
+    .cert-badge { display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--ink2); letter-spacing: 0.03em; }
+    .cert-badge::before { content: '◆'; color: var(--accent); font-size: 0.55rem; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; text-decoration: none; padding: 12px 28px; border-radius: 3px; font-weight: 500; font-size: 0.88rem; transition: all 0.2s; }
+    .btn-primary:hover { background: #a83d12; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(196,80,26,0.25); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--ink); text-decoration: none; padding: 12px 28px; border-radius: 3px; font-size: 0.88rem; border: 1px solid rgba(26,22,18,0.2); transition: all 0.2s; }
+    .btn-outline:hover { background: var(--bg2); }
+
+    .hero-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 32px; position: sticky; top: 90px; }
+    .hero-card-title { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 18px; }
+    .metric-row { display: flex; justify-content: space-between; align-items: baseline; padding: 13px 0; border-bottom: 1px solid var(--border2); }
+    .metric-row:last-of-type { border-bottom: none; }
+    .metric-val { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.8rem; color: var(--accent); letter-spacing: -0.03em; }
+    .metric-label { font-size: 0.78rem; color: var(--muted); text-align: right; max-width: 130px; line-height: 1.4; }
+    .hero-divider { height: 1px; background: var(--border); margin: 18px 0; }
+    .hero-contact-item { display: flex; align-items: center; gap: 9px; font-size: 0.78rem; color: var(--ink2); margin-bottom: 9px; text-decoration: none; transition: color 0.2s; }
+    .hero-contact-item:hover { color: var(--accent); }
+    .hero-contact-item svg { color: var(--muted); flex-shrink: 0; }
+
+    section { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 88px 64px; }
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .section-label::before { content: '//'; }
+    .section-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(1.8rem, 3vw, 2.5rem); letter-spacing: -0.025em; margin-bottom: 10px; }
+    .section-sub { color: var(--muted); font-size: 0.92rem; line-height: 1.7; max-width: 500px; margin-bottom: 52px; }
+
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .project-card { background: var(--card); border: 1px solid var(--border); padding: 36px; text-decoration: none; color: inherit; transition: all 0.25s; position: relative; overflow: hidden; }
+    .project-card:hover { background: #fff; box-shadow: 0 16px 48px rgba(0,0,0,0.07); transform: translateY(-2px); z-index: 2; }
+    .project-card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .project-num { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 16px; }
+    .project-type-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 2px; margin-bottom: 14px; }
+    .tag-ml { background: rgba(196,80,26,0.1); color: var(--accent); }
+    .tag-genai { background: rgba(45,106,79,0.1); color: var(--accent2); }
+    .tag-de { background: rgba(29,78,137,0.1); color: var(--accent3); }
+    .tag-ai { background: rgba(100,50,150,0.1); color: #6432a0; }
+    .project-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.3rem; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .project-desc { color: var(--muted); font-size: 0.86rem; line-height: 1.7; margin-bottom: 20px; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+    .stack-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--ink2); background: var(--bg2); border: 1px solid var(--border); padding: 3px 9px; border-radius: 2px; }
+    .project-links { display: flex; gap: 18px; align-items: center; }
+    .plink { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
+    .plink:hover { color: var(--accent); }
+    .plink.demo-link { color: var(--accent); font-weight: 500; }
+
+    .demo-preview { background: var(--bg2); border-radius: 5px; overflow: hidden; border: 1px solid var(--border); }
+    .demo-topbar { background: var(--bg); padding: 9px 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border); }
+    .demo-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .demo-url { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-left: 8px; background: var(--bg2); padding: 2px 8px; border-radius: 2px; border: 1px solid var(--border); }
+
+    /* churn demo */
+    .churn-demo { background: #1a1a2e; color: #e0e0e0; padding: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; line-height: 1.8; }
+    .churn-metric { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .churn-bar { height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 10px 0 4px; overflow: hidden; }
+    .churn-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #ff6b6b, #ff8c42); animation: fillBar 2s ease forwards; }
+    @keyframes fillBar { from { width: 0; } to { width: 72%; } }
+    .churn-insight { background: rgba(255,107,107,0.1); border-left: 3px solid #ff6b6b; padding: 9px 11px; margin-top: 12px; font-size: 0.65rem; color: #ffd0d0; line-height: 1.6; }
+
+    /* marketing demo */
+    .mkt-demo { background: #0f2027; color: #c9d6df; padding: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; }
+    .mkt-kpi-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 12px; }
+    .mkt-kpi { background: rgba(255,255,255,0.05); border-radius: 3px; padding: 10px; text-align: center; }
+    .mkt-kpi-val { font-family: 'Fraunces', serif; font-size: 1.2rem; color: #52e3c2; font-weight: 700; }
+    .mkt-kpi-lbl { font-size: 0.58rem; color: #7a9aaa; margin-top: 2px; }
+    .mkt-summary { background: rgba(82,227,194,0.07); border: 1px solid rgba(82,227,194,0.2); border-radius: 3px; padding: 10px; font-size: 0.65rem; line-height: 1.7; color: #b0ccd6; }
+    .mkt-summary-label { color: #52e3c2; font-weight: 500; display: block; margin-bottom: 5px; font-size: 0.6rem; letter-spacing: 0.08em; }
+
+    /* pipeline demo */
+    .pipe-demo { background: #141c24; color: #a8b8c8; padding: 13px; font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; }
+    .pipe-step { display: flex; align-items: center; gap: 8px; padding: 7px 0; }
+    .pipe-icon { width: 26px; height: 26px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
+    .pipe-status { margin-left: auto; padding: 2px 7px; border-radius: 2px; font-size: 0.58rem; }
+    .status-ok { background: rgba(81,207,102,0.15); color: #51cf66; }
+    .status-run { background: rgba(74,144,217,0.15); color: #4a90d9; animation: blink 1s infinite; }
+    @keyframes blink { 50% { opacity: 0.4; } }
+    .pipe-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-top: 10px; }
+    .pipe-metric-box { background: rgba(255,255,255,0.04); border-radius: 3px; padding: 7px; text-align: center; }
+    .pipe-metric-num { font-size: 1rem; color: #4a90d9; font-family: 'Fraunces', serif; font-weight: 700; }
+    .pipe-metric-lbl { font-size: 0.56rem; color: #6a8098; margin-top: 2px; }
+
+    /* chatbot demo */
+    .chat-demo { background: #1e1e2e; padding: 12px; font-family: 'Outfit', sans-serif; max-height: 190px; overflow: hidden; }
+    .chat-msg { display: flex; gap: 8px; margin-bottom: 10px; align-items: flex-start; }
+    .chat-avatar { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; flex-shrink: 0; margin-top: 2px; font-weight: 600; }
+    .chat-bubble { padding: 7px 11px; border-radius: 8px; line-height: 1.5; font-size: 0.72rem; max-width: 85%; }
+    .user-msg { flex-direction: row-reverse; }
+    .user-msg .chat-avatar { background: #cba6f7; color: #1e1e2e; }
+    .user-msg .chat-bubble { background: #313244; color: #cdd6f4; border-radius: 8px 8px 2px 8px; }
+    .bot-msg .chat-avatar { background: #a6e3a1; color: #1e1e2e; }
+    .bot-msg .chat-bubble { background: #181825; color: #bac2de; border-radius: 8px 8px 8px 2px; }
+    .typing-indicator { display: flex; gap: 4px; padding: 8px 12px; background: #181825; border-radius: 8px 8px 8px 2px; width: fit-content; }
+    .typing-dot { width: 5px; height: 5px; border-radius: 50%; background: #585b70; animation: typingBounce 1.2s infinite; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-5px); } }
+
+    /* experience */
+    .experience-list { display: flex; flex-direction: column; }
+    .exp-item { display: grid; grid-template-columns: 190px 1fr; gap: 40px; padding: 40px 0; border-bottom: 1px solid var(--border2); }
+    .exp-item:first-child { padding-top: 0; }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-period { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 7px; }
+    .exp-company { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; color: var(--accent); margin-bottom: 3px; }
+    .exp-location { font-size: 0.76rem; color: var(--muted); }
+    .exp-role { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.1rem; color: var(--ink); margin-bottom: 12px; }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li { position: relative; padding-left: 16px; color: var(--ink2); font-size: 0.86rem; line-height: 1.75; margin-bottom: 7px; }
+    .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+    .exp-bullets li strong { color: var(--ink); font-weight: 500; }
+
+    /* stack */
+    .stack-categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .stack-cat { background: var(--card); border: 1px solid var(--border); padding: 30px; }
+    .stack-cat-name { font-family: 'Fraunces', serif; font-weight: 500; font-size: 0.98rem; color: var(--ink); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .stack-cat-name span { color: var(--accent); margin-right: 8px; }
+    .stack-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .stack-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--ink2); background: var(--bg2); border: 1px solid var(--border); padding: 4px 11px; border-radius: 2px; }
+
+    /* contact */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .contact-headline { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 1.9rem; color: var(--ink); line-height: 1.4; margin-bottom: 28px; }
+    .contact-cards { display: flex; flex-direction: column; gap: 10px; }
+    .contact-card { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--border); padding: 18px 22px; border-radius: 4px; text-decoration: none; color: inherit; transition: all 0.2s; }
+    .contact-card:hover { border-color: var(--accent); background: #fff; transform: translateX(4px); }
+    .contact-card-icon { font-size: 1.1rem; width: 32px; flex-shrink: 0; }
+    .contact-card-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+    .contact-card-val { font-size: 0.88rem; color: var(--ink); }
+    .open-to { background: rgba(196,80,26,0.05); border: 1px solid rgba(196,80,26,0.18); border-radius: 4px; padding: 18px 22px; margin-top: 20px; }
+    .open-to-title { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+    .open-to-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .open-to-tag { font-size: 0.8rem; color: var(--ink2); background: var(--bg); padding: 4px 13px; border-radius: 2px; border: 1px solid var(--border); }
+
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 24px 64px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); flex-wrap: wrap; gap: 8px; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 1024px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 110px 20px 60px; gap: 36px; }
+      .hero-card { position: static; }
+      section { padding: 56px 20px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.wide { grid-column: 1; grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 10px; }
+      .stack-categories { grid-template-columns: 1fr; }
+      .contact-layout { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Shrikant Lambe</a>
+  <ul class="nav-links">
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#stack">stack</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Data & AI Portfolio · Milpitas, CA</div>
+    <h1>BI & Analytics<br/><em>Leader</em><br/>Building AI</h1>
+    <p class="hero-bio">
+      <strong>21+ years</strong> driving enterprise data modernization at companies like
+      <strong>Workday</strong> and <strong>Lyft</strong> — now building production-grade
+      <strong>AI/ML systems</strong>, GenAI pipelines, and real-time data platforms.
+    </p>
+    <div class="hero-certs">
+      <div class="cert-badge">AI Driven Leadership — Stanford University</div>
+      <div class="cert-badge">Data Analytics Certificate — Cornell University</div>
+      <div class="cert-badge">M.S. Software & Telecom Engineering — BITS Pilani</div>
+    </div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="https://www.linkedin.com/in/shrikantlambe" target="_blank" class="btn-outline">LinkedIn</a>
+      <a href="mailto:shrikantlambe@gmail.com" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-card reveal">
+    <div class="hero-card-title">career at a glance</div>
+    <div class="metric-row">
+      <div class="metric-val">21+</div>
+      <div class="metric-label">years in enterprise data & analytics</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-val">40%</div>
+      <div class="metric-label">manual reporting reduction at Workday</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-val">8+</div>
+      <div class="metric-label">BI analysts & engineers managed</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-val">4</div>
+      <div class="metric-label">production AI/ML projects shipped</div>
+    </div>
+    <div class="hero-divider"></div>
+    <a href="mailto:shrikantlambe@gmail.com" class="hero-contact-item">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      shrikantlambe@gmail.com
+    </a>
+    <a href="tel:3147755528" class="hero-contact-item">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 2.18 2 2 0 014 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      (314) 775-5528
+    </a>
+    <a href="https://www.linkedin.com/in/shrikantlambe" target="_blank" class="hero-contact-item">
+      <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      linkedin.com/in/shrikantlambe
+    </a>
+    <a href="https://github.com/ShrikantLambe" target="_blank" class="hero-contact-item">
+      <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      github.com/ShrikantLambe
+    </a>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">featured work</div>
+  <h2 class="section-title">AI & Data Projects</h2>
+  <p class="section-sub">Production systems built for real business impact — each with an interactive preview.</p>
+
+  <div class="projects-grid">
+
+    <!-- CHURN — wide -->
+    <div class="project-card wide reveal">
+      <div>
+        <div class="project-num">01</div>
+        <div class="project-type-tag tag-ml">ML + AI · Flagship</div>
+        <div class="project-title">Customer Churn Analysis & Prediction</div>
+        <p class="project-desc">End-to-end ML system for telecom churn prediction with an LLM-powered Copilot, SHAP explainability per prediction, AI-generated retention strategies, and a FastAPI microservice. CI/CD via GitHub Actions.</p>
+        <div class="project-stack">
+          <span class="stack-pill">scikit-learn</span><span class="stack-pill">OpenAI</span>
+          <span class="stack-pill">SHAP</span><span class="stack-pill">Streamlit</span>
+          <span class="stack-pill">FastAPI</span><span class="stack-pill">GitHub Actions</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/ShrikantLambe/customer-churn-analysis" target="_blank" class="plink">⎆ GitHub</a>
+          <a href="#" class="plink demo-link">▶ Deploy on Streamlit Cloud →</a>
+        </div>
+      </div>
+      <div class="demo-preview">
+        <div class="demo-topbar">
+          <div class="demo-dot" style="background:#ff5f57"></div><div class="demo-dot" style="background:#ffbd2e"></div><div class="demo-dot" style="background:#28c840"></div>
+          <div class="demo-url">churn-analysis.streamlit.app</div>
+        </div>
+        <div style="background:#1a1a2e; padding:14px;">
+          <div class="churn-demo">
+            <div style="color:#a0a8c0; font-size:0.6rem; letter-spacing:0.1em; margin-bottom:10px;">CHURN RISK DASHBOARD · LIVE PREDICTION</div>
+            <div class="churn-metric"><span>Customer ID</span><span style="color:#a0c4ff">#CUS-4821</span></div>
+            <div class="churn-metric"><span>Contract Type</span><span style="color:#a0c4ff">Month-to-month</span></div>
+            <div class="churn-metric"><span>Tenure (months)</span><span style="color:#a0c4ff">7</span></div>
+            <div class="churn-metric"><span>Monthly Charges</span><span style="color:#a0c4ff">$89.40</span></div>
+            <div style="margin-top:12px; margin-bottom:3px; color:#a0a8c0; font-size:0.58rem; letter-spacing:0.08em;">CHURN PROBABILITY</div>
+            <div class="churn-bar"><div class="churn-bar-fill"></div></div>
+            <div class="churn-metric"><span style="color:#ff6b6b; font-weight:500;">72% — HIGH RISK</span><span style="color:#ff6b6b;">↑ above threshold</span></div>
+            <div class="churn-insight">🤖 <strong>AI Copilot:</strong> Short tenure + month-to-month contract + high charges = 3 top churn signals. Recommend targeted retention offer within 48hrs.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKETING -->
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-type-tag tag-genai">GenAI · Enterprise</div>
+      <div class="project-title">Marketing AI Intelligence Engine</div>
+      <p class="project-desc">Inspired by real Workday AI work. 4-layer GenAI architecture (Semantic → Context/RAG → Insight Engine → LLM Generation) transforms campaign data into board-ready executive summaries in under 30 seconds.</p>
+      <div class="project-stack">
+        <span class="stack-pill">OpenAI GPT-4</span><span class="stack-pill">RAG</span>
+        <span class="stack-pill">Streamlit</span><span class="stack-pill">Pydantic</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/ShrikantLambe/marketing-executive-summary-genai" target="_blank" class="plink">⎆ GitHub</a>
+        <a href="#" class="plink demo-link">▶ Live Demo →</a>
+      </div>
+      <div class="demo-preview" style="margin-top:20px;">
+        <div class="demo-topbar">
+          <div class="demo-dot" style="background:#ff5f57"></div><div class="demo-dot" style="background:#ffbd2e"></div><div class="demo-dot" style="background:#28c840"></div>
+          <div class="demo-url">marketing-ai.streamlit.app</div>
+        </div>
+        <div style="background:#0f2027; padding:14px;">
+          <div class="mkt-demo">
+            <div style="color:#52e3c2; font-size:0.58rem; letter-spacing:0.1em; margin-bottom:10px;">Q3 CAMPAIGN PERFORMANCE · AI SUMMARY</div>
+            <div class="mkt-kpi-row">
+              <div class="mkt-kpi"><div class="mkt-kpi-val">4.2x</div><div class="mkt-kpi-lbl">ROAS</div></div>
+              <div class="mkt-kpi"><div class="mkt-kpi-val">$1.8M</div><div class="mkt-kpi-lbl">Revenue</div></div>
+              <div class="mkt-kpi"><div class="mkt-kpi-val">↑23%</div><div class="mkt-kpi-lbl">vs Q2</div></div>
+            </div>
+            <div class="mkt-summary">
+              <span class="mkt-summary-label">🤖 AI GENERATED EXECUTIVE SUMMARY</span>
+              Q3 delivered ROAS of 4.2x, exceeding 3.5x benchmark by 20%. Paid search drove 62% of revenue. Anomaly: email CTR declined 18% WoW — recommend creative refresh before Q4.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="project-card reveal">
+      <div class="project-num">03</div>
+      <div class="project-type-tag tag-de">Data Engineering · Streaming</div>
+      <div class="project-title">Real-Time Retail Sales Pipeline</div>
+      <p class="project-desc">Production streaming platform: Kafka → PySpark Structured Streaming → Snowflake → dbt incremental MERGE → Airflow orchestration with automated data quality checks. Fully containerized via Docker Compose.</p>
+      <div class="project-stack">
+        <span class="stack-pill">Apache Kafka</span><span class="stack-pill">PySpark</span>
+        <span class="stack-pill">Snowflake</span><span class="stack-pill">dbt</span>
+        <span class="stack-pill">Airflow</span><span class="stack-pill">Docker</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline" target="_blank" class="plink">⎆ GitHub</a>
+        <a href="https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline/blob/main/SYSTEM_DESIGN.md" target="_blank" class="plink demo-link">▶ System Design →</a>
+      </div>
+      <div class="demo-preview" style="margin-top:20px;">
+        <div class="demo-topbar">
+          <div class="demo-dot" style="background:#ff5f57"></div><div class="demo-dot" style="background:#ffbd2e"></div><div class="demo-dot" style="background:#28c840"></div>
+          <div class="demo-url">localhost:8080 · Airflow DAG</div>
+        </div>
+        <div style="background:#141c24; padding:13px;">
+          <div class="pipe-demo">
+            <div style="color:#4a90d9; font-size:0.58rem; letter-spacing:0.1em; margin-bottom:10px;">PIPELINE STATUS · retail_streaming_pipeline</div>
+            <div class="pipe-step"><div class="pipe-icon" style="background:rgba(81,207,102,0.15); color:#51cf66;">📨</div><span>Kafka Producer</span><span style="color:#4a9;margin:0 4px;">→</span><span style="color:#6a8098">25 events</span><span class="pipe-status status-ok">✓ done</span></div>
+            <div class="pipe-step"><div class="pipe-icon" style="background:rgba(74,144,217,0.15); color:#4a90d9;">⚡</div><span>PySpark Streaming</span><span style="color:#4a9;margin:0 4px;">→</span><span style="color:#6a8098">dedup + window</span><span class="pipe-status status-ok">✓ done</span></div>
+            <div class="pipe-step"><div class="pipe-icon" style="background:rgba(41,181,232,0.15); color:#29b5e8;">❄️</div><span>Snowflake write</span><span style="color:#4a9;margin:0 4px;">→</span><span style="color:#6a8098">raw + agg</span><span class="pipe-status status-ok">✓ done</span></div>
+            <div class="pipe-step"><div class="pipe-icon" style="background:rgba(255,107,107,0.15); color:#ff6b6b;">🔁</div><span>dbt run</span><span style="color:#4a9;margin:0 4px;">→</span><span style="color:#6a8098">fact_sales MERGE</span><span class="pipe-status status-run">● running</span></div>
+            <div class="pipe-metrics">
+              <div class="pipe-metric-box"><div class="pipe-metric-num">24.8K</div><div class="pipe-metric-lbl">rows today</div></div>
+              <div class="pipe-metric-box"><div class="pipe-metric-num">$94K</div><div class="pipe-metric-lbl">revenue</div></div>
+              <div class="pipe-metric-box"><div class="pipe-metric-num">0</div><div class="pipe-metric-lbl">DQ fails</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHATBOT -->
+    <div class="project-card reveal">
+      <div class="project-num">04</div>
+      <div class="project-type-tag tag-ai">AI · Deployed</div>
+      <div class="project-title">GPT-4o AI Chatbot</div>
+      <p class="project-desc">Production web chatbot with multi-turn memory, animated typing indicators, responsive dark UI. Flask + Gunicorn backend deployed on Render. One-line system prompt swap for any domain.</p>
+      <div class="project-stack">
+        <span class="stack-pill">Flask</span><span class="stack-pill">OpenAI GPT-4o</span>
+        <span class="stack-pill">Gunicorn</span><span class="stack-pill">Render</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/ShrikantLambe/simple_chatbot" target="_blank" class="plink">⎆ GitHub</a>
+        <a href="#" class="plink demo-link">▶ Live Demo →</a>
+      </div>
+      <div class="demo-preview" style="margin-top:20px;">
+        <div class="demo-topbar">
+          <div class="demo-dot" style="background:#ff5f57"></div><div class="demo-dot" style="background:#ffbd2e"></div><div class="demo-dot" style="background:#28c840"></div>
+          <div class="demo-url">ai-chatbot.onrender.com</div>
+        </div>
+        <div style="background:#1e1e2e; padding:12px;">
+          <div class="chat-demo">
+            <div class="chat-msg user-msg">
+              <div class="chat-avatar">U</div>
+              <div class="chat-bubble">What are the key drivers of customer churn?</div>
+            </div>
+            <div class="chat-msg bot-msg">
+              <div class="chat-avatar">AI</div>
+              <div class="chat-bubble">Key drivers: contract type (month-to-month = highest risk), tenure under 12 months, high charges relative to value, and lack of bundled services. Want a deeper breakdown?</div>
+            </div>
+            <div class="chat-msg user-msg">
+              <div class="chat-avatar">U</div>
+              <div class="chat-bubble">Yes, focus on retention strategies</div>
+            </div>
+            <div class="chat-msg bot-msg">
+              <div class="chat-avatar">AI</div>
+              <div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<div style="background:var(--bg2); position:relative; z-index:1;">
+<section id="experience">
+  <div class="section-label">career history</div>
+  <h2 class="section-title">Professional Experience</h2>
+  <p class="section-sub">21+ years delivering enterprise data platforms and AI-powered analytics.</p>
+  <div class="experience-list">
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">2020 – Present</div>
+        <div class="exp-company">Workday</div>
+        <div class="exp-location">Remote</div>
+      </div>
+      <div>
+        <div class="exp-role">Manager, BI Analytics <span style="color:var(--muted);font-size:0.78rem;font-family:'JetBrains Mono',monospace;">(promoted from Sr. BI Analyst)</span></div>
+        <ul class="exp-bullets">
+          <li>Led <strong>Analytics Modernization Program</strong> — migrated legacy Tableau ecosystem to Sigma + Snowflake/dbt; established governed self-service platform for global Sales & Marketing.</li>
+          <li>Deployed an <strong>AI Companion conversational interface</strong> enabling natural language querying of enterprise metrics with context-aware, governed responses.</li>
+          <li>Built <strong>AI-enabled executive summary engine</strong> synthesizing marketing performance data into board-ready narratives — the direct inspiration for the Marketing AI portfolio project.</li>
+          <li>Designed controlled prompt templates and semantic grounding to <strong>reduce hallucination risk</strong> in AI-generated GTM analytics outputs.</li>
+          <li>Institutionalized forecasting processes that <strong>reduced manual reporting by ~40%</strong> and improved forecast accuracy at scale.</li>
+          <li>Manages and mentors <strong>8+ BI analysts and data engineers</strong> across hiring, performance, and delivery standards.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">2018 – 2020</div>
+        <div class="exp-company">Lyft</div>
+        <div class="exp-location">San Francisco, CA</div>
+      </div>
+      <div>
+        <div class="exp-role">Senior BI / Data Engineer — Growth Analytics</div>
+        <ul class="exp-bullets">
+          <li>Built scalable data infrastructure supporting <strong>multi-million-dollar marketing spend</strong> across acquisition channels.</li>
+          <li>Designed end-to-end <strong>campaign attribution, funnel analytics, and churn analysis</strong> frameworks enabling data-driven budget reallocation.</li>
+          <li>Defined core growth KPIs (CAC, ROI, retention, LTV) and delivered weekly executive dashboards tracking top-line metrics.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">2016 – 2018</div>
+        <div class="exp-company">Intuitive Surgical</div>
+        <div class="exp-location">Sunnyvale, CA</div>
+      </div>
+      <div>
+        <div class="exp-role">Senior BI / Data Engineer — Supply Chain Analytics</div>
+        <ul class="exp-bullets">
+          <li>Modernized analytics in regulated medical device environment — migrated Excel processes to <strong>production-grade automated pipelines</strong> and governed dashboards.</li>
+          <li>Delivered KPI frameworks for production efficiency, lead times, defect rates, and capacity planning used in executive reviews.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">2015 – 2016</div>
+        <div class="exp-company">ServiceNow</div>
+      </div>
+      <div>
+        <div class="exp-role">Lead BI Analyst</div>
+        <ul class="exp-bullets">
+          <li>Delivered cross-functional analytics across Finance, Sales, HR, and Product; standardized metrics and reduced manual reporting via automation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">2014 – 2015</div>
+        <div class="exp-company">Juniper Networks</div>
+      </div>
+      <div>
+        <div class="exp-role">Lead BI Developer — CRM Transformation</div>
+        <ul class="exp-bullets">
+          <li>Led reporting strategy during <strong>SAP CRM migration</strong>; delivered executive dashboards and coordinated cross-team SIT/UAT and user enablement.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-meta">
+        <div class="exp-period">2006 – 2014</div>
+        <div class="exp-company">Tech Mahindra</div>
+        <div class="exp-location">India</div>
+      </div>
+      <div>
+        <div class="exp-role">Project Lead</div>
+        <ul class="exp-bullets">
+          <li>Led cross-functional teams of 8–20 across global delivery environments; primary client-facing technical lead across multiple enterprise programs.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="section-label">tools & technologies</div>
+  <h2 class="section-title">Tech Stack</h2>
+  <p class="section-sub">Spanning the full data lifecycle — warehouse to LLM.</p>
+  <div class="stack-categories">
+    <div class="stack-cat reveal">
+      <div class="stack-cat-name"><span>01</span>AI & Machine Learning</div>
+      <div class="stack-tags">
+        <span class="stack-tag">OpenAI GPT-4</span><span class="stack-tag">LangChain</span>
+        <span class="stack-tag">RAG / Vector DBs</span><span class="stack-tag">scikit-learn</span>
+        <span class="stack-tag">SHAP</span><span class="stack-tag">Prompt Engineering</span>
+        <span class="stack-tag">Semantic Grounding</span>
+      </div>
+    </div>
+    <div class="stack-cat reveal">
+      <div class="stack-cat-name"><span>02</span>Data Engineering</div>
+      <div class="stack-tags">
+        <span class="stack-tag">Snowflake</span><span class="stack-tag">dbt</span>
+        <span class="stack-tag">Apache Kafka</span><span class="stack-tag">PySpark</span>
+        <span class="stack-tag">Apache Airflow</span><span class="stack-tag">Docker</span>
+        <span class="stack-tag">ELT Pipelines</span><span class="stack-tag">Semantic Modeling</span>
+      </div>
+    </div>
+    <div class="stack-cat reveal">
+      <div class="stack-cat-name"><span>03</span>BI & App Development</div>
+      <div class="stack-tags">
+        <span class="stack-tag">Sigma Computing</span><span class="stack-tag">Tableau</span>
+        <span class="stack-tag">Streamlit</span><span class="stack-tag">FastAPI</span>
+        <span class="stack-tag">Flask</span><span class="stack-tag">Python</span>
+        <span class="stack-tag">SQL</span><span class="stack-tag">GitHub Actions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div style="background:var(--bg2); position:relative; z-index:1;">
+<section id="contact">
+  <div class="section-label">get in touch</div>
+  <div class="contact-layout">
+    <div>
+      <h2 class="section-title">Let's build<br/>something together</h2>
+      <p class="contact-headline">"21 years of making<br/>data useful — now<br/>making it intelligent."</p>
+      <div class="open-to">
+        <div class="open-to-title">Open to</div>
+        <div class="open-to-tags">
+          <span class="open-to-tag">Senior Data Engineering</span>
+          <span class="open-to-tag">ML Engineering</span>
+          <span class="open-to-tag">AI Product Leadership</span>
+          <span class="open-to-tag">Head of Analytics</span>
+          <span class="open-to-tag">BI Modernization</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-cards">
+      <a href="mailto:shrikantlambe@gmail.com" class="contact-card reveal">
+        <div class="contact-card-icon">📧</div>
+        <div><div class="contact-card-label">Email</div><div class="contact-card-val">shrikantlambe@gmail.com</div></div>
+      </a>
+      <a href="tel:3147755528" class="contact-card reveal">
+        <div class="contact-card-icon">📞</div>
+        <div><div class="contact-card-label">Phone</div><div class="contact-card-val">(314) 775-5528</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/shrikantlambe" target="_blank" class="contact-card reveal">
+        <div class="contact-card-icon">💼</div>
+        <div><div class="contact-card-label">LinkedIn</div><div class="contact-card-val">linkedin.com/in/shrikantlambe</div></div>
+      </a>
+      <a href="https://github.com/ShrikantLambe" target="_blank" class="contact-card reveal">
+        <div class="contact-card-icon">🐙</div>
+        <div><div class="contact-card-label">GitHub</div><div class="contact-card-val">github.com/ShrikantLambe</div></div>
+      </a>
+      <div class="contact-card reveal" style="cursor:default; pointer-events:none;">
+        <div class="contact-card-icon">📍</div>
+        <div><div class="contact-card-label">Location</div><div class="contact-card-val">Milpitas, CA · Open to Remote</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer>
+  <span>© 2026 Shrikant Lambe</span>
+  <span>Stanford AI Driven Leadership · Cornell Data Analytics · BITS Pilani M.S.</span>
+  <span>Host free at <code style="background:var(--bg2);padding:2px 6px;border-radius:2px;">ShrikantLambe.github.io</code></span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 80); obs.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
