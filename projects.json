@@ -1,0 +1,107 @@
+[
+  {
+    "id": "01",
+    "title": "Customer Churn Analysis & Prediction",
+    "tag": "ML + AI · Flagship",
+    "github": "https://github.com/ShrikantLambe/customer-churn-analysis",
+    "live": null,
+    "article_linkedin": "https://www.linkedin.com/pulse/how-i-turned-traditional-churn-prediction-model-ai-powered-lambe-xpcuc/",
+    "article_medium": "https://medium.com/@shrikantlambe/how-i-turned-a-traditional-churn-prediction-model-into-an-ai-powered-decision-copilot-5f106c0358e9",
+    "article_substack": "https://shrikantlambe.substack.com/p/how-i-turned-a-traditional-churn",
+    "stack": [
+      "scikit-learn",
+      "OpenAI",
+      "SHAP",
+      "Streamlit",
+      "FastAPI",
+      "GitHub Actions"
+    ]
+  },
+  {
+    "id": "02",
+    "title": "Marketing AI Intelligence Engine",
+    "tag": "GenAI · Enterprise",
+    "github": "https://github.com/ShrikantLambe/marketing-executive-summary-genai",
+    "live": null,
+    "article_linkedin": "https://www.linkedin.com/pulse/how-i-built-genai-powered-executive-summary-generator-shrikant-lambe-7scnc/",
+    "article_medium": "https://medium.com/@shrikantlambe/how-i-built-a-genai-powered-executive-summary-generator-for-marketing-organizations-b19f94ec5132",
+    "article_substack": "https://shrikantlambe.substack.com/p/how-i-built-a-genai-powered-executive",
+    "stack": [
+      "OpenAI GPT-4",
+      "RAG",
+      "Streamlit",
+      "Pydantic"
+    ]
+  },
+  {
+    "id": "03",
+    "title": "Real-Time Retail Sales Pipeline",
+    "tag": "Data Engineering · Streaming",
+    "github": "https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline",
+    "live": "https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline/blob/main/SYSTEM_DESIGN.md",
+    "article_linkedin": null,
+    "article_medium": "https://medium.com/@shrikantlambe/how-i-built-a-production-grade-real-time-retail-sales-data-pipeline-4601430087db",
+    "article_substack": "https://shrikantlambe.substack.com/p/how-i-built-a-production-grade-real",
+    "stack": [
+      "Apache Kafka",
+      "PySpark",
+      "Snowflake",
+      "dbt",
+      "Airflow",
+      "Docker"
+    ]
+  },
+  {
+    "id": "04",
+    "title": "GPT-4o AI Chatbot",
+    "tag": "AI · Deployed",
+    "github": "https://github.com/ShrikantLambe/simple_chatbot",
+    "live": null,
+    "article_linkedin": "https://www.linkedin.com/pulse/from-bi-ai-my-first-lightweight-chatbot-build-what-taught-lambe-zvydc/",
+    "article_medium": "https://medium.com/@shrikantlambe/from-dashboards-to-dialogues-what-building-a-simple-chatbot-taught-me-about-the-future-of-b34ea01a3cc5",
+    "article_substack": "https://shrikantlambe.substack.com/p/from-dashboards-to-dialogues-what",
+    "stack": [
+      "Flask",
+      "OpenAI GPT-4o",
+      "Gunicorn",
+      "Render"
+    ]
+  },
+  {
+    "id": "05",
+    "title": "AI-Native Data Platform on Snowflake Cortex",
+    "tag": "Snowflake · Enterprise AI",
+    "github": "https://github.com/ShrikantLambe/snowflake-cortex-architecture",
+    "live": "https://shrikantlambe.github.io/snowflake-cortex-architecture/",
+    "article_linkedin": null,
+    "article_medium": "https://medium.com/@shrikantlambe/what-it-actually-takes-to-run-ai-natively-inside-a-data-warehouse-c41209cdae2a",
+    "article_substack": "https://shrikantlambe.substack.com/p/what-it-actually-takes-to-run-ai",
+    "stack": [
+      "Snowflake Cortex",
+      "Cortex Search",
+      "Cortex Analyst",
+      "Anthropic API",
+      "SQL",
+      "GitHub Pages"
+    ]
+  },
+  {
+    "id": "06",
+    "title": "Growth Intelligence Agent",
+    "tag": "AI Agent · Analytics",
+    "github": "https://github.com/ShrikantLambe/growth_intelligence_agent",
+    "live": "https://shrikantlambe.github.io/growth_intelligence_agent/",
+    "article_linkedin": "https://www.linkedin.com/pulse/i-built-growth-intelligence-agent-acts-virtual-analyst-shrikant-lambe-u2c5c/",
+    "article_medium": "https://medium.com/@shrikantlambe/bdb94846130d",
+    "article_substack": "https://shrikantlambe.substack.com/p/i-built-an-growth-intelligence-agent",
+    "stack": [
+      "Claude 3.5 Sonnet",
+      "LangChain",
+      "FAISS",
+      "RAG",
+      "Streamlit",
+      "Plotly",
+      "SQLite"
+    ]
+  }
+]
