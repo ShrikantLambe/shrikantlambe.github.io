@@ -103,5 +103,41 @@
       "Plotly",
       "SQLite"
     ]
+  },
+  {
+    "id": "07",
+    "title": "Pipeline Sentinel",
+    "tag": "AI Agent · DataOps",
+    "github": "https://github.com/ShrikantLambe/Pipeline_Sentinel",
+    "live": null,
+    "article_linkedin": null,
+    "article_medium": null,
+    "article_substack": null,
+    "stack": [
+      "Claude Sonnet",
+      "FastAPI",
+      "Airflow",
+      "Streamlit",
+      "LangSmith",
+      "SQLite"
+    ]
+  },
+  {
+    "id": "08",
+    "title": "LoanLens",
+    "tag": "FinTech · Data Platform",
+    "github": "https://github.com/ShrikantLambe/loanlens",
+    "live": null,
+    "article_linkedin": null,
+    "article_medium": null,
+    "article_substack": null,
+    "stack": [
+      "Claude Sonnet",
+      "DuckDB",
+      "dbt Core",
+      "Snowflake",
+      "Streamlit",
+      "Python"
+    ]
   }
 ]

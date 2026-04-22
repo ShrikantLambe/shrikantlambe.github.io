@@ -5,7 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shrikant Lambe — Data & AI Portfolio</title>
   <meta name="description" content="BI & Analytics leader with 21+ years at Workday and Lyft, now building production AI/ML systems. Stanford AI Driven Leadership."/>
+  <meta property="og:title" content="Shrikant Lambe — Data & AI Portfolio"/>
+  <meta property="og:description" content="BI & Analytics leader with 21+ years at Workday and Lyft, now building production AI/ML systems."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://shrikantlambe.github.io/"/>
+  <meta name="twitter:card" content="summary"/>
+  <link rel="canonical" href="https://shrikantlambe.github.io/"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23c4501a' rx='4'/><text x='16' y='23' font-family='Georgia,serif' font-weight='700' font-size='20' fill='white' text-anchor='middle'>S</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,7 +23,7 @@
       --border: rgba(26,22,18,0.1); --border2: rgba(26,22,18,0.06); --card: #fff9f2;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 300; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 400; overflow-x: hidden; }
     body::before {
       content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
@@ -30,6 +38,13 @@
     .nav-links { display: flex; gap: 40px; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
+    .nav-links a.active { color: var(--accent); }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+    .nav-hamburger span { display: block; width: 20px; height: 1.5px; background: var(--ink); transition: all 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+    .scroll-bar { position: absolute; bottom: 0; left: 0; height: 2px; width: 0%; background: var(--accent); pointer-events: none; }
 
     .hero {
       position: relative; z-index: 1; padding: 160px 64px 100px; max-width: 1280px; margin: 0 auto;
@@ -37,7 +52,7 @@
     }
     .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
     .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
-    .hero h1 { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(3rem, 5.5vw, 5.2rem); line-height: 1.0; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 28px; }
+    .hero h1 { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(3rem, 5.5vw, 5.2rem); line-height: 1.05; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 28px; }
     .hero h1 em { font-style: italic; color: var(--accent); }
     .hero-bio { font-size: 1.02rem; color: var(--ink2); line-height: 1.8; max-width: 560px; margin-bottom: 32px; }
     .hero-bio strong { color: var(--ink); font-weight: 500; }
@@ -158,6 +173,11 @@
     .stack-cat-name span { color: var(--accent); margin-right: 8px; }
     .stack-tags { display: flex; flex-wrap: wrap; gap: 7px; }
     .stack-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--ink2); background: var(--bg2); border: 1px solid var(--border); padding: 4px 11px; border-radius: 2px; }
+    .stack-cat:nth-child(1) { border-top: 2px solid var(--accent); }
+    .stack-cat:nth-child(2) { border-top: 2px solid var(--accent3); }
+    .stack-cat:nth-child(3) { border-top: 2px solid var(--accent2); }
+    .stack-cat:nth-child(2) .stack-cat-name span { color: var(--accent3); }
+    .stack-cat:nth-child(3) .stack-cat-name span { color: var(--accent2); }
 
     /* contact */
     .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
@@ -165,7 +185,8 @@
     .contact-cards { display: flex; flex-direction: column; gap: 10px; }
     .contact-card { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--border); padding: 18px 22px; border-radius: 4px; text-decoration: none; color: inherit; transition: all 0.2s; }
     .contact-card:hover { border-color: var(--accent); background: #fff; transform: translateX(4px); }
-    .contact-card-icon { font-size: 1.1rem; width: 32px; flex-shrink: 0; }
+    .contact-card-icon { width: 32px; flex-shrink: 0; display: flex; align-items: center; color: var(--muted); transition: color 0.2s; }
+    .contact-card:hover .contact-card-icon { color: var(--accent); }
     .contact-card-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
     .contact-card-val { font-size: 0.88rem; color: var(--ink); }
     .open-to { background: rgba(196,80,26,0.05); border: 1px solid rgba(196,80,26,0.18); border-radius: 4px; padding: 18px 22px; margin-top: 20px; }
@@ -174,13 +195,20 @@
     .open-to-tag { font-size: 0.8rem; color: var(--ink2); background: var(--bg); padding: 4px 13px; border-radius: 2px; border: 1px solid var(--border); }
 
     footer { position: relative; z-index: 1; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; padding: 24px 64px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); flex-wrap: wrap; gap: 8px; }
+    .back-top { color: var(--muted); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; transition: color 0.2s; }
+    .back-top:hover { color: var(--accent); }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.in { opacity: 1; transform: none; }
 
     @media (max-width: 1024px) {
       nav { padding: 14px 20px; }
-      .nav-links { display: none; }
+      .nav-links { display: none; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 0; right: 0; background: rgba(245,240,232,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 8px 20px 16px; z-index: 99; }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid var(--border2); font-size: 0.85rem; }
+      .nav-hamburger { display: flex; }
       .hero { grid-template-columns: 1fr; padding: 110px 20px 60px; gap: 36px; }
       .hero-card { position: static; }
       section { padding: 56px 20px; }
@@ -203,13 +231,17 @@
     <li><a href="#stack">stack</a></li>
     <li><a href="#contact">contact</a></li>
   </ul>
+  <button class="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="scroll-bar" id="scroll-bar"></div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
   <div>
     <div class="hero-eyebrow">Data & AI Portfolio · Milpitas, CA</div>
-    <h1>BI & Analytics<br/><em>Leader</em><br/>Building AI</h1>
+    <h1>BI & Analytics<br/><em>Leader</em><br/>Building AI Systems</h1>
     <p class="hero-bio">
       <strong>21+ years</strong> driving enterprise data modernization at companies like
       <strong>Workday</strong> and <strong>Lyft</strong> — now building production-grade
@@ -222,7 +254,7 @@
     </div>
     <div class="hero-actions">
       <a href="#projects" class="btn-primary">View Projects</a>
-      <a href="https://www.linkedin.com/in/shrikantlambe" target="_blank" class="btn-outline">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/shrikantlambe" target="_blank" rel="noopener noreferrer" class="btn-outline">LinkedIn</a>
       <a href="mailto:shrikantlambe@gmail.com" class="btn-outline">Get in Touch</a>
     </div>
   </div>
@@ -241,32 +273,32 @@
       <div class="metric-label">BI analysts & engineers managed</div>
     </div>
     <div class="metric-row">
-      <div class="metric-val">6</div>
+      <div class="metric-val">8</div>
       <div class="metric-label">production AI/ML projects shipped</div>
     </div>
     <div class="hero-divider"></div>
     <a href="mailto:shrikantlambe@gmail.com" class="hero-contact-item">
-      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <svg aria-hidden="true" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       shrikantlambe@gmail.com
     </a>
-    <a href="tel:3147755528" class="hero-contact-item">
-      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 2.18 2 2 0 014 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+    <a href="tel:+13147755528" class="hero-contact-item">
+      <svg aria-hidden="true" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 2.18 2 2 0 014 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
       (314) 775-5528
     </a>
-    <a href="https://www.linkedin.com/in/shrikantlambe" target="_blank" class="hero-contact-item">
-      <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    <a href="https://www.linkedin.com/in/shrikantlambe" target="_blank" rel="noopener noreferrer" class="hero-contact-item">
+      <svg aria-hidden="true" width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
       linkedin.com/in/shrikantlambe
     </a>
-    <a href="https://github.com/ShrikantLambe" target="_blank" class="hero-contact-item">
-      <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+    <a href="https://github.com/ShrikantLambe" target="_blank" rel="noopener noreferrer" class="hero-contact-item">
+      <svg aria-hidden="true" width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
       github.com/ShrikantLambe
     </a>
-    <a href="https://medium.com/@shrikantlambe" target="_blank" class="hero-contact-item">
-      <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+    <a href="https://medium.com/@shrikantlambe" target="_blank" rel="noopener noreferrer" class="hero-contact-item">
+      <svg aria-hidden="true" width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
       medium.com/@shrikantlambe
     </a>
-    <a href="https://shrikantlambe.substack.com/" target="_blank" class="hero-contact-item">
-      <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+    <a href="https://shrikantlambe.substack.com/" target="_blank" rel="noopener noreferrer" class="hero-contact-item">
+      <svg aria-hidden="true" width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
       shrikantlambe.substack.com
     </a>
   </div>
@@ -293,9 +325,9 @@
           <span class="stack-pill">FastAPI</span><span class="stack-pill">GitHub Actions</span>
         </div>
         <div class="project-links">
-          <a href="https://github.com/ShrikantLambe/customer-churn-analysis" target="_blank" class="plink">⎆ GitHub</a>
-          <a href="https://www.linkedin.com/pulse/how-i-turned-traditional-churn-prediction-model-ai-powered-lambe-xpcuc/" target="_blank" class="plink demo-link">▶ LinkedIn Article →</a>
-          <a href="https://medium.com/@shrikantlambe/how-i-turned-a-traditional-churn-prediction-model-into-an-ai-powered-decision-copilot-5f106c0358e9" target="_blank" class="plink">✍ Medium</a>
+          <a href="https://github.com/ShrikantLambe/customer-churn-analysis" target="_blank" rel="noopener noreferrer" class="plink">⎆ GitHub</a>
+          <a href="https://www.linkedin.com/pulse/how-i-turned-traditional-churn-prediction-model-ai-powered-lambe-xpcuc/" target="_blank" rel="noopener noreferrer" class="plink demo-link">▶ LinkedIn Article →</a>
+          <a href="https://medium.com/@shrikantlambe/how-i-turned-a-traditional-churn-prediction-model-into-an-ai-powered-decision-copilot-5f106c0358e9" target="_blank" rel="noopener noreferrer" class="plink">✍ Medium</a>
         </div>
       </div>
       <div class="demo-preview">
@@ -330,9 +362,9 @@
         <span class="stack-pill">Streamlit</span><span class="stack-pill">Pydantic</span>
       </div>
       <div class="project-links">
-        <a href="https://github.com/ShrikantLambe/marketing-executive-summary-genai" target="_blank" class="plink">⎆ GitHub</a>
-        <a href="https://www.linkedin.com/pulse/how-i-built-genai-powered-executive-summary-generator-shrikant-lambe-7scnc/" target="_blank" class="plink demo-link">▶ LinkedIn Article →</a>
-        <a href="https://medium.com/@shrikantlambe/how-i-built-a-genai-powered-executive-summary-generator-for-marketing-organizations-b19f94ec5132" target="_blank" class="plink">✍ Medium</a>
+        <a href="https://github.com/ShrikantLambe/marketing-executive-summary-genai" target="_blank" rel="noopener noreferrer" class="plink">⎆ GitHub</a>
+        <a href="https://www.linkedin.com/pulse/how-i-built-genai-powered-executive-summary-generator-shrikant-lambe-7scnc/" target="_blank" rel="noopener noreferrer" class="plink demo-link">▶ LinkedIn Article →</a>
+        <a href="https://medium.com/@shrikantlambe/how-i-built-a-genai-powered-executive-summary-generator-for-marketing-organizations-b19f94ec5132" target="_blank" rel="noopener noreferrer" class="plink">✍ Medium</a>
       </div>
       <div class="demo-preview" style="margin-top:20px;">
         <div class="demo-topbar">
@@ -368,9 +400,9 @@
         <span class="stack-pill">Airflow</span><span class="stack-pill">Docker</span>
       </div>
       <div class="project-links">
-        <a href="https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline" target="_blank" class="plink">⎆ GitHub</a>
-        <a href="https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline/blob/main/SYSTEM_DESIGN.md" target="_blank" class="plink demo-link">▶ System Design →</a>
-        <a href="https://medium.com/@shrikantlambe/how-i-built-a-production-grade-real-time-retail-sales-data-pipeline-4601430087db" target="_blank" class="plink">✍ Medium</a>
+        <a href="https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline" target="_blank" rel="noopener noreferrer" class="plink">⎆ GitHub</a>
+        <a href="https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline/blob/main/SYSTEM_DESIGN.md" target="_blank" rel="noopener noreferrer" class="plink demo-link">▶ System Design →</a>
+        <a href="https://medium.com/@shrikantlambe/how-i-built-a-production-grade-real-time-retail-sales-data-pipeline-4601430087db" target="_blank" rel="noopener noreferrer" class="plink">✍ Medium</a>
       </div>
       <div class="demo-preview" style="margin-top:20px;">
         <div class="demo-topbar">
@@ -405,9 +437,9 @@
         <span class="stack-pill">Gunicorn</span><span class="stack-pill">Render</span>
       </div>
       <div class="project-links">
-        <a href="https://github.com/ShrikantLambe/simple_chatbot" target="_blank" class="plink">⎆ GitHub</a>
-        <a href="https://www.linkedin.com/pulse/from-bi-ai-my-first-lightweight-chatbot-build-what-taught-lambe-zvydc/" target="_blank" class="plink demo-link">▶ LinkedIn Article →</a>
-        <a href="https://medium.com/@shrikantlambe/from-dashboards-to-dialogues-what-building-a-simple-chatbot-taught-me-about-the-future-of-b34ea01a3cc5" target="_blank" class="plink">✍ Medium</a>
+        <a href="https://github.com/ShrikantLambe/simple_chatbot" target="_blank" rel="noopener noreferrer" class="plink">⎆ GitHub</a>
+        <a href="https://www.linkedin.com/pulse/from-bi-ai-my-first-lightweight-chatbot-build-what-taught-lambe-zvydc/" target="_blank" rel="noopener noreferrer" class="plink demo-link">▶ LinkedIn Article →</a>
+        <a href="https://medium.com/@shrikantlambe/from-dashboards-to-dialogues-what-building-a-simple-chatbot-taught-me-about-the-future-of-b34ea01a3cc5" target="_blank" rel="noopener noreferrer" class="plink">✍ Medium</a>
       </div>
       <div class="demo-preview" style="margin-top:20px;">
         <div class="demo-topbar">
@@ -449,9 +481,9 @@
         <span class="stack-pill">SQL</span><span class="stack-pill">GitHub Pages</span>
       </div>
       <div class="project-links">
-        <a href="https://github.com/ShrikantLambe/snowflake-cortex-architecture" target="_blank" class="plink">⎆ GitHub</a>
-        <a href="https://shrikantlambe.github.io/snowflake-cortex-architecture/" target="_blank" class="plink demo-link">▶ Live Architecture →</a>
-        <a href="https://medium.com/@shrikantlambe/what-it-actually-takes-to-run-ai-natively-inside-a-data-warehouse-c41209cdae2a" target="_blank" class="plink">✍ Medium</a>
+        <a href="https://github.com/ShrikantLambe/snowflake-cortex-architecture" target="_blank" rel="noopener noreferrer" class="plink">⎆ GitHub</a>
+        <a href="https://shrikantlambe.github.io/snowflake-cortex-architecture/" target="_blank" rel="noopener noreferrer" class="plink demo-link">▶ Live Architecture →</a>
+        <a href="https://medium.com/@shrikantlambe/what-it-actually-takes-to-run-ai-natively-inside-a-data-warehouse-c41209cdae2a" target="_blank" rel="noopener noreferrer" class="plink">✍ Medium</a>
       </div>
       <div class="demo-preview" style="margin-top:20px;">
         <div class="demo-topbar">
@@ -499,10 +531,10 @@
           <span class="stack-pill">SQLite</span>
         </div>
         <div class="project-links">
-          <a href="https://github.com/ShrikantLambe/growth_intelligence_agent" target="_blank" class="plink">⎆ GitHub</a>
-          <a href="https://shrikantlambe.github.io/growth_intelligence_agent/" target="_blank" class="plink demo-link">▶ Live App →</a>
-          <a href="https://www.linkedin.com/pulse/i-built-growth-intelligence-agent-acts-virtual-analyst-shrikant-lambe-u2c5c/" target="_blank" class="plink">✍ LinkedIn Article</a>
-          <a href="https://medium.com/@shrikantlambe/bdb94846130d" target="_blank" class="plink">✍ Medium</a>
+          <a href="https://github.com/ShrikantLambe/growth_intelligence_agent" target="_blank" rel="noopener noreferrer" class="plink">⎆ GitHub</a>
+          <a href="https://shrikantlambe.github.io/growth_intelligence_agent/" target="_blank" rel="noopener noreferrer" class="plink demo-link">▶ Live App →</a>
+          <a href="https://www.linkedin.com/pulse/i-built-growth-intelligence-agent-acts-virtual-analyst-shrikant-lambe-u2c5c/" target="_blank" rel="noopener noreferrer" class="plink">✍ LinkedIn Article</a>
+          <a href="https://medium.com/@shrikantlambe/bdb94846130d" target="_blank" rel="noopener noreferrer" class="plink">✍ Medium</a>
         </div>
       </div>
       <div class="demo-preview">
@@ -538,6 +570,84 @@
       </div>
     </div>
 
+    <!-- PIPELINE SENTINEL -->
+    <div class="project-card reveal">
+      <div class="project-num">07</div>
+      <div class="project-type-tag tag-genai">AI Agent · DataOps</div>
+      <div class="project-title">Pipeline Sentinel</div>
+      <p class="project-desc">Autonomous multi-agent system (6 specialized agents in a ReAct loop) that monitors Airflow pipelines, detects failures, diagnoses root causes, and self-heals without human intervention. Pattern memory prevents repeat pages; intelligent escalation auto-remediates only low-risk, high-confidence incidents.</p>
+      <div class="project-stack">
+        <span class="stack-pill">Claude Sonnet</span><span class="stack-pill">FastAPI</span>
+        <span class="stack-pill">Airflow</span><span class="stack-pill">Streamlit</span>
+        <span class="stack-pill">LangSmith</span><span class="stack-pill">SQLite</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/ShrikantLambe/Pipeline_Sentinel" target="_blank" rel="noopener noreferrer" class="plink">⎆ GitHub</a>
+      </div>
+      <div class="demo-preview" style="margin-top:20px;">
+        <div class="demo-topbar">
+          <div class="demo-dot" style="background:#ff5f57"></div><div class="demo-dot" style="background:#ffbd2e"></div><div class="demo-dot" style="background:#28c840"></div>
+          <div class="demo-url">pipeline-sentinel · Agent Dashboard</div>
+        </div>
+        <div style="background:#0d1117; padding:14px; font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:#c9d1d9; line-height:1.7;">
+          <div style="color:#f85149; font-size:0.58rem; letter-spacing:0.1em; margin-bottom:10px;">⚠ INCIDENT · customer_churn_pipeline · transform_features</div>
+          <div style="display:flex; flex-direction:column; gap:5px; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:8px;"><span style="background:rgba(63,185,80,0.15); color:#3fb950; padding:1px 6px; border-radius:2px; font-size:0.55rem; flex-shrink:0;">✓</span><span style="color:#8b949e;">Monitor → task failure detected</span></div>
+            <div style="display:flex; align-items:center; gap:8px;"><span style="background:rgba(63,185,80,0.15); color:#3fb950; padding:1px 6px; border-radius:2px; font-size:0.55rem; flex-shrink:0;">✓</span><span style="color:#8b949e;">Diagnosis → upstream schema drift</span></div>
+            <div style="display:flex; align-items:center; gap:8px;"><span style="background:rgba(63,185,80,0.15); color:#3fb950; padding:1px 6px; border-radius:2px; font-size:0.55rem; flex-shrink:0;">✓</span><span style="color:#8b949e;">Blast Radius → 3 downstream tasks</span></div>
+            <div style="display:flex; align-items:center; gap:8px;"><span style="background:rgba(74,144,217,0.15); color:#4a90d9; padding:1px 6px; border-radius:2px; font-size:0.55rem; flex-shrink:0; animation:blink 1s infinite;">●</span><span style="color:#8b949e;">Remediation → reload_schema strategy</span></div>
+          </div>
+          <div style="background:rgba(63,185,80,0.07); border:1px solid rgba(63,185,80,0.25); border-radius:3px; padding:7px;">
+            <div style="color:#3fb950; font-size:0.56rem; letter-spacing:0.08em; margin-bottom:3px;">🛡 SELF-HEALED · confidence: 94%</div>
+            <div style="color:#8b949e; font-size:0.6rem;">Schema reloaded + 3 tasks requeued. No human intervention required.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOANLENS -->
+    <div class="project-card reveal">
+      <div class="project-num">08</div>
+      <div class="project-type-tag tag-de">FinTech · Data Platform</div>
+      <div class="project-title">LoanLens — Portfolio Intelligence Stack</div>
+      <p class="project-desc">Production fintech platform simulating a Series C lender: 10,000 loans, 1.35M payment events across 3 SPVs, modeled with dbt, reconciled to &lt;0.1% tolerance, and narrated by Claude. SPV covenant monitoring, 36-cohort vintage analysis, anomaly detection, and investor-grade PDF memo export.</p>
+      <div class="project-stack">
+        <span class="stack-pill">Claude Sonnet</span><span class="stack-pill">DuckDB</span>
+        <span class="stack-pill">dbt Core</span><span class="stack-pill">Snowflake</span>
+        <span class="stack-pill">Streamlit</span><span class="stack-pill">Python</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/ShrikantLambe/loanlens" target="_blank" rel="noopener noreferrer" class="plink">⎆ GitHub</a>
+      </div>
+      <div class="demo-preview" style="margin-top:20px;">
+        <div class="demo-topbar">
+          <div class="demo-dot" style="background:#ff5f57"></div><div class="demo-dot" style="background:#ffbd2e"></div><div class="demo-dot" style="background:#28c840"></div>
+          <div class="demo-url">loanlens · Portfolio Intelligence</div>
+        </div>
+        <div style="background:#080c14; padding:14px; font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:#c9d1d9; line-height:1.7;">
+          <div style="color:#60a5fa; font-size:0.58rem; letter-spacing:0.1em; margin-bottom:10px;">LOANLENS · SPV PORTFOLIO DASHBOARD</div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:10px;">
+            <div style="background:rgba(96,165,250,0.08); border:1px solid rgba(96,165,250,0.2); border-radius:3px; padding:7px; text-align:center;">
+              <div style="font-family:'Fraunces',serif; font-size:1rem; color:#60a5fa; font-weight:700;">$284M</div>
+              <div style="font-size:0.54rem; color:#4a5568; margin-top:2px;">AUM</div>
+            </div>
+            <div style="background:rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.2); border-radius:3px; padding:7px; text-align:center;">
+              <div style="font-family:'Fraunces',serif; font-size:1rem; color:#34d399; font-weight:700;">3.2%</div>
+              <div style="font-size:0.54rem; color:#4a5568; margin-top:2px;">Default Rate</div>
+            </div>
+            <div style="background:rgba(251,191,36,0.08); border:1px solid rgba(251,191,36,0.2); border-radius:3px; padding:7px; text-align:center;">
+              <div style="font-family:'Fraunces',serif; font-size:1rem; color:#fbbf24; font-weight:700;">0.04%</div>
+              <div style="font-size:0.54rem; color:#4a5568; margin-top:2px;">Recon Delta</div>
+            </div>
+          </div>
+          <div style="background:rgba(96,165,250,0.06); border:1px solid rgba(96,165,250,0.2); border-radius:3px; padding:8px;">
+            <div style="color:#60a5fa; font-size:0.56rem; letter-spacing:0.08em; margin-bottom:4px;">🤖 AI INVESTOR MEMO · CLAUDE</div>
+            <div style="color:#8b9eb5; font-size:0.6rem; line-height:1.65;">SPV-B at 87% facility utilization — recommend 60-day drawdown pause. 2023 vintage cohorts outperforming 12-month default curve by 40bps. Recon delta within tolerance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -563,7 +673,7 @@
           <li>Built <strong>AI-enabled executive summary engine</strong> synthesizing marketing performance data into board-ready narratives — the direct inspiration for the Marketing AI portfolio project.</li>
           <li>Designed controlled prompt templates and semantic grounding to <strong>reduce hallucination risk</strong> in AI-generated GTM analytics outputs.</li>
           <li>Institutionalized forecasting processes that <strong>reduced manual reporting by ~40%</strong> and improved forecast accuracy at scale.</li>
-          <li>Manages and mentors <strong>8+ BI analysts and data engineers</strong> across hiring, performance, and delivery standards.</li>
+          <li>Led and mentored <strong>8+ BI analysts and data engineers</strong> across hiring, performance, and delivery standards.</li>
         </ul>
       </div>
     </div>
@@ -686,7 +796,7 @@
   <div class="contact-layout">
     <div>
       <h2 class="section-title">Let's build<br/>something together</h2>
-      <p class="contact-headline">"21 years of making<br/>data useful — now<br/>making it intelligent."</p>
+      <p class="contact-headline">&#8220;21 years of making<br/>data useful — now<br/>making it intelligent.&#8221;</p>
       <div class="open-to">
         <div class="open-to-title">Open to</div>
         <div class="open-to-tags">
@@ -700,31 +810,31 @@
     </div>
     <div class="contact-cards">
       <a href="mailto:shrikantlambe@gmail.com" class="contact-card reveal">
-        <div class="contact-card-icon">📧</div>
+        <div class="contact-card-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <div><div class="contact-card-label">Email</div><div class="contact-card-val">shrikantlambe@gmail.com</div></div>
       </a>
-      <a href="tel:3147755528" class="contact-card reveal">
-        <div class="contact-card-icon">📞</div>
+      <a href="tel:+13147755528" class="contact-card reveal">
+        <div class="contact-card-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 2.18 2 2 0 014 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
         <div><div class="contact-card-label">Phone</div><div class="contact-card-val">(314) 775-5528</div></div>
       </a>
-      <a href="https://www.linkedin.com/in/shrikantlambe" target="_blank" class="contact-card reveal">
-        <div class="contact-card-icon">💼</div>
+      <a href="https://www.linkedin.com/in/shrikantlambe" target="_blank" rel="noopener noreferrer" class="contact-card reveal">
+        <div class="contact-card-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
         <div><div class="contact-card-label">LinkedIn</div><div class="contact-card-val">linkedin.com/in/shrikantlambe</div></div>
       </a>
-      <a href="https://github.com/ShrikantLambe" target="_blank" class="contact-card reveal">
-        <div class="contact-card-icon">🐙</div>
+      <a href="https://github.com/ShrikantLambe" target="_blank" rel="noopener noreferrer" class="contact-card reveal">
+        <div class="contact-card-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg></div>
         <div><div class="contact-card-label">GitHub</div><div class="contact-card-val">github.com/ShrikantLambe</div></div>
       </a>
-      <a href="https://medium.com/@shrikantlambe" target="_blank" class="contact-card reveal">
-        <div class="contact-card-icon">✍️</div>
+      <a href="https://medium.com/@shrikantlambe" target="_blank" rel="noopener noreferrer" class="contact-card reveal">
+        <div class="contact-card-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg></div>
         <div><div class="contact-card-label">Medium</div><div class="contact-card-val">medium.com/@shrikantlambe</div></div>
       </a>
-      <a href="https://shrikantlambe.substack.com/" target="_blank" class="contact-card reveal">
-        <div class="contact-card-icon">📬</div>
+      <a href="https://shrikantlambe.substack.com/" target="_blank" rel="noopener noreferrer" class="contact-card reveal">
+        <div class="contact-card-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></div>
         <div><div class="contact-card-label">Substack</div><div class="contact-card-val">shrikantlambe.substack.com</div></div>
       </a>
       <div class="contact-card reveal" style="cursor:default; pointer-events:none;">
-        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <div><div class="contact-card-label">Location</div><div class="contact-card-val">Milpitas, CA · Open to Remote</div></div>
       </div>
     </div>
@@ -735,14 +845,50 @@
 <footer>
   <span>© 2026 Shrikant Lambe</span>
   <span>Stanford AI Driven Leadership · Cornell Data Analytics · BITS Pilani M.S.</span>
-  <span>Host free at <code style="background:var(--bg2);padding:2px 6px;border-radius:2px;">ShrikantLambe.github.io</code></span>
+  <span>Hosted for free at <code style="background:var(--bg2);padding:2px 6px;border-radius:2px;">ShrikantLambe.github.io</code></span>
+  <a href="#" class="back-top">↑ top</a>
 </footer>
 
 <script>
+  // Reveal animations
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 80); obs.unobserve(e.target); } });
   }, { threshold: 0.07 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Scroll progress bar
+  const scrollBar = document.getElementById('scroll-bar');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    scrollBar.style.width = pct + '%';
+  }, { passive: true });
+
+  // Active nav state
+  const navAs = document.querySelectorAll('.nav-links a[href^="#"]');
+  const secObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAs.forEach(a => a.classList.remove('active'));
+        const match = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('section[id]').forEach(s => secObs.observe(s));
+
+  // Hamburger menu
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navList = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    const open = navList.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navList.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+  }));
 </script>
 </body>
 </html>
