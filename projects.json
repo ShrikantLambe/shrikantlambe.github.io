@@ -110,9 +110,9 @@
     "tag": "AI Agent · DataOps",
     "github": "https://github.com/ShrikantLambe/Pipeline_Sentinel",
     "live": null,
-    "article_linkedin": null,
-    "article_medium": null,
-    "article_substack": null,
+    "article_linkedin": "https://www.linkedin.com/pulse/agentic-data-infrastructure-i-built-self-healing-pipeline-lambe-4zqyc/",
+    "article_medium": "https://medium.com/codetodeploy/agentic-data-infrastructure-i-built-a-self-healing-data-pipeline-system-8eb87f16f30e",
+    "article_substack": "https://shrikantlambe.substack.com/cp/193521687",
     "stack": [
       "Claude Sonnet",
       "FastAPI",
