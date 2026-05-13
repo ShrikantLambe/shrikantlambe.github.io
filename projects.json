@@ -139,5 +139,42 @@
       "Streamlit",
       "Python"
     ]
+  },
+  {
+    "id": "09",
+    "title": "Kids AI Explorer",
+    "tag": "Product · EdTech",
+    "github": "https://github.com/ShrikantLambe/kids-ai-explorer",
+    "live": "https://kids-ai-explorer.vercel.app",
+    "article_linkedin": null,
+    "article_medium": null,
+    "article_substack": null,
+    "stack": [
+      "React 18",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Google Gemini",
+      "Supabase",
+      "Vercel"
+    ]
+  },
+  {
+    "id": "10",
+    "title": "Marginalia",
+    "tag": "Product · Read-it-later",
+    "github": "https://github.com/ShrikantLambe/marginalia",
+    "live": null,
+    "article_linkedin": null,
+    "article_medium": null,
+    "article_substack": null,
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Gemini 2.5 Flash",
+      "Supabase",
+      "Stack Auth",
+      "Tailwind CSS",
+      "Vercel"
+    ]
   }
 ]
