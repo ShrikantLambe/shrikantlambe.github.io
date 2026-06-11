@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Data Brief · Issue #4 · Design Your Semantic Model</title>
+<link rel="canonical" href="https://shrikantlambe.substack.com/p/the-semantic-layer-define-it-once">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="nav"><a href="article3.html">← Previous</a><span class="nav-series">Issue 4 of 8</span><a href="article5.html">Next →</a></div>
+<div class="article">
+<p class="kicker">The Data Brief · Issue #4 · Semantic Layer Series</p>
+<h1>Define it once. Mean it everywhere.</h1>
+<p class="subtitle">How to design a semantic model your whole organization actually agrees on</p>
+<div class="byline"><span>Shrikant</span><span>·</span><span>April 15, 2026</span><span>·</span><span>8 min read</span></div>
+
+<div class="stat-strip">
+  <div class="stat-card"><div class="stat-num">61%</div><div class="stat-label">Of organizations use four or more BI platforms — Forrester 2025</div></div>
+  <div class="stat-card"><div class="stat-num">300%</div><div class="stat-label">Increase in LLM accuracy when querying a semantic layer vs. raw tables — Kaelio 2026</div></div>
+  <div class="stat-card"><div class="stat-num">10s</div><div class="stat-label">If a metric definition takes more than 10 seconds to understand, it's not ready — ThoughtSpot</div></div>
+</div>
+
+<p class="drop-cap">Most semantic layer projects fail before a single line of YAML is written. Not because of the tooling. Not because of the infrastructure. Because the organization never agreed on what "revenue" means.</p>
+<p>The technical implementation of a semantic model is, frankly, the easier part. The harder part is the conversation you have to have with Finance, Sales, Marketing, and Product before you open your IDE. Get that conversation right and the model almost writes itself. Skip it and you will spend the next twelve months maintaining five versions of the same metric, each subtly wrong in a different way.</p>
+
+<hr>
+
+<h2>Start before the model: the discovery conversation</h2>
+<p>Before modeling anything, you need to understand how your organization actually uses data today — not how it thinks it does. Interview the people closest to the metrics: Finance, Ops, Product, Marketing leads. Not the data team. Business leads know what the numbers are supposed to mean.</p>
+<div class="callout"><p><strong>The discovery checklist.</strong> For each candidate metric: What is the business question this metric answers? Who owns the definition? What are the edge cases (refunds, trials, internal accounts, multi-currency)? Are there known variants already in production? Which source systems feed it — and do they agree?</p></div>
+<p>Pick the handful of KPIs that show up in every leadership meeting — customer count, revenue, CAC, retention — and define those first. These become your anchor metrics.</p>
+
+<hr>
+
+<h2>The four building blocks of every semantic model</h2>
+
+<h3>1. Entities</h3>
+<p>The core business objects your organisation reasons about: Customer, Order, Product, Account, Campaign. They map to physical tables but carry business meaning — defining what a "row" represents in human terms, including whether trials count and how duplicates are resolved.</p>
+
+<h3>2. Dimensions</h3>
+<p>The attributes you use to slice and filter metrics — Region, Product Category, Customer Segment, Time Period. The key design decision is granularity: a Region dimension that works for a US-only business will break the moment you expand internationally unless you planned for country, state, and territory hierarchies upfront.</p>
+
+<h3>3. Measures</h3>
+<p>The raw aggregatable values that metrics are built from — <code>SUM(order_amount)</code>, <code>COUNT(DISTINCT customer_id)</code>, <code>AVG(session_duration)</code>. Measures live close to the data and must be expressed using aggregate functions. A good measure definition is specific enough to be unambiguous but general enough to support multiple derived metrics.</p>
+
+<h3>4. Metrics</h3>
+<p>Named, governed business calculations built on top of measures. Revenue, Customer Acquisition Cost, Monthly Active Users, Net Revenue Retention. A metric is not just a formula. It is a formula plus a business decision about what to include, what to exclude, and which edge cases to handle.</p>
+
+<div class="warn-box"><p><strong>The metric definition trap.</strong> <code>SUM(order_amount)</code> is a measure. "Revenue" is a metric — and revenue means: gross or net? Does it include tax? Does it include refunds? Does it exclude internal test orders? Does it use booking date or recognition date? Each of those is a business decision, not a technical one.</p></div>
+
+<hr>
+
+<h2>Naming conventions that prevent future drift</h2>
+
+<div class="rule-card"><div class="rule-num">1</div><div><div class="rule-title">Use snake_case consistently, everywhere</div><div class="rule-desc"><code>monthly_active_users</code>, not <code>MonthlyActiveUsers</code> or <code>MAU</code>. Abbreviations are a major source of drift — spell it out.</div></div></div>
+<div class="rule-card"><div class="rule-num">2</div><div><div class="rule-title">Encode the aggregation type in the name</div><div class="rule-desc">Prefix or suffix metrics with their aggregation: <code>revenue_total</code>, <code>sessions_count</code>, <code>load_time_avg_ms</code>. This prevents applying a second SUM on top of an already-aggregated metric.</div></div></div>
+<div class="rule-card"><div class="rule-num">3</div><div><div class="rule-title">Name for the business question, not the calculation</div><div class="rule-desc"><code>customer_acquisition_cost</code> tells you what it is. The formula will change; the business question won't. Business names age better than formula names.</div></div></div>
+<div class="rule-card"><div class="rule-num">4</div><div><div class="rule-title">Every metric needs a plain-language description</div><div class="rule-desc">If someone can't understand a metric definition in under 10 seconds, it is not ready. Write the description as if explaining to a new Finance analyst: what does it measure, what does it exclude, who owns the definition.</div></div></div>
+<div class="rule-card"><div class="rule-num">5</div><div><div class="rule-title">Synonyms are a first-class citizen</div><div class="rule-desc">Modern tools including Snowflake Semantic Views and Databricks Metric Views support synonym definitions. When an AI assistant or business user asks for "MRR" or "monthly recurring revenue," they resolve to the same governed definition.</div></div></div>
+
+<hr>
+
+<h2>Time intelligence: the dimension nobody designs properly</h2>
+<p>Time is the most universal dimension and the one most frequently under-designed. Most teams add a <code>date</code> dimension and consider it done. Then someone asks for "revenue this fiscal quarter" and the model has no concept of a fiscal calendar.</p>
+<div class="callout"><p><strong>Time intelligence checklist before you build.</strong> Does your organization use fiscal or calendar quarters? Which time zones matter — user-local, server, or UTC? Do you need rolling windows (7-day, 28-day, 90-day)? Do you need period-over-period comparisons (WoW, MoM, YoY)? Do you need "as of" reporting for point-in-time analysis? Each yes adds design requirements.</p></div>
+
+<hr>
+
+<h2>What a well-designed metric definition actually looks like</h2>
+<div class="code-label">models/metrics/revenue_metrics.yml (dbt MetricFlow)</div>
+<div class="code-block"><span class="cm">metrics:</span>
+  - <span class="ck">name:</span> <span class="cv">monthly_recurring_revenue</span>
+    <span class="ck">label:</span> Monthly Recurring Revenue
+    <span class="ck">description:</span> &gt;
+      Sum of normalized monthly contract value for all active
+      subscriptions at month end. Excludes trials, internal
+      accounts, and one-time charges. Uses contract start date,
+      not invoice date. Owned by Finance.
+    <span class="ck">type:</span> simple
+    <span class="ck">type_params:</span>
+      <span class="ck">measure:</span> mrr_amount
+    <span class="ck">filter:</span> |
+      &#123;&#123; Dimension('subscription__status') &#125;&#125; = 'active'
+      AND &#123;&#123; Dimension('subscription__is_trial') &#125;&#125; = false
+    <span class="ck">meta:</span>
+      <span class="ck">owner:</span> finance-data@company.com
+      <span class="ck">reviewed_at:</span> 2026-04-01
+      <span class="ck">synonyms:</span> [MRR, monthly revenue, monthly arr]</div>
+
+<p>Notice what this definition contains beyond the formula: a plain-language description that explains edge cases, an explicit filter encoding business rules, a named owner, a review date, and synonyms for AI and search resolution.</p>
+
+<hr>
+
+<div class="section-end"><strong>Design before you build.</strong> The most important output of a semantic model design phase is not the YAML files — it is the organisational agreements those files encode. The metric definitions, naming standards, time intelligence decisions, and governance process you put in place now will determine whether your semantic layer becomes a trusted foundation or an expensive source of new confusion. Next issue: the tool comparison — dbt, Cube, AtScale, and Looker assessed honestly, side by side, with no vendor influence.</div>
+
+<div class="series-footer"><div class="series-label">The complete series</div><div class="series-row"><a href="article1.html">◦ Part 1 — The semantic layer: your data's translator</a></div><div class="series-row"><a href="article2.html">◦ Part 2 — Why now? Three forces making it unavoidable</a></div><div class="series-row"><a href="article3.html">◦ Part 3 — Which flavor fits? The decision framework</a></div><div class="series-row current">▸ Part 4 — Design your semantic model: metrics and naming</div><div class="series-row"><a href="article5.html">◦ Part 5 — The honest tool guide</a></div><div class="series-row"><a href="article6.html">◦ Part 6 — Build it: step-by-step walkthrough</a></div><div class="series-row coming">◦ Part 7 — Governance and access control at scale · May 6</div><div class="series-row coming">◦ Part 8 — The semantic layer in the AI era · May 13</div></div>
+<div class="cta"><p>Next in the series</p><strong>Tool landscape: dbt, Cube, AtScale, Looker — an honest, vendor-neutral comparison</strong></div>
+<div class="tags"><span class="tag">#TheDataBrief</span><span class="tag">#SemanticLayer</span><span class="tag">#DataModeling</span><span class="tag">#AnalyticsEngineering</span><span class="tag">#dbt</span><span class="tag">#MetricLayer</span></div>
+<div class="article-footer"><div class="footer-brand">The Data Brief</div><div class="footer-tag">Strategy. Data. Decisions.</div></div>
+</div></body></html>

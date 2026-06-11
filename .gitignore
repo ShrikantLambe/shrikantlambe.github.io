@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor / OS
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Internal planning docs — keep local, don't ship to GitHub Pages
+portfolio_revamp_brief.md
+
+# Unused / orphaned profile images (keep canonical: profile.png, profile-sm.png)
+Profile_Shrikant.png
+Shrikant_Profile.png

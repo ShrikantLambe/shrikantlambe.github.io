@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Data Brief · Issue #6 · Build It</title>
+<!-- TODO: add canonical Substack URL once Issue #6 is published, e.g.:
+     <link rel="canonical" href="https://shrikantlambe.substack.com/p/..."> -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="nav"><a href="article5.html">← Previous</a><span class="nav-series">Issue 6 of 8</span><a href="index.html">↑ Series</a></div>
+<div class="article">
+<p class="kicker">The Data Brief · Issue #6 · Semantic Layer Series</p>
+<h1>Build it</h1>
+<p class="subtitle">From raw schema to working semantic layer — with the pitfalls nobody warns you about</p>
+<div class="byline"><span>Shrikant</span><span>·</span><span>April 29, 2026</span><span>·</span><span>10 min read</span></div>
+
+<p class="drop-cap">The previous five issues covered the why, the what, the which, and the design. This one covers the how.</p>
+<p>We are going to build a semantic layer on a real-world schema — an e-commerce orders dataset — using dbt and MetricFlow, the most common production setup in 2026. By the end you will have a working semantic model, two governed metrics, a time spine, and a validated query. More importantly, you will have encountered the mistakes that send teams back to square one — before you make them in production.</p>
+
+<div class="prereqs">
+  <div class="prereqs-label">What you need to follow along</div>
+  <div class="prereq-row">A dbt project (v1.6 or higher) connected to Snowflake, BigQuery, Databricks, or Redshift</div>
+  <div class="prereq-row">dbt Cloud Starter plan or higher — required for Semantic Layer APIs and BI integrations</div>
+  <div class="prereq-row">For local testing without dbt Cloud: <code>pip install dbt-metricflow</code></div>
+  <div class="prereq-row">Source data: orders, customers, products tables (Jaffle Shop-style schema)</div>
+</div>
+
+<hr>
+
+<h2>The architecture before you write a line of YAML</h2>
+<p>The correct layer order is: <strong>Sources → Staging → Marts → Semantic Models → Metrics → Consumption</strong></p>
+<p>The semantic layer must sit strictly above your mart models. Never build semantic models on top of staging or raw source tables — you will eventually need mart-level business logic and have nowhere clean to put it.</p>
+<blockquote><p>dbt best practice: prefer normalization when possible and allow MetricFlow to handle denormalization dynamically. Build in parallel with existing marts — never refactor production models directly. Audit the semantic layer output and deprecate old marts gracefully.</p></blockquote>
+
+<hr>
+
+<div class="step-header"><span class="step-pill setup">Step 1</span><h2 style="margin:0">Set up the time spine</h2><span class="step-time">10 min · skip this and every time-based metric fails</span></div>
+<p>The time spine is not optional. Any project with time dimensions needs one. The error it produces — <em>dimension not found</em> — is not obviously connected to a missing time spine.</p>
+<div class="code-label">models/metricflow_time_spine.sql</div>
+<div class="code-block"><span class="cm">&#123;&#123; config(materialized='table') &#125;&#125;</span>
+
+with days as (
+  <span class="cm">&#123;&#123; dbt.date_spine(</span>
+    <span class="cv">'day'</span>,
+    <span class="cv">"to_date('2020-01-01', 'YYYY-MM-DD')"</span>,
+    <span class="cv">"to_date('2030-01-01', 'YYYY-MM-DD')"</span>
+  <span class="cm">&#125;&#125;</span>
+),
+final as (
+  select cast(date_day as date) as date_day
+  from days
+)
+select * from final
+where date_day &gt; dateadd(year, -4, current_timestamp())
+and date_day &lt; dateadd(day, 30, current_timestamp())</div>
+<p>Run <code>dbt build</code> to materialise the time spine before defining any semantic models.</p>
+
+<hr>
+
+<div class="step-header"><span class="step-pill build">Step 2</span><h2 style="margin:0">Define your first semantic model</h2><span class="step-time">20–30 min · faster once the pattern is set</span></div>
+<div class="code-label">models/semantic_models/sem_orders.yml</div>
+<div class="code-block"><span class="cm">semantic_models:</span>
+  - <span class="ck">name:</span> <span class="cv">sem_orders</span>
+    <span class="ck">description:</span> &gt;
+      Order-level fact table. One row per order.
+      Excludes test orders. Uses order_date as primary time dimension.
+    <span class="ck">model:</span> ref(<span class="cv">'fct_orders'</span>)
+    <span class="ck">defaults:</span>
+      <span class="ck">agg_time_dimension:</span> order_date
+
+    <span class="ck">entities:</span>
+      - <span class="ck">name:</span> order_id
+        <span class="ck">type:</span> primary
+      - <span class="ck">name:</span> customer_id
+        <span class="ck">type:</span> foreign
+        <span class="ck">expr:</span> customer_id
+
+    <span class="ck">dimensions:</span>
+      - <span class="ck">name:</span> order_date
+        <span class="ck">type:</span> time
+        <span class="ck">type_params:</span>
+          <span class="ck">time_granularity:</span> day
+      - <span class="ck">name:</span> order_status
+        <span class="ck">type:</span> categorical
+        <span class="ck">expr:</span> status
+      - <span class="ck">name:</span> region
+        <span class="ck">type:</span> categorical
+        <span class="ck">expr:</span> customer_region
+
+    <span class="ck">measures:</span>
+      - <span class="ck">name:</span> order_revenue
+        <span class="ck">description:</span> Gross order value excl. tax and refunds
+        <span class="ck">agg:</span> sum
+        <span class="ck">expr:</span> order_amount
+      - <span class="ck">name:</span> order_count
+        <span class="ck">description:</span> Count of distinct orders
+        <span class="ck">agg:</span> count_distinct
+        <span class="ck">expr:</span> order_id</div>
+<div class="warn-box"><p><strong>Three things to get right.</strong> First: <code>agg_time_dimension</code> must exactly match a <code>type: time</code> dimension. Second: always set <code>expr</code> explicitly on every dimension. Third: measures are private — end users query metrics, not measures.</p></div>
+
+<hr>
+
+<div class="step-header"><span class="step-pill build">Step 3</span><h2 style="margin:0">Define your metrics</h2><span class="step-time">15 min · where business meaning lives</span></div>
+<div class="code-label">models/metrics/revenue_metrics.yml</div>
+<div class="code-block"><span class="cm">metrics:</span>
+  - <span class="ck">name:</span> <span class="cv">monthly_revenue</span>
+    <span class="ck">label:</span> Monthly Revenue
+    <span class="ck">description:</span> &gt;
+      Total gross order revenue per month.
+      Excludes cancelled orders and test accounts.
+    <span class="ck">type:</span> simple
+    <span class="ck">type_params:</span>
+      <span class="ck">measure:</span> order_revenue
+    <span class="ck">filter:</span> |
+      &#123;&#123; Dimension(<span class="cv">'sem_orders__order_status'</span>) &#125;&#125; != <span class="cv">'cancelled'</span>
+    <span class="ck">meta:</span>
+      <span class="ck">owner:</span> finance-data@company.com
+      <span class="ck">reviewed_at:</span> 2026-04-29</div>
+<div class="warn-box"><p><strong>Filter dimension syntax:</strong> use <code>sem_orders__order_status</code> — two underscores between semantic model name and dimension name. Writing <code>order_status</code> alone causes a validation error.</p></div>
+
+<hr>
+
+<h2>The global namespace trap</h2>
+<p>dbt models are scoped — the semantic layer is not. <strong>Every entity, dimension, measure, and metric name is registered in a single global namespace across your entire project.</strong> Define <code>order_revenue</code> for e-commerce and later try to define it for wholesale — you get a parse error.</p>
+<blockquote><p>Rule: prefix everything with the domain name from day one. Use <code>sem_ecommerce_orders</code> not <code>sem_orders</code>. Use <code>ecommerce_order_revenue</code> not <code>order_revenue</code>. Document this convention in a README in your semantic models folder.</p></blockquote>
+
+<hr>
+
+<div class="step-header"><span class="step-pill validate">Step 4–5</span><h2 style="margin:0">Validate, then query</h2><span class="step-time">10 min · always in this order</span></div>
+<div class="code-label">Validation sequence</div>
+<div class="code-block"><span class="cs"># 1. Catch YAML syntax errors — no warehouse needed</span>
+dbt parse
+
+<span class="cs"># 2. Validate semantic models and metrics</span>
+dbt sl validate          <span class="cs"># dbt Cloud</span>
+mf validate-configs      <span class="cs"># dbt Core</span>
+
+<span class="cs"># 3. List your metrics</span>
+dbt sl list metrics
+
+<span class="cs"># 4. Check dimensions for a specific metric</span>
+dbt sl list dimensions --metrics monthly_revenue
+
+<span class="cs"># 5. Run your first end-to-end query</span>
+dbt sl query \
+  --metrics monthly_revenue \
+  --group-by metric_time__month \
+  --limit 12
+
+<span class="cs"># Use --explain to see the SQL MetricFlow generates</span>
+dbt sl query --metrics monthly_revenue \
+  --group-by metric_time__month --explain</div>
+
+<hr>
+
+<div class="step-header"><span class="step-pill deploy">Step 6–7</span><h2 style="margin:0">Deploy and connect your BI tool</h2><span class="step-time">30–60 min depending on tool</span></div>
+<p>In dbt Cloud: run <code>dbt build</code> in your production environment, then go to <strong>Account Settings → Semantic Layer</strong>. Generate a service token with <strong>Semantic Layer Only</strong> permissions.</p>
+<p><strong>Tableau (GA):</strong> Connect → To a Server → More → search dbt Semantic Layer. Enter host URL and environment ID.</p>
+<p><strong>Google Sheets / Excel:</strong> Install the dbt Semantic Layer add-on from the Workspace Marketplace.</p>
+<p><strong>Power BI (Preview):</strong> Download the .msi installer from dbt docs. Use DirectQuery mode. Power BI Service requires an IT-configured On-premises Data Gateway.</p>
+
+<hr>
+
+<h2>The seven pitfalls that will cost you a week</h2>
+
+<div class="pitfall-card"><div class="pitfall-num">1</div><div><div class="pitfall-title">Skipping the time spine</div><div class="pitfall-symptom">Symptom: "dimension not found" on any time-based metric</div><div class="pitfall-fix">Fix: create metricflow_time_spine.sql and run dbt build first</div></div></div>
+<div class="pitfall-card"><div class="pitfall-num">2</div><div><div class="pitfall-title">Semantic models on staging tables</div><div class="pitfall-symptom">Symptom: business logic has nowhere clean to live</div><div class="pitfall-fix">Fix: semantic models must always sit above mart layer</div></div></div>
+<div class="pitfall-card"><div class="pitfall-num">3</div><div><div class="pitfall-title">Ignoring the global namespace</div><div class="pitfall-symptom">Symptom: parse errors when adding a second domain with reused names</div><div class="pitfall-fix">Fix: prefix all semantic model and measure names with the domain from day one</div></div></div>
+<div class="pitfall-card"><div class="pitfall-num">4</div><div><div class="pitfall-title">Confusing measures with metrics</div><div class="pitfall-symptom">Symptom: analysts can't find the revenue metric — it was published as a measure</div><div class="pitfall-fix">Fix: measures are private. Only metrics are queryable by downstream consumers</div></div></div>
+<div class="pitfall-card"><div class="pitfall-num">5</div><div><div class="pitfall-title">Omitting expr on dimensions</div><div class="pitfall-symptom">Symptom: MetricFlow silently uses the wrong column</div><div class="pitfall-fix">Fix: always set expr explicitly — even when column name matches dimension name</div></div></div>
+<div class="pitfall-card"><div class="pitfall-num">6</div><div><div class="pitfall-title">Summing pre-calculated percentages</div><div class="pitfall-symptom">Symptom: aggregated percentage metrics produce values over 100%</div><div class="pitfall-fix">Fix: store numerator and denominator separately; derive percentage at the metric layer</div></div></div>
+<div class="pitfall-card"><div class="pitfall-num">7</div><div><div class="pitfall-title">Running validate before dbt parse</div><div class="pitfall-symptom">Symptom: cryptic MetricFlow errors that don't point to the real problem</div><div class="pitfall-fix">Fix: dbt parse always runs first — MetricFlow validation won't run if the project doesn't parse</div></div></div>
+
+<hr>
+
+<h2>What the first week actually looks like</h2>
+<div class="day-row"><span class="day-label">Day 1</span><span class="day-text">Set up the time spine. Define your first semantic model on the orders mart. Validate locally. Do not touch the BI connection yet.</span></div>
+<div class="day-row"><span class="day-label">Day 2</span><span class="day-text">Define your first two metrics. Run end-to-end queries with --explain. Share the SQL output with Finance for sanity-check before going further.</span></div>
+<div class="day-row"><span class="day-label">Day 3</span><span class="day-text">Add naming prefixes for multiple domains. Define a second semantic model (customers). Build a ratio metric as your first cross-model metric.</span></div>
+<div class="day-row"><span class="day-label">Day 4</span><span class="day-text">Deploy to production. Connect one BI tool. Confirm metric queries return the same numbers as your CLI output.</span></div>
+<div class="day-row"><span class="day-label">Day 5</span><span class="day-text">Document. Every metric gets a description, an owner, a reviewed_at date, and a note on what it excludes. This is what separates a semantic layer that gets adopted from one that gets abandoned.</span></div>
+
+<blockquote><p>Do not try to migrate all your existing metrics at once. Pick two or three that matter most, define them with stakeholder sign-off, deploy, and prove value. The rest follows.</p></blockquote>
+
+<div class="series-footer"><div class="series-label">The complete series</div><div class="series-row"><a href="article1.html">◦ Part 1 — The semantic layer: your data's translator</a></div><div class="series-row"><a href="article2.html">◦ Part 2 — Why now? Three forces making it unavoidable</a></div><div class="series-row"><a href="article3.html">◦ Part 3 — Which flavor fits? The decision framework</a></div><div class="series-row"><a href="article4.html">◦ Part 4 — Design your semantic model: metrics and naming</a></div><div class="series-row"><a href="article5.html">◦ Part 5 — The honest tool guide</a></div><div class="series-row current">▸ Part 6 — Build it: step-by-step walkthrough (you are here)</div><div class="series-row coming">◦ Part 7 — Governance and access control at scale · May 6</div><div class="series-row coming">◦ Part 8 — The semantic layer in the AI era · May 13</div></div>
+<div class="cta"><p>Next in the series — publishing May 6</p><strong>Governance, security, and access control at semantic layer scale</strong></div>
+<div class="tags"><span class="tag">#TheDataBrief</span><span class="tag">#SemanticLayer</span><span class="tag">#dbt</span><span class="tag">#MetricFlow</span><span class="tag">#DataEngineering</span><span class="tag">#AnalyticsEngineering</span></div>
+<div class="article-footer"><div class="footer-brand">The Data Brief</div><div class="footer-tag">Strategy. Data. Decisions.</div></div>
+</div></body></html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Data Brief · Issue #5 · The Honest Tool Guide</title>
+<link rel="canonical" href="https://shrikantlambe.substack.com/p/the-semantic-layer-honest-tool-guide">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="nav"><a href="article4.html">← Previous</a><span class="nav-series">Issue 5 of 8</span><a href="article6.html">Next →</a></div>
+<div class="article">
+<p class="kicker">The Data Brief · Issue #5 · Semantic Layer Series</p>
+<h1>The honest tool guide</h1>
+<p class="subtitle">dbt, Cube, AtScale, Looker, and the platform-native options — assessed without vendor influence</p>
+<div class="byline"><span>Shrikant</span><span>·</span><span>April 22, 2026</span><span>·</span><span>Updated after fact-check</span><span>·</span><span>9 min read</span></div>
+<div class="disclaimer">No sponsored content. No affiliate links. No vendor relationships. All tool capabilities verified against official documentation as of April 2026.</div>
+
+<p class="drop-cap">Every vendor says they are the semantic layer. That sentence has never been more true — or more confusing — than it is in 2026. The market has fragmented into standalone platforms, warehouse-native solutions, BI-embedded layers, and emerging AI-first tools.</p>
+<p>84% of data teams still encounter conflicting versions of the same metric, with more than a third experiencing this regularly. This issue cuts through the noise. Five tools, assessed honestly. What each one does well, where it falls short, and the watch-out each vendor is unlikely to put in their own marketing materials.</p>
+<p>The wrong question is "which tool is best?" The right question is: which tool fits my architecture, team skills, and use case today?</p>
+
+<hr>
+
+<div class="tool-card">
+  <div class="tool-head"><span class="tool-name">dbt Semantic Layer (MetricFlow)</span><span class="tool-tag tag-analytics">Analytics engineering–first</span></div>
+  <p class="tool-ideal">Ideal for: Teams with mature dbt practices who want metrics version-controlled alongside transformation code</p>
+  <p style="font-family:Arial,sans-serif;font-size:13px;color:#666;line-height:1.65;margin-bottom:.75rem">dbt Labs acquired Transform — the company behind MetricFlow — and integrated it into dbt Cloud. Metrics are defined in YAML in the same Git repo as transformation models. BI integrations include Tableau, Google Sheets, Excel, Hex, Mode, Klipfolio, Omni, and Power BI (Preview — available via Power BI Desktop; Power BI Service requires IT-configured On-premises Data Gateway).</p>
+  <div class="news-flag"><strong>▲ October 2025 — dbt Labs and Fivetran announced a definitive merger agreement.</strong> The combined company approaches $600M ARR. dbt Core remains open-source. For teams evaluating long-term platform commitment, this is material context worth monitoring.</div>
+  <div class="pro-con">
+    <div><div class="col-head pros">Strengths</div>
+      <div class="pc-row pro">Metrics as code — full Git history, PRs, CI/CD</div>
+      <div class="pc-row pro">Natural fit for dbt-native teams</div>
+      <div class="pc-row pro">MetricFlow is open-source (Apache 2.0)</div>
+      <div class="pc-row pro">dbt MCP Server enables AI agent access</div>
+      <div class="pc-row pro">Best-in-class metric type system</div>
+    </div>
+    <div><div class="col-head cons">Limitations</div>
+      <div class="pc-row con">Requires dbt Cloud Starter minimum</div>
+      <div class="pc-row con">Caching on Enterprise and Enterprise+ only</div>
+      <div class="pc-row con">Power BI Service requires On-premises Gateway</div>
+      <div class="pc-row con">Not suited for embedded analytics</div>
+      <div class="pc-row con">Fivetran merger introduces strategic uncertainty</div>
+    </div>
+  </div>
+  <div class="watch-out"><strong>Watch out for:</strong> The dbt Cloud dependency is real and recurring. The API that lets BI tools query metrics is paywalled. Teams on dbt Core will not get the semantic layer's most useful capability without moving to dbt Cloud. Evaluate total cost of ownership carefully.</div>
+</div>
+
+<div class="tool-card">
+  <div class="tool-head"><span class="tool-name">Cube</span><span class="tool-tag tag-api">API-first</span></div>
+  <p class="tool-ideal">Ideal for: Teams building embedded analytics, custom data products, or multi-tool architectures</p>
+  <p style="font-family:Arial,sans-serif;font-size:13px;color:#666;line-height:1.65;margin-bottom:.75rem">Cube is the most developer-friendly semantic layer — built open-source with nearly 20,000 GitHub stars. The 2025 release added roll-up anytime materializations and a WASM-powered query engine achieving sub-second P95 latency on Snowflake. Cube exposes metrics through REST, GraphQL, SQL, MDX, and DAX APIs — the broadest API surface of any standalone tool.</p>
+  <div class="pro-con">
+    <div><div class="col-head pros">Strengths</div>
+      <div class="pc-row pro">Fully open-source core — no vendor lock-in</div>
+      <div class="pc-row pro">Broadest API surface (REST, GraphQL, SQL, MDX, DAX)</div>
+      <div class="pc-row pro">Best-in-class pre-aggregation and caching</div>
+      <div class="pc-row pro">Best embedded analytics support</div>
+      <div class="pc-row pro">Self-hostable for cost and data residency control</div>
+    </div>
+    <div><div class="col-head cons">Limitations</div>
+      <div class="pc-row con">Schema authoring requires JS or TypeScript</div>
+      <div class="pc-row con">More engineering overhead than platform-native</div>
+      <div class="pc-row con">Less mature governance tooling than AtScale</div>
+      <div class="pc-row con">dbt integration via adapter, not native</div>
+    </div>
+  </div>
+  <div class="watch-out"><strong>Watch out for:</strong> Total cost of ownership for self-hosted Cube tends to exceed Cube Cloud once you factor in engineering time. The open-source path is real, but it is not free.</div>
+</div>
+
+<div class="tool-card">
+  <div class="tool-head"><span class="tool-name">AtScale</span><span class="tool-tag tag-enterprise">Enterprise-scale</span></div>
+  <p class="tool-ideal">Ideal for: Large enterprises with complex governance requirements and Excel-heavy user bases</p>
+  <p style="font-family:Arial,sans-serif;font-size:13px;color:#666;line-height:1.65;margin-bottom:.75rem">AtScale sits across Snowflake, Databricks, BigQuery, and on-premise systems simultaneously, exposes metrics through XMLA/MDX interfaces that Excel understands natively, and provides the deepest governance capabilities. In January 2026, AtScale joined the Open Semantic Interchange initiative and introduced an open-source Semantic Modeling Language.</p>
+  <div class="pro-con">
+    <div><div class="col-head pros">Strengths</div>
+      <div class="pc-row pro">Deepest governance — RLS, audit trails, certification</div>
+      <div class="pc-row pro">Native Excel and MDX support</div>
+      <div class="pc-row pro">Works across multiple data platforms simultaneously</div>
+      <div class="pc-row pro">MCP integration for AI agent access</div>
+      <div class="pc-row pro">GigaOm 2025 Leader and Fast Mover</div>
+    </div>
+    <div><div class="col-head cons">Limitations</div>
+      <div class="pc-row con">Enterprise pricing — not suited for smaller teams</div>
+      <div class="pc-row con">Additional infrastructure to deploy and manage</div>
+      <div class="pc-row con">Heavier implementation overhead</div>
+      <div class="pc-row con">Proprietary SaaS — smaller community</div>
+    </div>
+  </div>
+  <div class="watch-out"><strong>Watch out for:</strong> AtScale earns its cost at genuine scale — hundreds of users, multiple data platforms, rigorous governance requirements. If your data estate is primarily one warehouse, you are paying for capabilities you will not use.</div>
+</div>
+
+<div class="tool-card">
+  <div class="tool-head"><span class="tool-name">Looker (LookML)</span><span class="tool-tag tag-bi">BI-native</span></div>
+  <p class="tool-ideal">Ideal for: Google-first organisations and shops where analytics flows through a single BI tool</p>
+  <p style="font-family:Arial,sans-serif;font-size:13px;color:#666;line-height:1.65;margin-bottom:.75rem">LookML is the original code-based semantic layer and remains one of the most mature modeling languages available. The 2025–2026 updates integrated Gemini NLQ, with meaningful AI accuracy improvements when grounded in LookML's governed model. Google has been developing decoupled semantic capabilities — though these are still maturing.</p>
+  <div class="pro-con">
+    <div><div class="col-head pros">Strengths</div>
+      <div class="pc-row pro">Most mature modeling language — 10+ years</div>
+      <div class="pc-row pro">Deep governance within Looker ecosystem</div>
+      <div class="pc-row pro">Gemini NLQ integration improving rapidly</div>
+      <div class="pc-row pro">Large practitioner community</div>
+    </div>
+    <div><div class="col-head cons">Limitations</div>
+      <div class="pc-row con">Definitions locked inside Looker — do not travel</div>
+      <div class="pc-row con">Second BI tool means replicating all metric logic</div>
+      <div class="pc-row con">Google Cloud pricing adds up at scale</div>
+      <div class="pc-row con">Decoupled semantic capabilities still maturing</div>
+    </div>
+  </div>
+  <div class="watch-out"><strong>Watch out for:</strong> LookML lock-in is the defining risk. If you leave Looker or add a second BI tool, you leave your entire metric layer behind.</div>
+</div>
+
+<div class="tool-card">
+  <div class="tool-head"><span class="tool-name">Platform-native (Snowflake / Databricks)</span><span class="tool-tag tag-platform">Zero-infrastructure</span></div>
+  <p class="tool-ideal">Ideal for: Teams fully committed to a single data platform who want the lowest-overhead path</p>
+  <p style="font-family:Arial,sans-serif;font-size:13px;color:#666;line-height:1.65;margin-bottom:.75rem">Snowflake Semantic Views reached full GA with standard SQL querying in March 2026 and introduced automated metric discovery capabilities. Databricks Metric Views extend Unity Catalog with metric governance that inherits existing access controls.</p>
+  <div class="pro-con">
+    <div><div class="col-head pros">Strengths</div>
+      <div class="pc-row pro">Zero additional infrastructure or vendor relationship</div>
+      <div class="pc-row pro">Governance inherits from existing platform controls</div>
+      <div class="pc-row pro">Standard SQL access — no new query language</div>
+      <div class="pc-row pro">Automated metric discovery reduces setup time</div>
+      <div class="pc-row pro">Native AI: Cortex Analyst, LakehouseIQ</div>
+    </div>
+    <div><div class="col-head cons">Limitations</div>
+      <div class="pc-row con">Definitions do not span multiple data platforms</div>
+      <div class="pc-row con">Multi-BI environments require additional tooling</div>
+      <div class="pc-row con">Not suited for embedded or custom analytics</div>
+      <div class="pc-row con">Feature parity with standalone tools catching up</div>
+    </div>
+  </div>
+  <div class="watch-out"><strong>Watch out for:</strong> Platform-native is the right call today — until you add a second data platform or BI tool. Plan your exit ramp early. The dbt_semantic_view package is worth evaluating as a middle path for Snowflake teams.</div>
+</div>
+
+<hr>
+
+<h2>The comparison at a glance</h2>
+<table class="matrix">
+  <tr><th>Criterion</th><th>dbt SL</th><th>Cube</th><th>AtScale</th><th>Looker</th><th>Native</th></tr>
+  <tr><td>Multi-BI portability</td><td class="dot-full">●●●</td><td class="dot-full">●●●</td><td class="dot-full">●●●</td><td class="dot-empty">●○○</td><td class="dot-half">●●○</td></tr>
+  <tr><td>Setup speed</td><td class="dot-half">●●○</td><td class="dot-half">●●○</td><td class="dot-empty">●○○</td><td class="dot-half">●●○</td><td class="dot-full">●●●</td></tr>
+  <tr><td>Governance depth</td><td class="dot-half">●●○</td><td class="dot-half">●●○</td><td class="dot-full">●●●</td><td class="dot-full">●●●</td><td class="dot-half">●●○</td></tr>
+  <tr><td>AI / LLM readiness</td><td class="dot-full">●●●</td><td class="dot-full">●●●</td><td class="dot-full">●●●</td><td class="dot-half">●●○</td><td class="dot-full">●●●</td></tr>
+  <tr><td>Embedded analytics</td><td class="dot-empty">●○○</td><td class="dot-full">●●●</td><td class="dot-half">●●○</td><td class="dot-half">●●○</td><td class="dot-empty">●○○</td></tr>
+  <tr><td>Cost at small scale</td><td class="dot-half">●●○</td><td class="dot-full">●●●</td><td class="dot-empty">●○○</td><td class="dot-half">●●○</td><td class="dot-full">●●●</td></tr>
+  <tr><td>dbt-native teams</td><td class="dot-full">●●●</td><td class="dot-half">●●○</td><td class="dot-half">●●○</td><td class="dot-empty">●○○</td><td class="dot-half">●●○</td></tr>
+  <tr><td>Vendor stability</td><td class="dot-half">●●○</td><td class="dot-full">●●●</td><td class="dot-full">●●●</td><td class="dot-full">●●●</td><td class="dot-full">●●●</td></tr>
+</table>
+<p style="font-family:Arial,sans-serif;font-size:11px;color:#999;margin-top:-.75rem;margin-bottom:1.5rem">● limited &nbsp;●● solid &nbsp;●●● best-in-class for this criterion · Ratings reflect architectural fit, not overall product quality.</p>
+
+<hr>
+
+<div class="pull-quote"><p>"35% of teams still define metrics ad-hoc in BI tools or custom code — not because they don't know better, but because they haven't found a tool that fits their workflow without adding friction."</p></div>
+
+<div class="changelog">
+  <div class="changelog-title">Corrections applied after fact-check — April 22, 2026</div>
+  <div class="changelog-row"><strong>dbt Power BI</strong> — Updated from "private beta" to Preview; added On-premises Gateway caveat for Service</div>
+  <div class="changelog-row"><strong>dbt caching</strong> — Clarified as Enterprise and Enterprise+ plans specifically</div>
+  <div class="changelog-row"><strong>dbt Fivetran merger</strong> — Added material strategic context</div>
+  <div class="changelog-row"><strong>Matrix AI score</strong> — dbt SL upgraded to ●●● following MCP Server launch; Vendor stability row added</div>
+  <div class="changelog-row"><strong>Looker Modeler</strong> — Reframed to "decoupled semantic capabilities"</div>
+</div>
+
+<div class="series-footer"><div class="series-label">The complete series</div><div class="series-row"><a href="article1.html">◦ Part 1 — The semantic layer: your data's translator</a></div><div class="series-row"><a href="article2.html">◦ Part 2 — Why now? Three forces making it unavoidable</a></div><div class="series-row"><a href="article3.html">◦ Part 3 — Which flavor fits? The decision framework</a></div><div class="series-row"><a href="article4.html">◦ Part 4 — Design your semantic model: metrics and naming</a></div><div class="series-row current">▸ Part 5 — The honest tool guide</div><div class="series-row"><a href="article6.html">◦ Part 6 — Build it: step-by-step walkthrough</a></div><div class="series-row coming">◦ Part 7 — Governance and access control at scale · May 6</div><div class="series-row coming">◦ Part 8 — The semantic layer in the AI era · May 13</div></div>
+<div class="cta"><p>Next in the series</p><strong>Build it: step-by-step implementation walkthrough with dbt and Cube</strong></div>
+<div class="tags"><span class="tag">#TheDataBrief</span><span class="tag">#SemanticLayer</span><span class="tag">#dbt</span><span class="tag">#DataEngineering</span><span class="tag">#DataTools</span><span class="tag">#DataStrategy</span></div>
+<div class="article-footer"><div class="footer-brand">The Data Brief</div><div class="footer-tag">Strategy. Data. Decisions.</div></div>
+</div></body></html>

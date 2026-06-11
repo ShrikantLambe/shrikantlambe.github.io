@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Data Brief · Issue #3 · Which Flavor Fits?</title>
+<link rel="canonical" href="https://shrikantlambe.substack.com/p/the-semantic-layer-which-flavor-fits">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="nav"><a href="article2.html">← Previous</a><span class="nav-series">Issue 3 of 8</span><a href="article4.html">Next →</a></div>
+<div class="article">
+
+<p class="kicker">The Data Brief · Issue #3 · Semantic Layer Series</p>
+<h1>Which flavor fits?</h1>
+<p class="subtitle">A decision framework for choosing the right semantic layer type — before you build the wrong one</p>
+<div class="byline"><span>Shrikant</span><span>·</span><span>April 8, 2026</span><span>·</span><span>8 min read</span></div>
+
+<p class="drop-cap">The most expensive architectural mistake is not choosing the wrong tool. It is choosing the right tool for the wrong moment — and spending twelve months discovering the difference.</p>
+<p>By now, most data leaders understand that they need a semantic layer. The harder question — the one this issue tackles directly — is which kind. Because "semantic layer" in 2026 is not a single thing. It is a family of architectural patterns, each with a fundamentally different trade-off profile.</p>
+
+<hr>
+
+<h2>The landscape: three patterns, not five flavors</h2>
+<p>The whiteboard version — logical, physical, hybrid, virtualisation, universal — is a useful teaching taxonomy. But in practice, the 2026 market has consolidated around three deployable patterns, each with a clear philosophical stance on where semantic logic should live.</p>
+
+<div style="margin:1.5rem 0">
+<span class="flavour-pill pill-bi">Pattern 1</span>
+<h3>BI-native semantic layer</h3>
+<p><em>Looker LookML, Power BI Tabular models, Tableau Semantics</em></p>
+<p>Semantic logic lives inside your BI tool. Metrics, joins, and business rules are defined in the tool's proprietary language and consumed exclusively through that tool's interface. The trade-off is fundamental: depth of integration versus portability. LookML is powerful and mature — but it does not travel.</p>
+<div class="decision-box"><h3>Choose BI-native when</h3><p><strong>One BI tool accounts for 90%+ of analytics usage</strong> and you have no near-term plans to change that. Your team has deep expertise in the tool's semantic language.</p><p><strong>Watch out for:</strong> the moment you introduce a second BI tool, an AI assistant, or an embedded analytics use case — at that point, BI-native semantics become a liability.</p></div>
+</div>
+
+<div style="margin:1.5rem 0">
+<span class="flavour-pill pill-platform">Pattern 2</span>
+<h3>Platform-native semantic layer</h3>
+<p><em>Snowflake Semantic Views (GA March 2026), Databricks Metric Views, dbt Semantic Layer (MetricFlow)</em></p>
+<p>Semantic logic lives in your data platform, not your BI tool. Snowflake Semantic Views reached full general availability with standard SQL querying in March 2026. Databricks Metric Views extend Unity Catalog to cover metrics with the same governance controls already applied to tables.</p>
+<blockquote><p>The semantic layer landscape has shifted from a single-vendor story to a genuine architectural choice. Multi-warehouse teams lean toward dbt, Snowflake-native teams lean toward Semantic Views, and teams wanting both governance and native SQL are using the dbt_semantic_view package to get both.</p></blockquote>
+<div class="decision-box"><h3>Choose platform-native when</h3><p><strong>You are committed to a single primary data platform</strong> and want the lowest-overhead path to governed metrics.</p><p><strong>Watch out for:</strong> multi-cloud or multi-warehouse environments. If your data lives across more than one platform, a platform-native semantic layer will not span the gap.</p></div>
+</div>
+
+<div style="margin:1.5rem 0">
+<span class="flavour-pill pill-universal">Pattern 3</span>
+<h3>Universal (headless) semantic layer</h3>
+<p><em>Cube, AtScale, GoodData</em></p>
+<p>Semantic logic lives in a dedicated, platform-independent layer that sits between your data sources and all consumers — BI tools, AI agents, notebooks, embedded applications, and APIs. Define a metric once. Every consumer gets the same answer, regardless of which tool they use to ask.</p>
+<div class="pull-quote"><p>"The universal semantic layer has evolved beyond accelerating BI. It has become the control plane for enterprise AI."</p></div>
+<div class="decision-box"><h3>Choose universal when</h3><p><strong>You use multiple BI tools, multiple data platforms, or AI-powered analytics in production.</strong> You need metrics consistent across dashboards, notebooks, embedded apps, and AI agents simultaneously.</p><p><strong>Watch out for:</strong> organisational readiness. Universal semantic layers require buy-in from multiple teams. Start with platform-native and migrate later if your organisation is not ready for that coordination overhead.</p></div>
+</div>
+
+<hr>
+
+<h2>The decision framework</h2>
+<table class="matrix">
+  <tr><th>Question</th><th>If yes → consider</th></tr>
+  <tr><td>Do 90%+ of your analytics queries flow through a single BI tool with no near-term plans to change?</td><td>BI-native — it already works, don't add complexity</td></tr>
+  <tr><td>Are you all-in on Snowflake, Databricks, or BigQuery, with dbt already in your stack?</td><td>Platform-native — lowest overhead, fastest time to value</td></tr>
+  <tr><td>Do you use multiple BI tools, or are AI agents consuming your metrics in production?</td><td>Universal — the only pattern that serves all consumers equally</td></tr>
+  <tr><td>Are you early-stage with limited data engineering capacity?</td><td>Platform-native first, universal later — sequence matters</td></tr>
+</table>
+
+<div class="warn-box"><p><strong>The most common mistake:</strong> choosing universal because it sounds most sophisticated, then spending six months on infrastructure before a single metric is defined. Pattern ambition should match organisational maturity. A well-governed platform-native semantic layer delivers more value than a half-implemented universal layer at the same company.</p></div>
+
+<hr>
+
+<h2>What the 2026 market is actually doing</h2>
+<p>The most common evolution pattern is to start BI-native, then add a universal layer once a second BI tool or AI assistant is introduced. The emerging Open Semantic Interchange initiative — co-founded by dbt Labs, Snowflake, and Salesforce — aims to define metrics in vendor-neutral YAML consumed by every tool. Until that standard matures, the choice remains a practical one based on your current stack.</p>
+
+<hr>
+
+<div class="section-end"><strong>The right pattern is the one you can actually govern.</strong> Every organisation eventually ends up at universal — the question is whether you get there by design or by accident, having accumulated three separate semantic models that all disagree. Next issue: how to actually design the model — naming conventions, metric definitions, and the organisational agreements that make a semantic layer stick.</div>
+
+<div class="series-footer">
+  <div class="series-label">The complete series</div>
+  <div class="series-row"><a href="article1.html">◦ Part 1 — The semantic layer: your data's translator</a></div>
+  <div class="series-row"><a href="article2.html">◦ Part 2 — Why now? Three forces making it unavoidable</a></div>
+  <div class="series-row current">▸ Part 3 — Which flavor fits? The decision framework (you are here)</div>
+  <div class="series-row"><a href="article4.html">◦ Part 4 — Design your semantic model: metrics and naming</a></div>
+  <div class="series-row"><a href="article5.html">◦ Part 5 — The honest tool guide</a></div>
+  <div class="series-row"><a href="article6.html">◦ Part 6 — Build it: step-by-step walkthrough</a></div>
+  <div class="series-row coming">◦ Part 7 — Governance and access control at scale · May 6</div>
+  <div class="series-row coming">◦ Part 8 — The semantic layer in the AI era · May 13</div>
+</div>
+<div class="cta"><p>Next in the series</p><strong>Design your semantic model: metrics, KPIs, and naming the whole organisation agrees on</strong></div>
+<div class="tags"><span class="tag">#TheDataBrief</span><span class="tag">#SemanticLayer</span><span class="tag">#DataArchitecture</span><span class="tag">#DataEngineering</span><span class="tag">#dbt</span></div>
+<div class="article-footer"><div class="footer-brand">The Data Brief</div><div class="footer-tag">Strategy. Data. Decisions.</div></div>
+</div></body></html>

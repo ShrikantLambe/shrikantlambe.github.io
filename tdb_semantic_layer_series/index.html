@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Data Brief · Semantic Layer Series</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.index-hero{text-align:center;padding:3rem 0 2rem}
+.index-hero h1{font-size:42px;margin-bottom:.5rem}
+.index-hero .subtitle{font-size:20px;max-width:520px;margin:0 auto 1rem}
+.index-brand{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:#1A56A0;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
+.phase-section{margin-bottom:2.25rem}
+.phase-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:3px;display:inline-block;margin-bottom:.75rem}
+.phase-label.concept{background:#EBF1F9;color:#1A56A0}
+.phase-label.design{background:#E2F0D9;color:#1E7145}
+.phase-label.build{background:#FFF8E8;color:#7F4F24}
+.phase-label.scale{background:#FCEBEB;color:#A32D2D}
+.article-link{display:flex;gap:1rem;border:0.5px solid #D8DCE8;border-radius:8px;padding:1.1rem 1.3rem;margin-bottom:.6rem;text-decoration:none;background:#fff;transition:border-color .15s,box-shadow .15s;align-items:flex-start}
+.article-link:hover{border-color:#1A56A0;box-shadow:0 2px 8px rgba(26,86,160,.1)}
+.article-link.concept{border-left:3px solid #1A56A0}
+.article-link.design{border-left:3px solid #1E7145}
+.article-link.build{border-left:3px solid #7F4F24}
+.article-link.scale{border-left:3px solid #A32D2D;opacity:.5;cursor:default;pointer-events:none}
+.art-num{font-family:Arial,sans-serif;font-size:13px;font-weight:700;min-width:28px;padding-top:1px}
+.art-num.concept{color:#1A56A0}
+.art-num.design{color:#1E7145}
+.art-num.build{color:#7F4F24}
+.art-num.scale{color:#A32D2D}
+.art-body{}
+.art-title{font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:#0D1F3C;line-height:1.35;margin-bottom:3px}
+.art-desc{font-family:Arial,sans-serif;font-size:12.5px;color:#888;line-height:1.5;margin-bottom:4px}
+.art-status{font-family:Arial,sans-serif;font-size:11px;font-weight:700}
+.art-status.live{color:#1E7145}
+.art-status.coming{color:#BBB}
+.index-quote{text-align:center;padding:2rem 1.5rem;margin:2rem 0;border-top:0.5px solid #E0E2E8;border-bottom:0.5px solid #E0E2E8}
+.index-quote p{font-size:19px;font-style:italic;color:#0D1F3C;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="article">
+  <div class="index-hero">
+    <div class="index-brand">The Data Brief · Semantic Layer Series</div>
+    <h1>The Complete Guide<br>to Semantic Layers</h1>
+    <p class="subtitle">From concept to production — everything you need to understand, design, build, and scale a semantic layer</p>
+    <p style="font-family:Arial,sans-serif;font-size:13px;color:#999">By Shrikant · 8 issues · Updated every Tuesday · Free</p>
+  </div>
+
+  <div class="tldr">
+    <div class="tldr-label">TL;DR — The case in four lines</div>
+    <div class="tldr-row"><span class="tldr-arrow">→</span><span class="tldr-text">A semantic layer translates raw data into business language — common names, shared metrics, governed definitions — so every tool and every team sees the same numbers.</span></div>
+    <div class="tldr-row"><span class="tldr-arrow">→</span><span class="tldr-text">In 2026, three forces make it structurally necessary: AI analytics that can't be trusted without governed definitions, data products that create metric drift, and self-service pressure that BI tools alone can't solve.</span></div>
+    <div class="tldr-row"><span class="tldr-arrow">→</span><span class="tldr-text">There are three deployment patterns — BI-native, platform-native, and universal — each with a different trade-off profile. Match the tool to your architecture today.</span></div>
+    <div class="tldr-row"><span class="tldr-arrow">→</span><span class="tldr-text">The real work is organizational: getting teams to agree on definitions. The technical implementation follows from that, not the other way around.</span></div>
+  </div>
+
+  <div class="how-to-use">
+    <div class="how-label">How to use this guide</div>
+    <div class="how-row"><span class="how-icon">New to this</span><span class="how-text">Read Articles 1 and 2 first. They give you the vocabulary and strategic context before anything technical.</span></div>
+    <div class="how-row"><span class="how-icon">Evaluating options</span><span class="how-text">Jump to Article 3 for the decision framework between BI-native, platform-native, and universal patterns.</span></div>
+    <div class="how-row"><span class="how-icon">Ready to build</span><span class="how-text">Articles 4, 5, and 6 cover model design, tool selection, and a step-by-step implementation walkthrough.</span></div>
+    <div class="how-row"><span class="how-icon">At scale</span><span class="how-text">Articles 7 and 8 cover governance, access control, and what the AI era means for your semantic model.</span></div>
+  </div>
+
+  <hr>
+
+  <div class="phase-section">
+    <span class="phase-label concept">Concept — Why it exists</span>
+    <a class="article-link concept" href="article1.html">
+      <span class="art-num concept">#1</span>
+      <div class="art-body">
+        <div class="art-title">The semantic layer: your data's translator for the real world</div>
+        <div class="art-desc">What it is, how it works, the four things it does, and why it matters across every industry from finance to retail.</div>
+        <span class="art-status live">✓ Published · Start here</span>
+      </div>
+    </a>
+    <a class="article-link concept" href="article2.html">
+      <span class="art-num concept">#2</span>
+      <div class="art-body">
+        <div class="art-title">Why now? Three forces making the semantic layer unavoidable in 2026</div>
+        <div class="art-desc">The AI analytics reckoning, the data product movement, and self-service pressure. The strategic case for acting this year.</div>
+        <span class="art-status live">✓ Published · Read this to make the business case</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="phase-section">
+    <span class="phase-label design">Design — How to think about it</span>
+    <a class="article-link design" href="article3.html">
+      <span class="art-num design">#3</span>
+      <div class="art-body">
+        <div class="art-title">Which flavor fits? A decision framework for the right semantic layer type</div>
+        <div class="art-desc">BI-native, platform-native, and universal — the three deployable patterns and a four-question framework to choose between them.</div>
+        <span class="art-status live">✓ Published · Read before choosing a tool</span>
+      </div>
+    </a>
+    <a class="article-link design" href="article4.html">
+      <span class="art-num design">#4</span>
+      <div class="art-body">
+        <div class="art-title">Define it once. Mean it everywhere. Designing your semantic model.</div>
+        <div class="art-desc">Metrics, KPIs, naming conventions, time intelligence, and the governance process that keeps definitions from drifting.</div>
+        <span class="art-status live">✓ Published · The design blueprint</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="phase-section">
+    <span class="phase-label build">Build — How to implement it</span>
+    <a class="article-link build" href="article5.html">
+      <span class="art-num build">#5</span>
+      <div class="art-body">
+        <div class="art-title">The honest tool guide: dbt, Cube, AtScale, Looker, platform-native</div>
+        <div class="art-desc">Five tools assessed without vendor influence. What each does well, where it falls short, and the watch-out each vendor won't tell you.</div>
+        <span class="art-status live">✓ Published · Fact-checked April 2026</span>
+      </div>
+    </a>
+    <a class="article-link build" href="article6.html">
+      <span class="art-num build">#6</span>
+      <div class="art-body">
+        <div class="art-title">Build it: step-by-step walkthrough from raw schema to working semantic layer</div>
+        <div class="art-desc">Time spine setup, semantic models, metrics, validation commands, BI connection, and the seven pitfalls that cost teams a week.</div>
+        <span class="art-status live">✓ Published · Hands-on implementation guide</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="phase-section">
+    <span class="phase-label scale">Scale — How to sustain it</span>
+    <a class="article-link scale" href="#">
+      <span class="art-num scale">#7</span>
+      <div class="art-body">
+        <div class="art-title">Governance, security, and access control at semantic layer scale</div>
+        <div class="art-desc">Row-level security, data contracts, audit trails, and multi-team ownership models.</div>
+        <span class="art-status coming">Coming May 6</span>
+      </div>
+    </a>
+    <a class="article-link scale" href="#">
+      <span class="art-num scale">#8</span>
+      <div class="art-body">
+        <div class="art-title">The semantic layer in the AI era — series capstone</div>
+        <div class="art-desc">Why AI analytics is only as trustworthy as the data it reasons over, and what the data leader's role becomes.</div>
+        <span class="art-status coming">Coming May 13</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="index-quote">
+    <p>"The semantic layer is not a tool you buy. It is a decision you make — about where business logic lives, who owns it, and how it gets enforced across every system that touches your data."</p>
+  </div>
+
+  <div class="update-log">
+    <div class="update-label">Update log</div>
+    <div class="update-row"><span class="update-date">Apr 29, 2026</span><span class="update-text">Added Article 6 — Build it: step-by-step walkthrough with dbt and MetricFlow</span></div>
+    <div class="update-row"><span class="update-date">Apr 22, 2026</span><span class="update-text">Added Article 5 — The honest tool guide (fact-checked, 7 corrections applied)</span></div>
+    <div class="update-row"><span class="update-date">Apr 15, 2026</span><span class="update-text">Added Article 4 — Define it once: designing your semantic model</span></div>
+    <div class="update-row"><span class="update-date">Apr 8, 2026</span><span class="update-text">Added Article 3 — Which flavor fits? Decision framework</span></div>
+    <div class="update-row"><span class="update-date">Apr 1, 2026</span><span class="update-text">Added Article 2 — Why now? Three forces (data mesh reframed as data products)</span></div>
+    <div class="update-row"><span class="update-date">Mar 25, 2026</span><span class="update-text">Guide launched alongside Article 1</span></div>
+  </div>
+
+  <div class="article-footer">
+    <div class="footer-brand">The Data Brief</div>
+    <div class="footer-tag">Strategy. Data. Decisions. · Free · Every Tuesday</div>
+  </div>
+</div>
+</body>
+</html>
