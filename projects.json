@@ -37,7 +37,7 @@
   {
     "id": "07",
     "title": "Pipeline Sentinel",
-    "tag": "AI Agent · DataOps",
+    "tag": "Multi-Agent · DataOps",
     "github": "https://github.com/ShrikantLambe/Pipeline_Sentinel",
     "live": null,
     "article_linkedin": "https://www.linkedin.com/pulse/agentic-data-infrastructure-i-built-self-healing-pipeline-lambe-4zqyc/",
@@ -45,11 +45,11 @@
     "article_substack": "https://shrikantlambe.substack.com/cp/193521687",
     "stack": [
       "Claude Sonnet",
+      "LangGraph",
+      "LangSmith",
       "FastAPI",
       "Airflow",
-      "Streamlit",
-      "LangSmith",
-      "SQLite"
+      "Streamlit"
     ]
   },
   {
@@ -73,7 +73,7 @@
   {
     "id": "06",
     "title": "Growth Intelligence Agent",
-    "tag": "AI Agent · Analytics",
+    "tag": "Agentic AI · SaaS Analytics",
     "github": "https://github.com/ShrikantLambe/growth_intelligence_agent",
     "live": "https://growth-intelligence-agent.vercel.app/dashboard",
     "article_linkedin": "https://www.linkedin.com/pulse/i-built-growth-intelligence-agent-acts-virtual-analyst-shrikant-lambe-u2c5c/",
@@ -85,8 +85,7 @@
       "FAISS",
       "RAG",
       "Streamlit",
-      "Plotly",
-      "SQLite"
+      "Plotly"
     ]
   },
   {

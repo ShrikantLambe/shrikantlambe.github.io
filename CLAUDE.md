@@ -27,8 +27,8 @@ There is no build step, no `package.json`, and no CI/CD pipeline.
 
 ## Files
 
-- `index.html` — main portfolio page (~1310 lines)
-- `styles.css` — shared stylesheet used by all pages (~285 lines)
+- `index.html` — main portfolio page (~1480 lines)
+- `styles.css` — shared stylesheet used by all pages (~286 lines)
 - `for-apple.html`, `for-netflix.html`, `for-parafin.html` — company-targeted landing pages that link back to the main portfolio; they use `styles.css` and have their own tailored hero/content but no separate JS
 - `projects.json` — project metadata (source of truth for project data, not loaded at runtime)
 - `sitemap.xml`, `robots.txt` — SEO assets; update `sitemap.xml` when adding new pages

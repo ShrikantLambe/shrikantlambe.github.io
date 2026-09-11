@@ -32,7 +32,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2310d47f' rx='4'/><text x='16' y='23' font-family='Arial,sans-serif' font-weight='700' font-size='20' fill='%2308080a' text-anchor='middle'>S</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
 <!-- Schema.org Person structured data -->
@@ -67,9 +67,9 @@
     --bg: #08080a; --bg-1: #0f0f12; --bg-2: #16161a; --bg-3: #1e1e23;
     --fg: #fafafa; --fg-1: #c4c4cc; --fg-2: #8b8b95; --fg-3: #5a5a66;
     --line: #22222a; --line-1: #2f2f38; --line-2: #3a3a45;
-    --accent: #10d47f; --accent-bright: #34eaa0; --accent-dim: #0a7f4d;
-    --accent-glow: rgba(16,212,127,0.15);
-    --red: #f87171; --amber: #fbbf24; --blue: #60a5fa;
+    --accent: #10d47f; --accent-bright: #34eaa0; --accent-dim: #0a7f4d; --accent-rgb: 16,212,127;
+    --accent-glow: rgba(var(--accent-rgb),0.15);
+    --red: #f87171; --amber: #fbbf24; --amber-rgb: 251,191,36; --blue: #60a5fa;
     --sans: "Archivo", system-ui, sans-serif;
     --mono: "JetBrains Mono", ui-monospace, monospace;
   }
@@ -119,7 +119,7 @@
   .hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
   .avail { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 11.5px; padding: 6px 12px; background: var(--bg-1); border: 1px solid var(--line); border-radius: 40px; color: var(--fg-1); }
   .avail .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); animation: pulse 2.4s infinite; }
-  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 3px var(--accent-glow); } 50% { box-shadow: 0 0 0 6px rgba(16,212,127,0); } }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 3px var(--accent-glow); } 50% { box-shadow: 0 0 0 6px rgba(var(--accent-rgb),0); } }
   .loc-tag { font-family: var(--mono); font-size: 11.5px; color: var(--fg-2); padding: 6px 12px; border: 1px solid var(--line); border-radius: 40px; }
 
   h1.headline { font-size: clamp(42px,7.5vw,96px); font-weight: 500; line-height: 0.98; letter-spacing: -0.04em; margin-bottom: 32px; max-width: 16ch; }
@@ -182,7 +182,8 @@
   .sec-head { padding: 100px 0 40px; display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; border-top: 1px solid var(--line); margin-top: 40px; }
   .sec-head.no-border { border-top: none; margin-top: 0; }
   .sec-head .left { flex: 1; min-width: 280px; }
-  .sec-head .label { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 14px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; }
+  .label { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; }
+  .sec-head .label { margin-bottom: 14px; }
   .sec-head .label::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
   .sec-head h2 { font-size: clamp(30px,4vw,50px); font-weight: 500; line-height: 1.02; letter-spacing: -0.035em; max-width: 22ch; }
   .sec-head h2 .ac { color: var(--accent); }
@@ -206,7 +207,7 @@
   .flag-meta h3 { font-size: clamp(22px,2.8vw,36px); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 22px; }
   .flag-meta h3 .ac { color: var(--accent); font-weight: 400; }
   .flag-meta .pitch { color: var(--fg-1); font-size: 15px; line-height: 1.65; margin-bottom: 26px; }
-  .flag-meta .outcome { font-family: var(--mono); font-size: 12px; color: var(--accent); padding: 8px 12px; background: rgba(16,212,127,0.06); border: 1px solid rgba(16,212,127,0.2); border-radius: 4px; margin-bottom: 22px; letter-spacing: -0.01em; }
+  .flag-meta .outcome { font-family: var(--mono); font-size: 12px; color: var(--accent); padding: 8px 12px; background: rgba(var(--accent-rgb),0.06); border: 1px solid rgba(var(--accent-rgb),0.2); border-radius: 4px; margin-bottom: 22px; letter-spacing: -0.01em; }
 
   .key-specs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--line); border-radius: 6px; margin-bottom: 26px; background: var(--bg-1); }
   .key-specs .ks { padding: 14px 16px; border-right: 1px solid var(--line); }
@@ -233,15 +234,15 @@
   .agent-flow { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
   .af-step { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; padding: 10px 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 4px; color: var(--fg-1); }
   .af-step.done { border-left: 2px solid var(--accent); }
-  .af-step.run { border-left: 2px solid var(--amber); background: rgba(251,191,36,0.04); }
+  .af-step.run { border-left: 2px solid var(--amber); background: rgba(var(--amber-rgb),0.04); }
   .af-step .ico { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 10px; font-weight: 600; flex-shrink: 0; }
   .af-step.done .ico { background: var(--accent); color: var(--bg); }
   .af-step.run .ico { background: var(--amber); color: var(--bg); animation: pulse-a 1.4s infinite; }
-  @keyframes pulse-a { 0%,100% { box-shadow: 0 0 0 0 rgba(251,191,36,0.4); } 50% { box-shadow: 0 0 0 5px rgba(251,191,36,0); } }
+  @keyframes pulse-a { 0%,100% { box-shadow: 0 0 0 0 rgba(var(--amber-rgb),0.4); } 50% { box-shadow: 0 0 0 5px rgba(var(--amber-rgb),0); } }
   .af-step .lbl { flex: 1; }
   .af-step .t { font-size: 10.5px; color: var(--fg-3); }
 
-  .healed-box { background: linear-gradient(180deg,rgba(16,212,127,0.08),rgba(16,212,127,0.02)); border: 1px solid rgba(16,212,127,0.25); border-radius: 6px; padding: 14px; font-family: var(--mono); font-size: 12px; color: var(--fg-1); line-height: 1.5; }
+  .healed-box { background: linear-gradient(180deg,rgba(var(--accent-rgb),0.08),rgba(var(--accent-rgb),0.02)); border: 1px solid rgba(var(--accent-rgb),0.25); border-radius: 6px; padding: 14px; font-family: var(--mono); font-size: 12px; color: var(--fg-1); line-height: 1.5; }
   .healed-box .ttl { color: var(--accent); font-weight: 600; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 
   .portfolio-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
@@ -319,7 +320,7 @@
   .tier-label::before { content: ""; width: 16px; height: 1px; background: var(--accent); }
   .tier-pills { display: flex; flex-wrap: wrap; gap: 8px; }
   .tier-pill { font-family: var(--mono); font-size: 12px; padding: 8px 14px; border-radius: 4px; letter-spacing: -0.01em; }
-  .tier-pills.core .tier-pill { background: var(--bg-1); border: 1px solid rgba(16,212,127,0.3); color: var(--fg); }
+  .tier-pills.core .tier-pill { background: var(--bg-1); border: 1px solid rgba(var(--accent-rgb),0.3); color: var(--fg); }
   .tier-pills.secondary .tier-pill { background: var(--bg-1); border: 1px solid var(--line); color: var(--fg-2); }
 
   /* ---- CONTACT ---- */
@@ -331,7 +332,7 @@
   .contact-head p { color: var(--fg-1); font-size: 16px; max-width: 480px; line-height: 1.55; margin-bottom: 28px; }
   .pills { display: flex; flex-wrap: wrap; gap: 6px; }
   .pill { font-family: var(--mono); font-size: 11.5px; padding: 6px 12px; background: var(--bg-1); border: 1px solid var(--line); border-radius: 40px; color: var(--fg-1); letter-spacing: -0.01em; }
-  .pill.primary { border-color: rgba(16,212,127,0.4); color: var(--accent); }
+  .pill.primary { border-color: rgba(var(--accent-rgb),0.4); color: var(--accent); }
 
   .links-stack { display: flex; flex-direction: column; }
   .link-item { display: grid; grid-template-columns: 90px 1fr auto; gap: 20px; align-items: center; padding: 18px 0; border-top: 1px solid var(--line); transition: padding-left .2s; }
@@ -636,7 +637,7 @@
     <article class="flagship rev reveal" data-category="fintech data-engineering">
       <div class="flag-meta">
         <div class="flag-num">08 / loanlens</div>
-        <span class="flag-tag">Fintech · Data Platform</span>
+        <span class="flag-tag">FinTech · Data Platform</span>
         <h3>LoanLens <span class="ac">— portfolio intelligence for a simulated Series C lender.</span></h3>
         <p class="pitch">10,000 loans, 1.35M payment events, 3 SPVs. Modeled in dbt, reconciled end-to-end to &lt;0.1% tolerance, narrated by Claude. SPV covenant monitoring, 36-cohort vintage analysis, anomaly detection, and investor-grade PDF memo export. Designed and shipped as a two-day sprint.</p>
         <div class="outcome">📊 1.35M payment events · 3 SPVs reconciled to &lt;0.1% · investor-grade PDF memo in one click</div>
@@ -742,7 +743,7 @@
         </div>
         <div class="tags">
           <span class="tag">Snowflake Cortex</span><span class="tag">Cortex Search</span>
-          <span class="tag">Cortex Analyst</span><span class="tag">Anthropic API</span><span class="tag">SQL</span>
+          <span class="tag">Cortex Analyst</span><span class="tag">Anthropic API</span><span class="tag">SQL</span><span class="tag">GitHub Pages</span>
         </div>
         <div class="link-row">
           <a href="https://shrikantlambe.github.io/snowflake-cortex-architecture/" target="_blank" rel="noopener noreferrer">Live architecture ↗</a>
@@ -1332,7 +1333,7 @@
     </div>
     <div class="contact-row">
       <div class="contact-head reveal">
-        <div class="label" style="font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:10px;">◆ get in touch</div>
+        <div class="label" style="margin-bottom:24px;">◆ get in touch</div>
         <h2>Let's build <span class="ac">something that ships.</span></h2>
         <p>Actively talking to teams building the next layer of the data stack — AI-native analytics, agentic DataOps, fintech data platforms, enterprise LLM infrastructure.</p>
         <div class="pills">
@@ -1385,31 +1386,45 @@
 </footer>
 
 <script>
-  // Scroll progress bar
+  // Scroll progress bar (rAF-throttled, cached scrollHeight, zero-guarded)
   const scrollBar = document.getElementById('scroll-bar');
+  let scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  window.addEventListener('resize', () => {
+    scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  }, { passive: true });
+  let scrollTicking = false;
   window.addEventListener('scroll', () => {
-    scrollBar.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      scrollBar.style.width = (scrollable > 0 ? (window.scrollY / scrollable * 100) : 0) + '%';
+      scrollTicking = false;
+    });
   }, { passive: true });
 
   // Reveal animations
   const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 60); obs.unobserve(e.target); }
+    let i = 0;
+    entries.forEach((e) => {
+      if (e.isIntersecting) { const delay = i++; setTimeout(() => e.target.classList.add('in'), delay * 60); obs.unobserve(e.target); }
     });
   }, { threshold: 0.05 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // Active nav
-  const navLinks = document.querySelectorAll('.nav-right a[href^="#"]');
+  // Active nav — band around viewport center so it works regardless of section height
+  const navLinks = [...document.querySelectorAll('.nav-right a[href^="#"]')];
+  const navLinkById = new Map(navLinks.map(a => [a.getAttribute('href').slice(1), a]));
   const sectionObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        navLinks.forEach(a => a.classList.remove('active'));
-        const match = document.querySelector(`.nav-right a[href="#${entry.target.id}"]`);
-        if (match) match.classList.add('active');
+        const match = navLinkById.get(entry.target.id);
+        if (match) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          match.classList.add('active');
+        }
       }
     });
-  }, { threshold: 0.3 });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
   document.querySelectorAll('section[id]').forEach(s => sectionObs.observe(s));
 
   // Filter chips
@@ -1426,27 +1441,30 @@
     localStorage.setItem('projectFilter', filter);
   }
 
-  document.querySelectorAll('.chip').forEach(chip => {
+  const chips = [...document.querySelectorAll('.chip')];
+  chips.forEach(chip => {
     chip.addEventListener('click', () => {
-      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chips.forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       applyFilter(chip.dataset.filter);
     });
   });
 
-  // Restore filter on reload
+  // Restore filter on reload — apply directly rather than simulating a click
   const saved = localStorage.getItem('projectFilter');
   if (saved && saved !== 'all') {
-    const chip = document.querySelector(`.chip[data-filter="${saved}"]`);
-    if (chip) chip.click();
+    const savedChip = chips.find(c => c.dataset.filter === saved);
+    if (savedChip) {
+      chips.forEach(c => c.classList.remove('active'));
+      savedChip.classList.add('active');
+      applyFilter(saved);
+    }
   }
 
   // Track outbound clicks for GA4
   document.querySelectorAll('a[target="_blank"], a[download]').forEach(a => {
     a.addEventListener('click', () => {
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'click', { event_category: a.download ? 'resume_download' : 'outbound', event_label: a.href });
-      }
+      gtag('event', 'click', { event_category: a.download ? 'resume_download' : 'outbound', event_label: a.href });
     });
   });
 </script>
