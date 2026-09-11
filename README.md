@@ -4,9 +4,8 @@ Source for [shrikantlambe.github.io](https://shrikantlambe.github.io), a single-
 
 ## Structure
 
-- `index.html` — the full portfolio page: hero, 8 project cards (filterable by AI+ML / Data Eng / GenAI), experience, tech stack, and contact sections
-- `styles.css` — shared stylesheet (CSS custom properties drive all theming; mobile breakpoint at 720px)
-- `for-apple.html`, `for-netflix.html`, `for-parafin.html` — company-targeted landing pages linking back to the main portfolio
+- `index.html` — the full portfolio page: hero, 13 project cards (filterable by AI / Agents, Analytics Engineering, Data Engineering, FinTech, Product Builds), credentials, experience, tech stack, and contact sections
+- `styles.css` — stylesheet linked from `index.html`, duplicated into its inline `<style>` block for historical reasons (see `CLAUDE.md`)
 - `projects.json` — source-of-truth metadata for each project (GitHub link, live demo, article links, tech stack) — kept in sync with the hardcoded cards in `index.html`
 - `Shrikant_Lambe_Resume.pdf` — linked from the nav and hero; replace in place to update
 - `sitemap.xml`, `robots.txt` — SEO
