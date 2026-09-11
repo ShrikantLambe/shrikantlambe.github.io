@@ -16,7 +16,7 @@ There is no build step, no `package.json`, and no CI/CD pipeline.
 
 ## Architecture
 
-`index.html` contains all markup and a large inline `<style>` block (lines 65–351) that is a **full duplicate** of `styles.css` — not just `:root` overrides. When editing any styles, you must update **both** the inline block in `index.html` and `styles.css`, or the main page and the company-targeted pages will visually diverge. The company-targeted pages load only `styles.css`; `index.html` relies solely on the inline block. A JS script at the end of the body handles scroll animations, active nav tracking, project filter chips, and GA4 outbound click tracking.
+`index.html` contains all markup and a large inline `<style>` block (lines 65–351) that is a **full duplicate** of `styles.css` — not just `:root` overrides. `index.html` also has a `<link rel="stylesheet" href="styles.css">` tag (line 36), so the inline block is currently redundant with the external file; when editing any styles, update **both** to keep them from drifting apart. A JS script at the end of the body handles scroll animations, active nav tracking, project filter chips, and GA4 outbound click tracking.
 
 - All styling uses CSS custom properties defined in `:root`; prefer editing those over hardcoding values.
 - CSS Grid drives the layout; mobile breakpoint is at 720px.
@@ -28,8 +28,7 @@ There is no build step, no `package.json`, and no CI/CD pipeline.
 ## Files
 
 - `index.html` — main portfolio page (~1480 lines)
-- `styles.css` — shared stylesheet used by all pages (~286 lines)
-- `for-apple.html`, `for-netflix.html`, `for-parafin.html` — company-targeted landing pages that link back to the main portfolio; they use `styles.css` and have their own tailored hero/content but no separate JS
+- `styles.css` — stylesheet linked from `index.html`, duplicated into its inline `<style>` block (see Architecture above) (~286 lines)
 - `projects.json` — project metadata (source of truth for project data, not loaded at runtime)
 - `sitemap.xml`, `robots.txt` — SEO assets; update `sitemap.xml` when adding new pages
 - `Shrikant_Lambe_Resume.pdf` — linked from the nav CTA and hero; replace in-place to update
@@ -41,7 +40,7 @@ Section IDs match the nav links. Order in `index.html`:
 
 1. **Hero** — intro, metrics card, contact links
 2. **About** (`id="about"`) — photo + bio blurb
-3. **Credentials** (`id="credentials"`) — 8 featured certs in a 3-column grid (3 rows, last row partial); "12 on LinkedIn ↗" sec-head count link goes to the full list. Section is mirrored to all three `for-*.html` landing pages.
+3. **Credentials** (`id="credentials"`) — 8 featured certs in a 3-column grid (3 rows, last row partial); "12 on LinkedIn ↗" sec-head count link goes to the full list.
 4. **Projects** (`id="work"`) — 13 project cards with filter chips (All / AI / Agents / Analytics Engineering / Data Engineering / FinTech / Product Builds)
 5. **Writing** (`id="writing"`) — newsletter card + article list
 6. **Experience** (`id="experience"`) — timeline of job entries
@@ -53,5 +52,5 @@ Section IDs match the nav links. Order in `index.html`:
 
 - Fonts: Archivo (headings and body), JetBrains Mono (code/labels) — loaded from Google Fonts.
 - Color/spacing tokens are CSS custom properties in `:root` inside `styles.css`; prefer editing those over hardcoding values.
-- GA4 property ID is `G-89FHE2QN8M`; the tag appears at the top of `<head>` in `index.html` and the three `for-*.html` pages. The `tdb_semantic_layer_series/` sub-site does not have it.
-- Vercel Speed Insights snippet also appears immediately after the GA4 block in those same four files, and is likewise absent from the sub-site.
+- GA4 property ID is `G-89FHE2QN8M`; the tag appears at the top of `<head>` in `index.html`. The `tdb_semantic_layer_series/` sub-site does not have it.
+- Vercel Speed Insights snippet also appears immediately after the GA4 block in `index.html`, and is likewise absent from the sub-site.
