@@ -41,8 +41,8 @@ Section IDs match the nav links. Order in `index.html`:
 
 1. **Hero** — intro, metrics card, contact links
 2. **About** (`id="about"`) — photo + bio blurb
-3. **Credentials** (`id="credentials"`) — 6 featured certs in a 3×2 card grid; "12 on LinkedIn ↗" sec-head count link goes to the full list. Section is mirrored to all three `for-*.html` landing pages.
-4. **Projects** (`id="work"`) — 10 project cards with filter chips (All / AI / Agents / Analytics Engineering / Data Engineering / FinTech / Product Builds)
+3. **Credentials** (`id="credentials"`) — 8 featured certs in a 3-column grid (3 rows, last row partial); "12 on LinkedIn ↗" sec-head count link goes to the full list. Section is mirrored to all three `for-*.html` landing pages.
+4. **Projects** (`id="work"`) — 13 project cards with filter chips (All / AI / Agents / Analytics Engineering / Data Engineering / FinTech / Product Builds)
 5. **Writing** (`id="writing"`) — newsletter card + article list
 6. **Experience** (`id="experience"`) — timeline of job entries
 7. **Stack** (`id="stack"`) — two-tier categorized tech tags (Core / Proficient)
