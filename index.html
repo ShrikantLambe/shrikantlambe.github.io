@@ -240,6 +240,19 @@
   .link-row a:hover { color: var(--accent); border-color: var(--accent); }
 
   .flag-preview { background: var(--bg-1); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6); }
+
+  /* light-tier project catalog */
+  .projects-more-label { font-family: var(--mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.1em; text-transform: uppercase; margin: 20px 0 24px; padding-top: 40px; border-top: 1px solid var(--line); }
+  .light-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .light-card { display: block; padding: 20px 22px; background: var(--bg-1); border: 1px solid var(--line); border-radius: 6px; transition: border-color .2s, background .2s; }
+  .light-card:hover { border-color: var(--accent); background: var(--bg-2); }
+  .light-card .lc-num { font-family: var(--mono); font-size: 11px; color: var(--fg-3); margin-bottom: 8px; }
+  .light-card h4 { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .light-card .lc-outcome { font-size: 13px; color: var(--fg-1); line-height: 1.55; margin-bottom: 14px; }
+  .light-card .tags { margin-bottom: 14px; }
+  .light-card .link-row { gap: 12px; }
+  .light-card .link-row a { font-size: 11.5px; }
+  @media (max-width: 720px) { .light-grid { grid-template-columns: 1fr; } }
   .prev-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--bg-2); border-bottom: 1px solid var(--line); }
   .prev-dots { display: flex; gap: 6px; }
   .prev-dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--line-2); }
@@ -508,7 +521,7 @@
     <div class="sec-head reveal">
       <div class="left">
         <div class="label">featured work</div>
-        <h2>Thirteen systems. All <span class="ac">production-ready.</span></h2>
+        <h2>Three flagship builds. <span class="ac">Ten more in the catalog.</span></h2>
       </div>
       <div class="count">13 projects</div>
     </div>
@@ -568,59 +581,18 @@
       </div>
     </article>
 
-    <!-- 12: Coffee Barista Agent (rev) -->
-    <article class="flagship rev reveal" data-category="ai-agents product">
-      <div class="flag-meta">
-        <div class="flag-num">12 / barista</div>
-        <span class="flag-tag">AI Agent · Conversational</span>
-        <h3>Coffee Barista Agent <span class="ac">— an ADK agent that won't recommend off-menu.</span></h3>
-        <p class="pitch">A conversational ordering assistant built on Google's Agent Development Kit, served through a Streamlit chat UI. The agent is grounded in an actual menu via a get_menu tool call — it asks one clarifying question when a request is vague (hot or cold, sweet or strong) and respects allergen and dietary tags instead of free-associating a drink. A companion script embeds the menu with Vertex AI text-embedding-005 into Firestore, laying the groundwork for semantic menu search.</p>
-        <div class="outcome">☕ Menu-grounded recommendations · allergen-aware · Vertex AI embeddings for semantic search</div>
-        <div class="key-specs">
-          <div class="ks"><div class="ks-val">1</div><div class="ks-label">Menu-grounded tool call</div></div>
-          <div class="ks"><div class="ks-val">0</div><div class="ks-label">Off-menu recommendations</div></div>
-          <div class="ks"><div class="ks-val">Vertex AI</div><div class="ks-label">Embeddings seed script</div></div>
-        </div>
-        <div class="tags">
-          <span class="tag">Google ADK</span><span class="tag">Gemini</span><span class="tag">Streamlit</span>
-          <span class="tag">Firestore</span><span class="tag">Vertex AI Embeddings</span>
-        </div>
-        <div class="link-row">
-          <a href="https://coffee-barista-711280096325.us-west1.run.app" target="_blank" rel="noopener noreferrer">Live app ↗</a>
-          <a href="https://github.com/ShrikantLambe/coffee-barista-agent" target="_blank" rel="noopener noreferrer">github ⎆</a>
-        </div>
-      </div>
-      <div class="flag-preview">
-        <div class="prev-bar">
-          <div class="prev-dots"><span></span><span></span><span></span></div>
-          <div class="prev-url">coffee-barista-agent · chat</div>
-        </div>
-        <div class="prev-body">
-          <div class="prev-label">ORDER · IN PROGRESS</div>
-          <div class="chat-exchange">
-            <div class="ch-user">Something cold and not too sweet, and I'm dairy-free.</div>
-            <div class="ch-ai">Iced Americano or the Cold Brew — both dairy-free, neither is sweet. Want oat milk in either?</div>
-          </div>
-          <div class="healed-box" style="margin-top:12px;">
-            <div class="ttl">✓ Grounded in menu.json</div>
-            Every suggestion checked against real items, prices, and allergen tags — nothing recommended off-menu.
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 07: Pipeline Sentinel -->
-    <article class="flagship reveal" data-category="ai-agents data-engineering">
+    <!-- 07: Pipeline Sentinel (rev) -->
+    <article class="flagship rev reveal" data-category="ai-agents data-engineering">
       <div class="flag-meta">
         <div class="flag-num">07 / sentinel</div>
         <span class="flag-tag">Multi-Agent · DataOps</span>
         <h3>Pipeline Sentinel <span class="ac">— a self-healing agent for Airflow.</span></h3>
-        <p class="pitch">Five specialized agents — Monitor, Diagnosis, Blast Radius, Remediation, Reflection — coordinate through shared state to diagnose and resolve pipeline failures without paging a human. Pattern memory prevents repeat incidents. A confidence gate auto-remediates only low-risk, high-signal cases; everything else escalates with a full audit trail.</p>
-        <div class="outcome">⚡ Self-heals pipeline failures in ~11s · 94% median confidence · zero human pages on low-risk incidents</div>
+        <p class="pitch">Five specialized agents — Monitor, Diagnosis, Blast Radius, Remediation, Reflection — coordinate through shared state to diagnose and resolve pipeline failures without paging a human. Pattern memory prevents repeat incidents. A confidence gate auto-remediates only low-risk, high-signal cases; everything else escalates with a full audit trail. Independent build — the numbers below are from its own test/demo scenarios, not a company-monitored production system.</p>
+        <div class="outcome">⚡ Demo scenario: resolves failures in ~11s at 94% confidence · escalates everything else with a full audit trail</div>
         <div class="key-specs">
           <div class="ks"><div class="ks-val">5</div><div class="ks-label">Agents in ReAct loop</div></div>
-          <div class="ks"><div class="ks-val">94%</div><div class="ks-label">Median confidence</div></div>
-          <div class="ks"><div class="ks-val">11s</div><div class="ks-label">Time-to-resolution</div></div>
+          <div class="ks"><div class="ks-val">94%</div><div class="ks-label">Confidence (demo run)</div></div>
+          <div class="ks"><div class="ks-val">11s</div><div class="ks-label">Time-to-resolution (demo)</div></div>
         </div>
         <div class="tags">
           <span class="tag">Claude Sonnet</span><span class="tag">LangGraph</span><span class="tag">LangSmith</span>
@@ -639,7 +611,7 @@
           <div class="prev-url">pipeline-sentinel · agent dashboard</div>
         </div>
         <div class="prev-body">
-          <div class="prev-label">INCIDENT · customer_churn_pipeline · transform_features</div>
+          <div class="prev-label">DEMO SCENARIO · customer_churn_pipeline · transform_features</div>
           <div class="agent-flow">
             <div class="af-step done"><span class="ico">✓</span><span class="lbl">Monitor · task failure detected</span><span class="t">T+04s</span></div>
             <div class="af-step done"><span class="ico">✓</span><span class="lbl">Diagnosis · upstream schema drift on `plan_tier`</span><span class="t">T+07s</span></div>
@@ -648,119 +620,24 @@
           </div>
           <div class="healed-box">
             <div class="ttl">✓ Self-healed · confidence 94%</div>
-            Schema reloaded, 3 tasks re-queued. No human intervention. Similar incident 2026-04-03 — same fix, resolved in 11s.
+            Schema reloaded, 3 tasks re-queued. No human intervention needed in this demo scenario.
           </div>
         </div>
       </div>
     </article>
 
-    <!-- 08: LoanLens (rev) -->
-    <article class="flagship rev reveal" data-category="fintech data-engineering">
-      <div class="flag-meta">
-        <div class="flag-num">08 / loanlens</div>
-        <span class="flag-tag">FinTech · Data Platform</span>
-        <h3>LoanLens <span class="ac">— portfolio intelligence for a simulated Series C lender.</span></h3>
-        <p class="pitch">10,000 loans, 1.35M payment events, 3 SPVs. Modeled in dbt, reconciled end-to-end to &lt;0.1% tolerance, narrated by Claude. SPV covenant monitoring, 36-cohort vintage analysis, anomaly detection, and investor-grade PDF memo export. Designed and shipped as a two-day sprint.</p>
-        <div class="outcome">📊 1.35M payment events · 3 SPVs reconciled to &lt;0.1% · investor-grade PDF memo in one click</div>
-        <div class="key-specs">
-          <div class="ks"><div class="ks-val">1.35M</div><div class="ks-label">Payment events</div></div>
-          <div class="ks"><div class="ks-val">&lt;0.1%</div><div class="ks-label">Recon tolerance</div></div>
-          <div class="ks"><div class="ks-val">36</div><div class="ks-label">Cohort vintages</div></div>
-        </div>
-        <div class="tags">
-          <span class="tag">Claude Sonnet</span><span class="tag">DuckDB</span><span class="tag">dbt Core</span>
-          <span class="tag">Snowflake</span><span class="tag">Streamlit</span><span class="tag">Python</span>
-        </div>
-        <div class="link-row">
-          <a href="https://loanlens-agentic.streamlit.app/" target="_blank" rel="noopener noreferrer">Live app ↗</a>
-          <a href="https://github.com/ShrikantLambe/loanlens" target="_blank" rel="noopener noreferrer">github ⎆</a>
-        </div>
-      </div>
-      <div class="flag-preview">
-        <div class="prev-bar">
-          <div class="prev-dots"><span></span><span></span><span></span></div>
-          <div class="prev-url">loanlens · spv-b portfolio snapshot</div>
-        </div>
-        <div class="prev-body">
-          <div class="prev-label">SPV-B · Q4 2025 · AS-OF 2026-04-22</div>
-          <div class="portfolio-grid">
-            <div class="pg-card"><div class="pg-val ac">$284M</div><div class="pg-label">AUM</div><div class="pg-delta">+3.1% QoQ</div></div>
-            <div class="pg-card"><div class="pg-val warn">3.2%</div><div class="pg-label">Default rate</div><div class="pg-delta warn">+40bps</div></div>
-            <div class="pg-card"><div class="pg-val">0.04%</div><div class="pg-label">Recon delta</div><div class="pg-delta">within tol.</div></div>
-          </div>
-          <div class="mini-chart">
-            <svg viewBox="0 0 400 60" preserveAspectRatio="none">
-              <defs><linearGradient id="g1" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#10d47f" stop-opacity="0.4"/><stop offset="100%" stop-color="#10d47f" stop-opacity="0"/></linearGradient></defs>
-              <path d="M0,50 L40,45 L80,38 L120,32 L160,28 L200,22 L240,18 L280,15 L320,14 L360,12 L400,10 L400,60 L0,60 Z" fill="url(#g1)"/>
-              <path d="M0,50 L40,45 L80,38 L120,32 L160,28 L200,22 L240,18 L280,15 L320,14 L360,12 L400,10" stroke="#10d47f" stroke-width="1.5" fill="none"/>
-            </svg>
-          </div>
-          <div class="ai-memo">
-            <div class="memo-head">◆ Investor memo · claude</div>
-            <div class="memo-body">SPV-B at 87% facility utilization — recommend 60-day drawdown pause. 2023 vintage cohorts outperforming 12-month default curve by 40bps.</div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 06: Growth Intelligence Agent -->
-    <article class="flagship reveal" data-category="ai-agents analytics-engineering">
-      <div class="flag-meta">
-        <div class="flag-num">06 / growth-agent</div>
-        <span class="flag-tag">Agentic AI · SaaS Analytics</span>
-        <h3>Growth Intelligence Agent <span class="ac">— a virtual revenue analyst.</span></h3>
-        <p class="pitch">Autonomously monitors SaaS growth metrics across 6 categories (new logo, expansion, retention), detects anomalies with severity scoring, and surfaces RAG-grounded strategic recommendations from company playbooks — all through a natural-language interface. Thinks like an analyst, cites like a playbook.</p>
-        <div class="outcome">🤖 Surfaces playbook-grounded recommendations autonomously across 6 metric categories</div>
-        <div class="key-specs">
-          <div class="ks"><div class="ks-val">6</div><div class="ks-label">Metric categories</div></div>
-          <div class="ks"><div class="ks-val">FAISS</div><div class="ks-label">Playbook retrieval</div></div>
-          <div class="ks"><div class="ks-val">NL</div><div class="ks-label">Query interface</div></div>
-        </div>
-        <div class="tags">
-          <span class="tag">Claude 3.5 Sonnet</span><span class="tag">LangChain</span><span class="tag">FAISS</span>
-          <span class="tag">RAG</span><span class="tag">Streamlit</span><span class="tag">Plotly</span>
-        </div>
-        <div class="link-row">
-          <a href="https://growth-intelligence-agent.vercel.app/dashboard" target="_blank" rel="noopener noreferrer">Live app ↗</a>
-          <a href="https://www.linkedin.com/pulse/i-built-growth-intelligence-agent-acts-virtual-analyst-shrikant-lambe-u2c5c/" target="_blank" rel="noopener noreferrer">LinkedIn article →</a>
-          <a href="https://medium.com/@shrikantlambe/bdb94846130d" target="_blank" rel="noopener noreferrer">Medium ↗</a>
-          <a href="https://shrikantlambe.substack.com/p/i-built-an-growth-intelligence-agent" target="_blank" rel="noopener noreferrer">Substack ↗</a>
-          <a href="https://github.com/ShrikantLambe/growth_intelligence_agent" target="_blank" rel="noopener noreferrer">github ⎆</a>
-        </div>
-      </div>
-      <div class="flag-preview">
-        <div class="prev-bar">
-          <div class="prev-dots"><span></span><span></span><span></span></div>
-          <div class="prev-url">growth-intelligence-agent · week 17</div>
-        </div>
-        <div class="prev-body">
-          <div class="prev-label">SAAS PORTFOLIO · WEEK 17 · REAL-TIME</div>
-          <div class="portfolio-grid">
-            <div class="pg-card"><div class="pg-val ac">$2.4M</div><div class="pg-label">MRR</div><div class="pg-delta">+6.2% WoW</div></div>
-            <div class="pg-card"><div class="pg-val ac">118%</div><div class="pg-label">NRR</div><div class="pg-delta">above target</div></div>
-            <div class="pg-card"><div class="pg-val warn">↑2.1%</div><div class="pg-label">Churn risk</div><div class="pg-delta warn">anomaly</div></div>
-          </div>
-          <div class="anomaly-badge">⚠ <strong>ANOMALY · HIGH</strong> — enterprise churn spiked +2.1pp WoW · 3 accounts flagged</div>
-          <div class="chat-exchange">
-            <div class="ch-user">Why did enterprise churn jump this week?</div>
-            <div class="ch-ai">Per ICP playbook §3.2: accounts with &lt;60% feature adoption + no QBR in 90d = highest signal. 3 flagged accounts match both. Recommend CSM outreach this week.</div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- 05: Snowflake Cortex (rev) -->
-    <article class="flagship rev reveal" data-category="analytics-engineering">
+    <!-- 05: Snowflake Cortex -->
+    <article class="flagship reveal" data-category="analytics-engineering">
       <div class="flag-meta">
         <div class="flag-num">05 / cortex</div>
         <span class="flag-tag">Snowflake · Enterprise AI</span>
         <h3>AI-Native Data Platform <span class="ac">on Snowflake Cortex.</span></h3>
-        <p class="pitch">A production-grade architecture blueprint for running governed AI natively inside the Snowflake Data Cloud. Cortex LLM functions (COMPLETE, SENTIMENT, CLASSIFY), Cortex Search, and Cortex Analyst — with live interactive demos. Zero data egress, end-to-end policy enforcement, ships with Anthropic API integration.</p>
-        <div class="outcome">🏗 Zero data egress · end-to-end governed AI · live interactive demo deployed on GitHub Pages</div>
+        <p class="pitch">A reference architecture and live demo for running governed AI natively inside the Snowflake Data Cloud — Cortex LLM functions (COMPLETE, SENTIMENT, CLASSIFY), Cortex Search, and Cortex Analyst, with live interactive demos. Zero data egress is a design property of the in-warehouse pattern, not a third-party-audited guarantee — this is a personal architecture blueprint, not a deployed enterprise system.</p>
+        <div class="outcome">🏗 Architecture blueprint: zero data egress by design · end-to-end governed AI patterns · live interactive demo on GitHub Pages</div>
         <div class="key-specs">
           <div class="ks"><div class="ks-val">3</div><div class="ks-label">Cortex layers</div></div>
-          <div class="ks"><div class="ks-val">0</div><div class="ks-label">Data egress</div></div>
-          <div class="ks"><div class="ks-val">E2E</div><div class="ks-label">Governed AI</div></div>
+          <div class="ks"><div class="ks-val">0</div><div class="ks-label">Data egress (by design)</div></div>
+          <div class="ks"><div class="ks-val">E2E</div><div class="ks-label">Governed AI pattern</div></div>
         </div>
         <div class="tags">
           <span class="tag">Snowflake Cortex</span><span class="tag">Cortex Search</span>
@@ -802,313 +679,117 @@
       </div>
     </article>
 
-    <!-- 03: Real-Time Retail Pipeline -->
-    <article class="flagship reveal" data-category="data-engineering">
-      <div class="flag-meta">
-        <div class="flag-num">03 / retail-pipeline</div>
-        <span class="flag-tag">Data Engineering · Streaming</span>
-        <h3>Real-Time Retail Sales Pipeline <span class="ac">— Kafka to warehouse, E2E.</span></h3>
-        <p class="pitch">Production streaming platform: Kafka producer → PySpark Structured Streaming → Snowflake → dbt incremental MERGE → Airflow orchestration with automated data quality gates. Fully containerized via Docker Compose. System design documented as an architecture reference.</p>
-        <div class="outcome">🔄 Processes 25 events/sec end-to-end · zero DQ failures · fully containerized with Docker Compose</div>
-        <div class="key-specs">
-          <div class="ks"><div class="ks-val">25/s</div><div class="ks-label">Kafka throughput</div></div>
-          <div class="ks"><div class="ks-val">0</div><div class="ks-label">DQ failures</div></div>
-          <div class="ks"><div class="ks-val">E2E</div><div class="ks-label">Stream to warehouse</div></div>
+    <div class="projects-more-label reveal">10 more builds</div>
+    <div class="light-grid reveal">
+      <article class="light-card" data-category="ai-agents product">
+        <div class="lc-num">12 / barista</div>
+        <h4>Coffee Barista Agent</h4>
+        <p class="lc-outcome">Menu-grounded ordering assistant on Google ADK — refuses off-menu recommendations, Vertex AI embeddings for semantic search.</p>
+        <div class="tags"><span class="tag">Google ADK</span><span class="tag">Gemini</span><span class="tag">Streamlit</span></div>
+        <div class="link-row">
+          <a href="https://coffee-barista-711280096325.us-west1.run.app" target="_blank" rel="noopener noreferrer">Live app ↗</a>
+          <a href="https://github.com/ShrikantLambe/coffee-barista-agent" target="_blank" rel="noopener noreferrer">github ⎆</a>
         </div>
-        <div class="tags">
-          <span class="tag">Apache Kafka</span><span class="tag">PySpark</span><span class="tag">Snowflake</span>
-          <span class="tag">dbt</span><span class="tag">Airflow</span><span class="tag">Docker</span>
+      </article>
+
+      <article class="light-card" data-category="fintech data-engineering">
+        <div class="lc-num">08 / loanlens</div>
+        <h4>LoanLens</h4>
+        <p class="lc-outcome">Simulated Series C lender portfolio — 10K synthetic loans, 1.35M events, dbt-modeled reconciliation to &lt;0.1%, Claude-narrated investor memos.</p>
+        <div class="tags"><span class="tag">Claude Sonnet</span><span class="tag">DuckDB</span><span class="tag">dbt Core</span></div>
+        <div class="link-row">
+          <a href="https://loanlens-agentic.streamlit.app/" target="_blank" rel="noopener noreferrer">Live app ↗</a>
+          <a href="https://github.com/ShrikantLambe/loanlens" target="_blank" rel="noopener noreferrer">github ⎆</a>
         </div>
+      </article>
+
+      <article class="light-card" data-category="ai-agents analytics-engineering">
+        <div class="lc-num">06 / growth-agent</div>
+        <h4>Growth Intelligence Agent</h4>
+        <p class="lc-outcome">Illustrative SaaS metrics — RAG-grounded anomaly detection and playbook-cited recommendations across 6 growth categories.</p>
+        <div class="tags"><span class="tag">Claude 3.5 Sonnet</span><span class="tag">LangChain</span><span class="tag">FAISS</span></div>
+        <div class="link-row">
+          <a href="https://growth-intelligence-agent.vercel.app/dashboard" target="_blank" rel="noopener noreferrer">Live app ↗</a>
+          <a href="https://github.com/ShrikantLambe/growth_intelligence_agent" target="_blank" rel="noopener noreferrer">github ⎆</a>
+        </div>
+      </article>
+
+      <article class="light-card" data-category="data-engineering">
+        <div class="lc-num">03 / retail-pipeline</div>
+        <h4>Real-Time Retail Sales Pipeline</h4>
+        <p class="lc-outcome">Kafka → PySpark → Snowflake → dbt streaming pipeline, load-tested at 25 events/sec in a local Docker Compose environment — architecture reference, not a live production system.</p>
+        <div class="tags"><span class="tag">Apache Kafka</span><span class="tag">PySpark</span><span class="tag">dbt</span></div>
         <div class="link-row">
           <a href="https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline/blob/main/SYSTEM_DESIGN.md" target="_blank" rel="noopener noreferrer">System design →</a>
-          <a href="https://medium.com/@shrikantlambe/how-i-built-a-production-grade-real-time-retail-sales-data-pipeline-4601430087db" target="_blank" rel="noopener noreferrer">Medium ↗</a>
-          <a href="https://shrikantlambe.substack.com/p/how-i-built-a-production-grade-real" target="_blank" rel="noopener noreferrer">Substack ↗</a>
           <a href="https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline" target="_blank" rel="noopener noreferrer">github ⎆</a>
         </div>
-      </div>
-      <div class="flag-preview">
-        <div class="prev-bar">
-          <div class="prev-dots"><span></span><span></span><span></span></div>
-          <div class="prev-url">retail-pipeline · airflow dag</div>
-        </div>
-        <div class="prev-body">
-          <div class="prev-label">PIPELINE STATUS · retail_streaming_pipeline</div>
-          <div class="agent-flow">
-            <div class="af-step done"><span class="ico">✓</span><span class="lbl">Kafka Producer · 25 events/sec</span><span class="t">live</span></div>
-            <div class="af-step done"><span class="ico">✓</span><span class="lbl">PySpark Streaming · dedup + window</span><span class="t">done</span></div>
-            <div class="af-step done"><span class="ico">✓</span><span class="lbl">Snowflake write · raw + agg layers</span><span class="t">done</span></div>
-            <div class="af-step run"><span class="ico">●</span><span class="lbl">dbt run · fact_sales incremental MERGE</span><span class="t">running</span></div>
-          </div>
-          <div class="portfolio-grid" style="margin-top:14px;">
-            <div class="pg-card"><div class="pg-val ac">24.8K</div><div class="pg-label">Rows today</div></div>
-            <div class="pg-card"><div class="pg-val ac">$94K</div><div class="pg-label">Revenue</div></div>
-            <div class="pg-card"><div class="pg-val ac">0</div><div class="pg-label">DQ fails</div></div>
-          </div>
-        </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- 02: Marketing AI (rev) -->
-    <article class="flagship rev reveal" data-category="ai-agents analytics-engineering">
-      <div class="flag-meta">
-        <div class="flag-num">02 / mktg-ai</div>
-        <span class="flag-tag">GenAI · Enterprise</span>
-        <h3>Marketing AI Intelligence Engine <span class="ac">— board-ready in 30 seconds.</span></h3>
-        <p class="pitch">Inspired by real AI work at Workday. 4-layer GenAI architecture — Semantic → Context/RAG → Insight Engine → LLM Generation — that transforms raw campaign data into board-ready executive summaries. No analyst in the loop required.</p>
-        <div class="outcome">⚡ Reduces executive reporting from hours to 30 seconds · inspired by production AI work at Workday</div>
-        <div class="key-specs">
-          <div class="ks"><div class="ks-val">4</div><div class="ks-label">GenAI layers</div></div>
-          <div class="ks"><div class="ks-val">30s</div><div class="ks-label">Time to summary</div></div>
-          <div class="ks"><div class="ks-val">RAG</div><div class="ks-label">Context retrieval</div></div>
-        </div>
-        <div class="tags">
-          <span class="tag">OpenAI GPT-4</span><span class="tag">RAG</span><span class="tag">Streamlit</span><span class="tag">Pydantic</span>
-        </div>
+      <article class="light-card" data-category="ai-agents analytics-engineering">
+        <div class="lc-num">02 / mktg-ai</div>
+        <h4>Marketing AI Intelligence Engine</h4>
+        <p class="lc-outcome">4-layer GenAI pipeline turning campaign data into board-ready executive summaries — demo data, inspired by real AI work at Workday.</p>
+        <div class="tags"><span class="tag">OpenAI GPT-4</span><span class="tag">RAG</span><span class="tag">Streamlit</span></div>
         <div class="link-row">
           <a href="https://medium.com/@shrikantlambe/how-i-built-a-genai-powered-executive-summary-generator-for-marketing-organizations-b19f94ec5132" target="_blank" rel="noopener noreferrer">Medium →</a>
-          <a href="https://www.linkedin.com/pulse/how-i-built-genai-powered-executive-summary-generator-shrikant-lambe-7scnc/" target="_blank" rel="noopener noreferrer">LinkedIn ⎆</a>
-          <a href="https://shrikantlambe.substack.com/p/how-i-built-a-genai-powered-executive" target="_blank" rel="noopener noreferrer">Substack ↗</a>
           <a href="https://github.com/ShrikantLambe/marketing-executive-summary-genai" target="_blank" rel="noopener noreferrer">github ⎆</a>
         </div>
-      </div>
-      <div class="flag-preview">
-        <div class="prev-bar">
-          <div class="prev-dots"><span></span><span></span><span></span></div>
-          <div class="prev-url">marketing-ai · q3 executive summary</div>
-        </div>
-        <div class="prev-body">
-          <div class="prev-label">Q3 CAMPAIGN PERFORMANCE · AI SUMMARY</div>
-          <div class="portfolio-grid">
-            <div class="pg-card"><div class="pg-val ac">4.2x</div><div class="pg-label">ROAS</div><div class="pg-delta">above 3.5x target</div></div>
-            <div class="pg-card"><div class="pg-val ac">$1.8M</div><div class="pg-label">Revenue</div><div class="pg-delta">+23% vs Q2</div></div>
-            <div class="pg-card"><div class="pg-val warn">↓18%</div><div class="pg-label">Email CTR</div><div class="pg-delta warn">anomaly WoW</div></div>
-          </div>
-          <div class="chat-exchange">
-            <div class="ch-user">Generate Q3 executive summary.</div>
-            <div class="ch-ai">Q3 delivered ROAS 4.2x, exceeding 3.5x benchmark by 20%. Paid search drove 62% of revenue. Email CTR declined 18% WoW — recommend creative refresh before Q4.</div>
-          </div>
-        </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- 01: Customer Churn -->
-    <article class="flagship reveal" data-category="ai-agents analytics-engineering">
-      <div class="flag-meta">
-        <div class="flag-num">01 / churn</div>
-        <span class="flag-tag">ML + AI · Flagship</span>
-        <h3>Customer Churn Analysis <span class="ac">&amp; Prediction Copilot.</span></h3>
-        <p class="pitch">End-to-end ML system for telecom churn prediction — SHAP explainability per prediction, LLM-generated retention strategies per customer, and a FastAPI microservice. Inspired by real patterns from enterprise data work at Workday. CI/CD via GitHub Actions.</p>
-        <div class="outcome">🎯 Per-customer SHAP explainability + LLM retention strategy in a single FastAPI call</div>
-        <div class="key-specs">
-          <div class="ks"><div class="ks-val">SHAP</div><div class="ks-label">Explainability</div></div>
-          <div class="ks"><div class="ks-val">FastAPI</div><div class="ks-label">Microservice</div></div>
-          <div class="ks"><div class="ks-val">CI/CD</div><div class="ks-label">GitHub Actions</div></div>
-        </div>
-        <div class="tags">
-          <span class="tag">scikit-learn</span><span class="tag">OpenAI</span><span class="tag">SHAP</span>
-          <span class="tag">Streamlit</span><span class="tag">FastAPI</span><span class="tag">GitHub Actions</span>
-        </div>
+      <article class="light-card" data-category="ai-agents analytics-engineering">
+        <div class="lc-num">01 / churn</div>
+        <h4>Customer Churn Analysis &amp; Prediction</h4>
+        <p class="lc-outcome">SHAP-explainable churn model + LLM-generated retention strategy per customer, served via FastAPI — demo data, inspired by patterns from enterprise data work.</p>
+        <div class="tags"><span class="tag">scikit-learn</span><span class="tag">SHAP</span><span class="tag">FastAPI</span></div>
         <div class="link-row">
           <a href="https://medium.com/@shrikantlambe/how-i-turned-a-traditional-churn-prediction-model-into-an-ai-powered-decision-copilot-5f106c0358e9" target="_blank" rel="noopener noreferrer">Medium →</a>
-          <a href="https://www.linkedin.com/pulse/how-i-turned-traditional-churn-prediction-model-ai-powered-lambe-xpcuc/" target="_blank" rel="noopener noreferrer">LinkedIn ⎆</a>
-          <a href="https://shrikantlambe.substack.com/p/how-i-turned-a-traditional-churn" target="_blank" rel="noopener noreferrer">Substack ↗</a>
           <a href="https://github.com/ShrikantLambe/customer-churn-analysis" target="_blank" rel="noopener noreferrer">github ⎆</a>
         </div>
-      </div>
-      <div class="flag-preview">
-        <div class="prev-bar">
-          <div class="prev-dots"><span></span><span></span><span></span></div>
-          <div class="prev-url">churn-analysis · risk dashboard</div>
-        </div>
-        <div class="prev-body">
-          <div class="prev-label">CUSTOMER RISK ANALYSIS · LIVE PREDICTION</div>
-          <div class="portfolio-grid">
-            <div class="pg-card"><div class="pg-val warn">72%</div><div class="pg-label">Churn score</div><div class="pg-delta warn">HIGH RISK</div></div>
-            <div class="pg-card"><div class="pg-val">7</div><div class="pg-label">Tenure (mo)</div><div class="pg-delta warn">short tenure</div></div>
-            <div class="pg-card"><div class="pg-val">$89</div><div class="pg-label">Monthly charges</div><div class="pg-delta warn">above avg</div></div>
-          </div>
-          <div class="chat-exchange">
-            <div class="ch-user">Why is #CUS-4821 flagged high risk?</div>
-            <div class="ch-ai">Month-to-month + tenure 7mo + charges above cohort median = 3 top SHAP signals. Recommend targeted retention offer within 48hrs.</div>
-          </div>
-        </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- 04: GPT-4o Chatbot (rev) -->
-    <article class="flagship rev reveal" data-category="ai-agents">
-      <div class="flag-meta">
-        <div class="flag-num">04 / chatbot</div>
-        <span class="flag-tag">AI · Deployed</span>
-        <h3>GPT-4o AI Chatbot <span class="ac">— multi-turn, deployed on Render.</span></h3>
-        <p class="pitch">Production web chatbot with multi-turn memory, animated typing indicators, and a responsive dark UI. Flask + Gunicorn backend deployed on Render. One-line system prompt swap for any domain — built as a reusable baseline for enterprise conversational AI.</p>
-        <div class="outcome">🚀 Live on Render · multi-turn context window · one-line system prompt swap for any domain</div>
-        <div class="key-specs">
-          <div class="ks"><div class="ks-val">GPT-4o</div><div class="ks-label">Model</div></div>
-          <div class="ks"><div class="ks-val">Multi-turn</div><div class="ks-label">Memory</div></div>
-          <div class="ks"><div class="ks-val">Render</div><div class="ks-label">Live deployed</div></div>
-        </div>
-        <div class="tags">
-          <span class="tag">Flask</span><span class="tag">OpenAI GPT-4o</span><span class="tag">Gunicorn</span><span class="tag">Render</span>
-        </div>
+      <article class="light-card" data-category="ai-agents">
+        <div class="lc-num">04 / chatbot</div>
+        <h4>GPT-4o AI Chatbot</h4>
+        <p class="lc-outcome">Multi-turn chatbot baseline deployed on Render — a reusable starting point, kept in the catalog for the deployment pattern rather than novelty.</p>
+        <div class="tags"><span class="tag">Flask</span><span class="tag">OpenAI GPT-4o</span><span class="tag">Render</span></div>
         <div class="link-row">
           <a href="https://medium.com/@shrikantlambe/from-dashboards-to-dialogues-what-building-a-simple-chatbot-taught-me-about-the-future-of-b34ea01a3cc5" target="_blank" rel="noopener noreferrer">Medium →</a>
-          <a href="https://www.linkedin.com/pulse/from-bi-ai-my-first-lightweight-chatbot-build-what-taught-lambe-zvydc/" target="_blank" rel="noopener noreferrer">LinkedIn ⎆</a>
-          <a href="https://shrikantlambe.substack.com/p/from-dashboards-to-dialogues-what" target="_blank" rel="noopener noreferrer">Substack ↗</a>
           <a href="https://github.com/ShrikantLambe/simple_chatbot" target="_blank" rel="noopener noreferrer">github ⎆</a>
         </div>
-      </div>
-      <div class="flag-preview">
-        <div class="prev-bar">
-          <div class="prev-dots"><span></span><span></span><span></span></div>
-          <div class="prev-url">ai-chatbot · multi-turn session</div>
-        </div>
-        <div class="prev-body">
-          <div class="prev-label">GPT-4o · MULTI-TURN CONVERSATION</div>
-          <div class="chat-exchange" style="margin-bottom:14px;">
-            <div class="ch-user">What are the key drivers of customer churn?</div>
-            <div class="ch-ai">Key drivers: month-to-month contracts, tenure under 12 months, charges above cohort median, lack of bundled services. Want retention strategies?</div>
-          </div>
-          <div class="chat-exchange">
-            <div class="ch-user">Yes, focus on retention strategies.</div>
-            <div class="ch-ai">Top 3 levers: (1) proactive offer at 6-month mark, (2) bundle upgrade for high-usage, (3) CSM outreach when charges spike &gt;20% MoM.</div>
-          </div>
-        </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- 09: Kids AI Explorer -->
-    <article class="flagship reveal" data-category="product">
-      <div class="flag-meta">
-        <div class="flag-num">09 / kids-ai</div>
-        <span class="flag-tag">Product · EdTech</span>
-        <h3>Kids AI Explorer <span class="ac">— AI literacy for ages 6–12.</span></h3>
-        <p class="pitch">A 4-week, 12-activity curriculum that teaches children foundational AI concepts through hands-on exploration guided by Sparky, a robot mascot. Anonymous auth on first visit with optional cross-device sync, parent coaching guides per week, real AI chat powered by Gemini or Claude, and printable completion certificates. Shipped from scratch to live on Vercel in a single sprint.</p>
-        <div class="outcome">🎓 4 weeks · 12 activities · Gemini + Claude powered chat · live on Vercel</div>
-        <div class="key-specs">
-          <div class="ks"><div class="ks-val">4</div><div class="ks-label">Weeks curriculum</div></div>
-          <div class="ks"><div class="ks-val">12</div><div class="ks-label">Activities</div></div>
-          <div class="ks"><div class="ks-val">Live</div><div class="ks-label">On Vercel</div></div>
-        </div>
-        <div class="tags">
-          <span class="tag">React 18</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS v4</span>
-          <span class="tag">Google Gemini</span><span class="tag">Supabase</span><span class="tag">Vercel</span>
-        </div>
+      <article class="light-card" data-category="product">
+        <div class="lc-num">09 / kids-ai</div>
+        <h4>Kids AI Explorer</h4>
+        <p class="lc-outcome">4-week AI-literacy curriculum for ages 6–12 — live on Vercel, Gemini/Claude-powered chat, anonymous auth with optional sync.</p>
+        <div class="tags"><span class="tag">React 18</span><span class="tag">Google Gemini</span><span class="tag">Supabase</span></div>
         <div class="link-row">
           <a href="https://kids-ai-explorer.vercel.app" target="_blank" rel="noopener noreferrer">Live app ↗</a>
           <a href="https://github.com/ShrikantLambe/kids-ai-explorer" target="_blank" rel="noopener noreferrer">github ⎆</a>
         </div>
-      </div>
-      <div class="flag-preview">
-        <div class="prev-bar">
-          <div class="prev-dots"><span></span><span></span><span></span></div>
-          <div class="prev-url">kids-ai-explorer · week 2 · pattern recognition</div>
-        </div>
-        <div class="prev-body">
-          <div class="prev-label">WEEK 2 · PATTERN RECOGNITION · IN PROGRESS</div>
-          <div class="agent-flow">
-            <div class="af-step done"><span class="ico">✓</span><span class="lbl">Week 1 · What is AI? · 3 activities</span><span class="t">⭐⭐⭐</span></div>
-            <div class="af-step run"><span class="ico">●</span><span class="lbl">Week 2 · Patterns &amp; Predictions · 2 / 3</span><span class="t">active</span></div>
-            <div class="af-step"><span class="ico">○</span><span class="lbl">Week 3 · Train a Classifier · locked</span><span class="t"></span></div>
-          </div>
-          <div class="chat-exchange" style="margin-top:14px;">
-            <div class="ch-ai">Sparky: What comes next — 2, 4, 6, 8, ___?</div>
-            <div class="ch-user">10! It adds 2 each time. That's how a machine learns patterns!</div>
-          </div>
-          <div class="healed-box" style="margin-top:12px;">
-            <div class="ttl">✓ Badge unlocked · Pattern Spotter</div>
-            Week 2 complete · 6 stars earned · Certificate unlocks after Week 4
-          </div>
-        </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- 10: Marginalia (rev) -->
-    <article class="flagship rev reveal" data-category="product">
-      <div class="flag-meta">
-        <div class="flag-num">10 / marginalia</div>
-        <span class="flag-tag">Product · Read-it-later</span>
-        <h3>Marginalia <span class="ac">— your reading list, summarized by AI.</span></h3>
-        <p class="pitch">Paste a URL, Marginalia fetches and strips the article via Mozilla Readability, generates a TL;DR and tags via Gemini 2.5 Flash, then saves it to a personal reading list with an editorial aesthetic. Server-side API routes keep credentials off the client. Zero-cost stack: Next.js, Supabase, Stack Auth, and Vercel — all free tier, all self-hostable.</p>
-        <div class="outcome">📚 URL → TL;DR in one click · $0 infra cost · editorial typography with Crimson Pro</div>
-        <div class="key-specs">
-          <div class="ks"><div class="ks-val">~4s</div><div class="ks-label">Per summary</div></div>
-          <div class="ks"><div class="ks-val">$0</div><div class="ks-label">Infra cost</div></div>
-          <div class="ks"><div class="ks-val">SSR</div><div class="ks-label">Credentials safe</div></div>
-        </div>
-        <div class="tags">
-          <span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Gemini 2.5 Flash</span>
-          <span class="tag">Supabase</span><span class="tag">Stack Auth</span><span class="tag">Tailwind CSS</span><span class="tag">Vercel</span>
-        </div>
+      <article class="light-card" data-category="product">
+        <div class="lc-num">10 / marginalia</div>
+        <h4>Marginalia</h4>
+        <p class="lc-outcome">Paste a URL, get a TL;DR and a saved reading list — Mozilla Readability extraction, Gemini 2.5 Flash summaries, all free-tier infra.</p>
+        <div class="tags"><span class="tag">Next.js</span><span class="tag">Gemini 2.5 Flash</span><span class="tag">Supabase</span></div>
         <div class="link-row">
           <a href="https://marginalia-sigma.vercel.app" target="_blank" rel="noopener noreferrer">Live app ↗</a>
           <a href="https://github.com/ShrikantLambe/marginalia" target="_blank" rel="noopener noreferrer">github ⎆</a>
         </div>
-      </div>
-      <div class="flag-preview">
-        <div class="prev-bar">
-          <div class="prev-dots"><span></span><span></span><span></span></div>
-          <div class="prev-url">marginalia · reading list</div>
-        </div>
-        <div class="prev-body">
-          <div class="prev-label">READING LIST · 14 ARTICLES SAVED</div>
-          <div class="chat-exchange" style="margin-bottom:14px;">
-            <div class="ch-user">https://simonwillison.net/2025/may/llm-agents</div>
-            <div class="ch-ai">Fetching &amp; summarizing...</div>
-          </div>
-          <div class="ai-memo">
-            <div class="memo-head">◆ TL;DR · Gemini 2.5 Flash</div>
-            <div class="memo-body">LLMs are shifting from reactive tools to autonomous agents. Core challenges: reliable tool use and faithful long-context retrieval. <span style="color:var(--accent)">#llms</span> <span style="color:var(--accent)">#agents</span></div>
-          </div>
-          <div class="portfolio-grid" style="margin-top:14px;">
-            <div class="pg-card"><div class="pg-val ac">14</div><div class="pg-label">Articles saved</div></div>
-            <div class="pg-card"><div class="pg-val ac">~4s</div><div class="pg-label">Per summary</div></div>
-            <div class="pg-card"><div class="pg-val ac">$0</div><div class="pg-label">Infra cost</div></div>
-          </div>
-        </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- 13: KinSync -->
-    <article class="flagship reveal" data-category="ai-agents product">
-      <div class="flag-meta">
-        <div class="flag-num">13 / kinsync</div>
-        <span class="flag-tag">AI Agent · Family Logistics</span>
-        <h3>KinSync <span class="ac">— a family command hub with a Reasoning Engine assistant.</span></h3>
-        <p class="pitch">A scheduling hub for multi-child households — daily briefs, driver assignments, packing lists, and live Google Maps directions — backed by a conversational assistant built on Google ADK and deployed to Vertex AI Reasoning Engine. The assistant talks to the frontend over the A2A protocol using A2UI, rendering interactive Maps route cards and conflict detection directly inside the chat drawer instead of as plain text.</p>
-        <div class="outcome">🗓️ Conflict-aware scheduling assistant · live Maps route cards via A2UI · Vertex AI Reasoning Engine backend</div>
-        <div class="key-specs">
-          <div class="ks"><div class="ks-val">A2A</div><div class="ks-label">Agent-to-app protocol</div></div>
-          <div class="ks"><div class="ks-val">A2UI 0.8</div><div class="ks-label">Interactive UI schema</div></div>
-          <div class="ks"><div class="ks-val">2.5</div><div class="ks-label">Gemini Flash reasoning model</div></div>
-        </div>
-        <div class="tags">
-          <span class="tag">Google ADK</span><span class="tag">Vertex AI Reasoning Engine</span><span class="tag">A2UI</span>
-          <span class="tag">Gemini 2.5 Flash</span><span class="tag">FastAPI</span>
-        </div>
+      <article class="light-card" data-category="ai-agents product">
+        <div class="lc-num">13 / kinsync</div>
+        <h4>KinSync</h4>
+        <p class="lc-outcome">Family scheduling hub with a Vertex AI Reasoning Engine assistant and live Maps route cards via A2UI — synthetic household data.</p>
+        <div class="tags"><span class="tag">Google ADK</span><span class="tag">Vertex AI Reasoning Engine</span><span class="tag">A2UI</span></div>
         <div class="link-row">
           <a href="https://github.com/ShrikantLambe/buildwithgemini-kinsync" target="_blank" rel="noopener noreferrer">github ⎆</a>
         </div>
-      </div>
-      <div class="flag-preview">
-        <div class="prev-bar">
-          <div class="prev-dots"><span></span><span></span><span></span></div>
-          <div class="prev-url">kinsync · AI assistant drawer</div>
-        </div>
-        <div class="prev-body">
-          <div class="prev-label">DAILY BRIEF · TUESDAY</div>
-          <div class="agent-flow">
-            <div class="af-step done"><span class="ico">✓</span><span class="lbl">Drop-off · Maya · soccer · Dad</span><span class="t">7:45a</span></div>
-            <div class="af-step done"><span class="ico">✓</span><span class="lbl">Pickup · Leo · piano · Grandma Helen</span><span class="t">4:30p</span></div>
-            <div class="af-step run"><span class="ico">●</span><span class="lbl">Conflict check · overlapping pickups</span><span class="t">now</span></div>
-          </div>
-          <div class="chat-exchange" style="margin-top:14px;">
-            <div class="ch-user">How long to soccer from home?</div>
-            <div class="ch-ai">~12 mins (3.4 mi) — route card rendered via A2UI ↓</div>
-          </div>
-        </div>
-      </div>
-    </article>
+      </article>
+    </div>
 
   </div>
 </section>
@@ -1466,7 +1147,7 @@
 
   // Filter chips
   function applyFilter(filter) {
-    const articles = [...document.querySelectorAll('.flagship')];
+    const articles = [...document.querySelectorAll('.flagship, .light-card')];
     let foundFirst = false;
     articles.forEach(article => {
       const cats = article.dataset.category ? article.dataset.category.split(' ') : [];
