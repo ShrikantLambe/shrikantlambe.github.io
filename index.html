@@ -65,7 +65,7 @@
 <style>
   :root {
     --bg: #08080a; --bg-1: #0f0f12; --bg-2: #16161a; --bg-3: #1e1e23;
-    --fg: #fafafa; --fg-1: #c4c4cc; --fg-2: #8b8b95; --fg-3: #5a5a66;
+    --fg: #fafafa; --fg-1: #c4c4cc; --fg-2: #8b8b95; --fg-3: #7d7d8e;
     --line: #22222a; --line-1: #2f2f38; --line-2: #3a3a45;
     --accent: #10d47f; --accent-bright: #34eaa0; --accent-dim: #0a7f4d; --accent-rgb: 16,212,127;
     --accent-glow: rgba(var(--accent-rgb),0.15);
@@ -97,6 +97,10 @@
   .scroll-bar { position: fixed; top: 57px; left: 0; height: 2px; width: 0%; background: var(--accent); z-index: 51; pointer-events: none; }
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
   .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .avail .dot, .af-step.run .ico { animation: none !important; }
+  }
 
   /* ---- NAV ---- */
   nav.top {
@@ -108,11 +112,23 @@
   .brand { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; }
   .brand .bx { width: 22px; height: 22px; border-radius: 4px; background: linear-gradient(135deg,var(--accent),var(--accent-dim)); display: inline-flex; align-items: center; justify-content: center; color: var(--bg); font-size: 11px; font-weight: 700; }
   .nav-right { display: flex; align-items: center; gap: 28px; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
   .nav-right a { font-family: var(--mono); font-size: 12px; color: var(--fg-2); letter-spacing: -0.01em; transition: color .18s; }
   .nav-right a:hover, .nav-right a.active { color: var(--fg); }
   .nav-cta { padding: 6px 12px; background: var(--accent); color: var(--bg) !important; border-radius: 4px; font-weight: 500 !important; }
   .nav-cta:hover { background: var(--accent-bright); }
-  @media (max-width: 720px) { .nav-right a:not(.nav-cta) { display: none; } }
+  .nav-toggle { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 4px; width: 32px; height: 32px; background: transparent; border: 1px solid var(--line); border-radius: 4px; cursor: pointer; padding: 0; }
+  .nav-toggle span { display: block; width: 16px; height: 1.5px; background: var(--fg-1); transition: transform .2s, opacity .2s; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+  @media (max-width: 720px) {
+    .nav-toggle { display: inline-flex; }
+    .nav-links { position: absolute; top: 58px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bg-1); border-top: 1px solid var(--line); max-height: 0; overflow: hidden; transition: max-height .25s ease; z-index: 52; }
+    .nav-links.open { max-height: 320px; }
+    .nav-links a { padding: 14px 20px; border-bottom: 1px solid var(--line); }
+  }
+  @media (prefers-reduced-motion: reduce) { .nav-links { transition: none; } .nav-toggle span { transition: none; } }
 
   /* ---- HERO ---- */
   section.hero { padding: 130px 0 80px; }
@@ -357,11 +373,16 @@
   <div class="wrap">
     <a href="#" class="brand"><span class="bx">SL</span> shrikantlambe.com</a>
     <div class="nav-right">
-      <a href="#work">Work</a>
-      <a href="#writing">Writing</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
+      <div class="nav-links" id="nav-links">
+        <a href="#work">Work</a>
+        <a href="#writing">Writing</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
       <a href="Shrikant_Lambe_Resume.pdf" download class="nav-cta">Résumé ↓</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
@@ -493,12 +514,12 @@
     </div>
 
     <div class="filter-chips reveal">
-      <button class="chip active" data-filter="all">All</button>
-      <button class="chip" data-filter="ai-agents">AI / Agents</button>
-      <button class="chip" data-filter="analytics-engineering">Analytics Engineering</button>
-      <button class="chip" data-filter="data-engineering">Data Engineering</button>
-      <button class="chip" data-filter="fintech">FinTech</button>
-      <button class="chip" data-filter="product">Product Builds</button>
+      <button class="chip active" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" data-filter="ai-agents" aria-pressed="false">AI / Agents</button>
+      <button class="chip" data-filter="analytics-engineering" aria-pressed="false">Analytics Engineering</button>
+      <button class="chip" data-filter="data-engineering" aria-pressed="false">Data Engineering</button>
+      <button class="chip" data-filter="fintech" aria-pressed="false">FinTech</button>
+      <button class="chip" data-filter="product" aria-pressed="false">Product Builds</button>
     </div>
 
     <!-- 11: HR Analytics Copilot -->
@@ -618,7 +639,7 @@
           <div class="prev-url">pipeline-sentinel · agent dashboard</div>
         </div>
         <div class="prev-body">
-          <div class="prev-label">⚠ INCIDENT · customer_churn_pipeline · transform_features</div>
+          <div class="prev-label">INCIDENT · customer_churn_pipeline · transform_features</div>
           <div class="agent-flow">
             <div class="af-step done"><span class="ico">✓</span><span class="lbl">Monitor · task failure detected</span><span class="t">T+04s</span></div>
             <div class="af-step done"><span class="ico">✓</span><span class="lbl">Diagnosis · upstream schema drift on `plan_tier`</span><span class="t">T+07s</span></div>
@@ -626,7 +647,7 @@
             <div class="af-step run"><span class="ico">●</span><span class="lbl">Remediation · applying `reload_schema` strategy</span><span class="t">T+09s</span></div>
           </div>
           <div class="healed-box">
-            <div class="ttl">🛡 self-healed · confidence 94%</div>
+            <div class="ttl">✓ Self-healed · confidence 94%</div>
             Schema reloaded, 3 tasks re-queued. No human intervention. Similar incident 2026-04-03 — same fix, resolved in 11s.
           </div>
         </div>
@@ -675,7 +696,7 @@
             </svg>
           </div>
           <div class="ai-memo">
-            <div class="memo-head">🤖 investor memo · claude</div>
+            <div class="memo-head">◆ Investor memo · claude</div>
             <div class="memo-body">SPV-B at 87% facility utilization — recommend 60-day drawdown pause. 2023 vintage cohorts outperforming 12-month default curve by 40bps.</div>
           </div>
         </div>
@@ -991,11 +1012,11 @@
             <div class="af-step"><span class="ico">○</span><span class="lbl">Week 3 · Train a Classifier · locked</span><span class="t"></span></div>
           </div>
           <div class="chat-exchange" style="margin-top:14px;">
-            <div class="ch-ai">🤖 Sparky: What comes next — 2, 4, 6, 8, ___?</div>
+            <div class="ch-ai">Sparky: What comes next — 2, 4, 6, 8, ___?</div>
             <div class="ch-user">10! It adds 2 each time. That's how a machine learns patterns!</div>
           </div>
           <div class="healed-box" style="margin-top:12px;">
-            <div class="ttl">🏅 Badge unlocked · Pattern Spotter</div>
+            <div class="ttl">✓ Badge unlocked · Pattern Spotter</div>
             Week 2 complete · 6 stars earned · Certificate unlocks after Week 4
           </div>
         </div>
@@ -1036,7 +1057,7 @@
             <div class="ch-ai">Fetching &amp; summarizing...</div>
           </div>
           <div class="ai-memo">
-            <div class="memo-head">✦ TL;DR · Gemini 2.5 Flash</div>
+            <div class="memo-head">◆ TL;DR · Gemini 2.5 Flash</div>
             <div class="memo-body">LLMs are shifting from reactive tools to autonomous agents. Core challenges: reliable tool use and faithful long-context retrieval. <span style="color:var(--accent)">#llms</span> <span style="color:var(--accent)">#agents</span></div>
           </div>
           <div class="portfolio-grid" style="margin-top:14px;">
@@ -1083,7 +1104,7 @@
           </div>
           <div class="chat-exchange" style="margin-top:14px;">
             <div class="ch-user">How long to soccer from home?</div>
-            <div class="ch-ai">🗺️ ~12 mins (3.4 mi) — route card rendered via A2UI ↓</div>
+            <div class="ch-ai">~12 mins (3.4 mi) — route card rendered via A2UI ↓</div>
           </div>
         </div>
       </div>
@@ -1427,6 +1448,22 @@
   }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
   document.querySelectorAll('section[id]').forEach(s => sectionObs.observe(s));
 
+  // Mobile nav menu
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinksMenu = document.getElementById('nav-links');
+  if (navToggle && navLinksMenu) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinksMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    navLinksMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinksMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   // Filter chips
   function applyFilter(filter) {
     const articles = [...document.querySelectorAll('.flagship')];
@@ -1442,10 +1479,16 @@
   }
 
   const chips = [...document.querySelectorAll('.chip')];
+  function setActiveChip(target) {
+    chips.forEach(c => {
+      const isActive = c === target;
+      c.classList.toggle('active', isActive);
+      c.setAttribute('aria-pressed', String(isActive));
+    });
+  }
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
+      setActiveChip(chip);
       applyFilter(chip.dataset.filter);
     });
   });
@@ -1455,8 +1498,7 @@
   if (saved && saved !== 'all') {
     const savedChip = chips.find(c => c.dataset.filter === saved);
     if (savedChip) {
-      chips.forEach(c => c.classList.remove('active'));
-      savedChip.classList.add('active');
+      setActiveChip(savedChip);
       applyFilter(saved);
     }
   }
