@@ -2,8 +2,7 @@
   {
     "id": "11",
     "title": "HR Analytics Copilot",
-    "tag": "AI Agent · Recruiting Analytics",
-    "tier": "flagship",
+    "tag": "AI Agent \u00b7 Recruiting Analytics",
     "github": "https://github.com/ShrikantLambe/hr-ai-chatbot",
     "live": "https://hr-ai-chatbot-seven.vercel.app",
     "article_linkedin": null,
@@ -19,10 +18,26 @@
     ]
   },
   {
+    "id": "12",
+    "title": "Coffee Barista Agent",
+    "tag": "AI Agent \u00b7 Conversational",
+    "github": "https://github.com/ShrikantLambe/coffee-barista-agent",
+    "live": "https://coffee-barista-711280096325.us-west1.run.app",
+    "article_linkedin": null,
+    "article_medium": null,
+    "article_substack": null,
+    "stack": [
+      "Google ADK",
+      "Gemini",
+      "Streamlit",
+      "Firestore",
+      "Vertex AI Embeddings"
+    ]
+  },
+  {
     "id": "07",
     "title": "Pipeline Sentinel",
-    "tag": "Multi-Agent · DataOps",
-    "tier": "flagship",
+    "tag": "Multi-Agent \u00b7 DataOps",
     "github": "https://github.com/ShrikantLambe/Pipeline_Sentinel",
     "live": null,
     "article_linkedin": "https://www.linkedin.com/pulse/agentic-data-infrastructure-i-built-self-healing-pipeline-lambe-4zqyc/",
@@ -39,54 +54,15 @@
     ]
   },
   {
-    "id": "05",
-    "title": "AI-Native Data Platform on Snowflake Cortex",
-    "tag": "Snowflake · Enterprise AI",
-    "tier": "flagship",
-    "github": "https://github.com/ShrikantLambe/snowflake-cortex-architecture",
-    "live": "https://shrikantlambe.github.io/snowflake-cortex-architecture/",
-    "article_linkedin": null,
-    "article_medium": "https://medium.com/@shrikantlambe/what-it-actually-takes-to-run-ai-natively-inside-a-data-warehouse-c41209cdae2a",
-    "article_substack": "https://shrikantlambe.substack.com/p/what-it-actually-takes-to-run-ai",
-    "evidence_note": "Personal architecture blueprint and live demo, not a deployed enterprise system. 'Zero data egress' is a design property of the in-warehouse pattern, not a third-party-audited guarantee.",
-    "stack": [
-      "Snowflake Cortex",
-      "Cortex Search",
-      "Cortex Analyst",
-      "Anthropic API",
-      "SQL",
-      "GitHub Pages"
-    ]
-  },
-  {
-    "id": "12",
-    "title": "Coffee Barista Agent",
-    "tag": "AI Agent · Conversational",
-    "tier": "catalog",
-    "github": "https://github.com/ShrikantLambe/coffee-barista-agent",
-    "live": "https://coffee-barista-711280096325.us-west1.run.app",
-    "article_linkedin": null,
-    "article_medium": null,
-    "article_substack": null,
-    "stack": [
-      "Google ADK",
-      "Gemini",
-      "Streamlit",
-      "Firestore",
-      "Vertex AI Embeddings"
-    ]
-  },
-  {
     "id": "08",
     "title": "LoanLens",
-    "tag": "FinTech · Data Platform",
-    "tier": "catalog",
+    "tag": "FinTech \u00b7 Data Platform",
     "github": "https://github.com/ShrikantLambe/loanlens",
     "live": "https://loanlens-agentic.streamlit.app/",
     "article_linkedin": null,
     "article_medium": null,
     "article_substack": null,
-    "evidence_note": "Simulated Series C lender — loans, payment events, SPVs, and financial values are synthetic.",
+    "evidence_note": "Simulated Series C lender \u2014 loans, payment events, SPVs, and financial values are synthetic.",
     "stack": [
       "Claude Sonnet",
       "DuckDB",
@@ -99,8 +75,7 @@
   {
     "id": "06",
     "title": "Growth Intelligence Agent",
-    "tag": "Agentic AI · SaaS Analytics",
-    "tier": "catalog",
+    "tag": "Agentic AI \u00b7 SaaS Analytics",
     "github": "https://github.com/ShrikantLambe/growth_intelligence_agent",
     "live": "https://growth-intelligence-agent.vercel.app/dashboard",
     "article_linkedin": "https://www.linkedin.com/pulse/i-built-growth-intelligence-agent-acts-virtual-analyst-shrikant-lambe-u2c5c/",
@@ -117,10 +92,28 @@
     ]
   },
   {
+    "id": "05",
+    "title": "AI-Native Data Platform on Snowflake Cortex",
+    "tag": "Snowflake \u00b7 Enterprise AI",
+    "github": "https://github.com/ShrikantLambe/snowflake-cortex-architecture",
+    "live": "https://shrikantlambe.github.io/snowflake-cortex-architecture/",
+    "article_linkedin": null,
+    "article_medium": "https://medium.com/@shrikantlambe/what-it-actually-takes-to-run-ai-natively-inside-a-data-warehouse-c41209cdae2a",
+    "article_substack": "https://shrikantlambe.substack.com/p/what-it-actually-takes-to-run-ai",
+    "evidence_note": "Personal architecture blueprint and live demo, not a deployed enterprise system. 'Zero data egress' is a design property of the in-warehouse pattern, not a third-party-audited guarantee.",
+    "stack": [
+      "Snowflake Cortex",
+      "Cortex Search",
+      "Cortex Analyst",
+      "Anthropic API",
+      "SQL",
+      "GitHub Pages"
+    ]
+  },
+  {
     "id": "03",
     "title": "Real-Time Retail Sales Pipeline",
-    "tag": "Data Engineering · Streaming",
-    "tier": "catalog",
+    "tag": "Data Engineering \u00b7 Streaming",
     "github": "https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline",
     "live": "https://github.com/ShrikantLambe/real-time-retail-sales-data-pipeline/blob/main/SYSTEM_DESIGN.md",
     "article_linkedin": null,
@@ -139,14 +132,13 @@
   {
     "id": "02",
     "title": "Marketing AI Intelligence Engine",
-    "tag": "GenAI · Enterprise",
-    "tier": "catalog",
+    "tag": "GenAI \u00b7 Enterprise",
     "github": "https://github.com/ShrikantLambe/marketing-executive-summary-genai",
     "live": null,
     "article_linkedin": "https://www.linkedin.com/pulse/how-i-built-genai-powered-executive-summary-generator-shrikant-lambe-7scnc/",
     "article_medium": "https://medium.com/@shrikantlambe/how-i-built-a-genai-powered-executive-summary-generator-for-marketing-organizations-b19f94ec5132",
     "article_substack": "https://shrikantlambe.substack.com/p/how-i-built-a-genai-powered-executive",
-    "evidence_note": "Demo campaign data — inspired by real AI work at Workday, not that company's actual figures.",
+    "evidence_note": "Demo campaign data \u2014 inspired by real AI work at Workday, not that company's actual figures.",
     "stack": [
       "OpenAI GPT-4",
       "RAG",
@@ -157,14 +149,13 @@
   {
     "id": "01",
     "title": "Customer Churn Analysis & Prediction",
-    "tag": "ML + AI · Flagship",
-    "tier": "catalog",
+    "tag": "ML + AI \u00b7 Flagship",
     "github": "https://github.com/ShrikantLambe/customer-churn-analysis",
     "live": null,
     "article_linkedin": "https://www.linkedin.com/pulse/how-i-turned-traditional-churn-prediction-model-ai-powered-lambe-xpcuc/",
     "article_medium": "https://medium.com/@shrikantlambe/how-i-turned-a-traditional-churn-prediction-model-into-an-ai-powered-decision-copilot-5f106c0358e9",
     "article_substack": "https://shrikantlambe.substack.com/p/how-i-turned-a-traditional-churn",
-    "evidence_note": "Demo customer data — inspired by patterns from enterprise data work, not real customer records.",
+    "evidence_note": "Demo customer data \u2014 inspired by patterns from enterprise data work, not real customer records.",
     "stack": [
       "scikit-learn",
       "OpenAI",
@@ -177,8 +168,7 @@
   {
     "id": "04",
     "title": "GPT-4o AI Chatbot",
-    "tag": "AI · Deployed",
-    "tier": "catalog",
+    "tag": "AI \u00b7 Deployed",
     "github": "https://github.com/ShrikantLambe/simple_chatbot",
     "live": null,
     "article_linkedin": "https://www.linkedin.com/pulse/from-bi-ai-my-first-lightweight-chatbot-build-what-taught-lambe-zvydc/",
@@ -194,8 +184,7 @@
   {
     "id": "09",
     "title": "Kids AI Explorer",
-    "tag": "Product · EdTech",
-    "tier": "catalog",
+    "tag": "Product \u00b7 EdTech",
     "github": "https://github.com/ShrikantLambe/kids-ai-explorer",
     "live": "https://kids-ai-explorer.vercel.app",
     "article_linkedin": null,
@@ -213,8 +202,7 @@
   {
     "id": "10",
     "title": "Marginalia",
-    "tag": "Product · Read-it-later",
-    "tier": "catalog",
+    "tag": "Product \u00b7 Read-it-later",
     "github": "https://github.com/ShrikantLambe/marginalia",
     "live": "https://marginalia-sigma.vercel.app",
     "article_linkedin": null,
@@ -233,8 +221,7 @@
   {
     "id": "13",
     "title": "KinSync",
-    "tag": "AI Agent · Family Logistics",
-    "tier": "catalog",
+    "tag": "AI Agent \u00b7 Family Logistics",
     "github": "https://github.com/ShrikantLambe/buildwithgemini-kinsync",
     "live": null,
     "article_linkedin": null,

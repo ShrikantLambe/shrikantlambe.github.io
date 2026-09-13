@@ -16,19 +16,19 @@ There is no build step, no `package.json`, and no CI/CD pipeline.
 
 ## Architecture
 
-`index.html` contains all markup and a large inline `<style>` block (lines 65–381) that is a **full duplicate** of `styles.css` — not just `:root` overrides. `index.html` also has a `<link rel="stylesheet" href="styles.css">` tag (line 36), so the inline block is currently redundant with the external file; when editing any styles, update **both** to keep them from drifting apart. A JS script at the end of the body handles scroll animations, active nav tracking, project filter chips, and GA4 outbound click tracking.
+`index.html` contains all markup and a large inline `<style>` block (lines 65–368) that is a **full duplicate** of `styles.css` — not just `:root` overrides. `index.html` also has a `<link rel="stylesheet" href="styles.css">` tag (line 36), so the inline block is currently redundant with the external file; when editing any styles, update **both** to keep them from drifting apart. A JS script at the end of the body handles scroll animations, active nav tracking, project filter chips, and GA4 outbound click tracking.
 
 - All styling uses CSS custom properties defined in `:root`; prefer editing those over hardcoding values.
 - CSS Grid drives the layout; mobile breakpoint is at 720px.
 - `.reveal` elements animate in via `IntersectionObserver` when they enter the viewport; the active nav link is tracked by a second `IntersectionObserver` on `section[id]` elements.
-- Project filter chips (All / AI / Agents / Analytics Engineering / Data Engineering / FinTech / Product Builds) use `data-category` attributes on both `.flagship` (3 flagship cards) and `.light-card` (10 catalog cards) elements; `applyFilter()` queries both classes together. Selected filter persists in `localStorage`.
+- Project filter chips (All / AI / Agents / Analytics Engineering / Data Engineering / FinTech / Product Builds) use `data-category` attributes on `.flagship` cards; selected filter persists in `localStorage`.
 
 **`projects.json`** stores project metadata (title, GitHub link, live link, article links, tech stack). This file is not parsed at runtime — the HTML project cards are hardcoded to match it. When adding or editing a project, update both `projects.json` and the corresponding card in `index.html` to keep them in sync.
 
 ## Files
 
-- `index.html` — main portfolio page (~1203 lines)
-- `styles.css` — stylesheet linked from `index.html`, duplicated into its inline `<style>` block (see Architecture above) (~315 lines)
+- `index.html` — main portfolio page (~1522 lines)
+- `styles.css` — stylesheet linked from `index.html`, duplicated into its inline `<style>` block (see Architecture above) (~302 lines)
 - `projects.json` — project metadata (source of truth for project data, not loaded at runtime)
 - `sitemap.xml`, `robots.txt` — SEO assets; update `sitemap.xml` when adding new pages
 - `Shrikant_Lambe_Resume.pdf` — linked from the nav CTA and hero; replace in-place to update
@@ -41,7 +41,7 @@ Section IDs match the nav links. Order in `index.html`:
 1. **Hero** — intro, metrics card, contact links
 2. **About** (`id="about"`) — photo + bio blurb
 3. **Credentials** (`id="credentials"`) — 8 featured certs in a 3-column grid (3 rows, last row partial); "12 on LinkedIn ↗" sec-head count link goes to the full list.
-4. **Projects** (`id="work"`) — tiered: 3 flagship `.flagship` cards (full case-study treatment — pitch, outcome, key-specs, mockup preview) followed by a `.light-grid` of 10 compact `.light-card` entries (title, one-line outcome, tags, links only). Filter chips (All / AI / Agents / Analytics Engineering / Data Engineering / FinTech / Product Builds) apply across both tiers. `projects.json` has a `"tier"` field (`"flagship"`/`"catalog"`) and an optional `"evidence_note"` field documenting which metrics are illustrative/simulated vs. real — keep both in sync with the HTML when changing a project's tier or claims.
+4. **Projects** (`id="work"`) — 13 project cards, all with equal full treatment (pitch, outcome, key-specs, mockup preview), with filter chips (All / AI / Agents / Analytics Engineering / Data Engineering / FinTech / Product Builds). `projects.json` has an optional `"evidence_note"` field on a few entries documenting which metrics are illustrative/simulated vs. real (e.g. LoanLens's synthetic loan data, Pipeline Sentinel's demo-scenario confidence numbers) — the corresponding card copy states this directly rather than linking back to the JSON, so keep both in sync when changing a project's claims.
 5. **Writing** (`id="writing"`) — newsletter card + article list
 6. **Experience** (`id="experience"`) — timeline of job entries
 7. **Stack** (`id="stack"`) — two-tier categorized tech tags (Core / Proficient)
