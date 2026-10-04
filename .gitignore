@@ -15,3 +15,6 @@ portfolio_revamp_brief.md
 # Unused / orphaned profile images (keep canonical: profile.png, profile-sm.png)
 Profile_Shrikant.png
 Shrikant_Profile.png
+
+# Playwright MCP screenshot output
+.playwright-mcp/

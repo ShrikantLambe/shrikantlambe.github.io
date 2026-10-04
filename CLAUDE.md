@@ -2,6 +2,31 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Redesign in progress — read this first
+
+This repo is mid-redesign on the `redesign` branch, following the "Governed by design" direction in `DESIGN.md`. **Everything below this section documents the current (pre-redesign) site** — still accurate for whatever the redesign hasn't replaced yet, but expect it to go stale section by section as the redesign lands. Don't delete it; update or remove each piece only once the redesign actually supersedes it.
+
+### Read first
+- `DESIGN.md` is the source of truth for tokens, type, layout and banned patterns for the redesign.
+- Never change copy meaning without asking. Never invent metrics.
+
+### How to work
+- Plan before editing when a change touches more than one section.
+- After every visual change: run the dev server, screenshot with Playwright at 1440x900 and 390x844, compare against DESIGN.md, fix, screenshot again.
+- Show the final screenshots before saying a task is done.
+- One section per session. Do not restyle sections not explicitly named.
+
+### Quality gates
+- Lighthouse performance >= 95, accessibility = 100 on mobile.
+- LCP < 2.5s, INP < 200ms, CLS < 0.1.
+- Total transfer for the home page < 400 KB excluding the resume PDF.
+- Keyboard: every interactive element reachable, visible focus ring.
+- prefers-reduced-motion disables the hero animation and shows the final state.
+
+### Facts
+- Production claims (Intuitive, Workday, Lyft) and personal builds must be labelled differently via the provenance rail. Never mix them.
+- Ask before publishing anything about current/former employers that might be confidential — the Intuitive Surgical case study in particular needs explicit sign-off before it goes live.
+
 ## What This Is
 
 A static single-page portfolio website hosted on GitHub Pages (`shrikantlambe.github.io`). No build process, no framework, no dependencies — pure HTML/CSS/JS. Pushing to `main` deploys automatically via GitHub Pages.
