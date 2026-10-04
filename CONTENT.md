@@ -4,18 +4,25 @@ Written without a formal AUDIT.md (P1 needs Playwright, not available this sessi
 
 **Style note:** this draft is em-dash-free and en-dash-free (ranges use a hyphen), per the `taste-skill` design skill's zero-tolerance rule against em-dash as the most common AI writing tell. Carry that discipline into any further edits to this file.
 
+**Decisions locked (answered, no longer open):**
+- Confidentiality on the Intuitive Surgical case study: approved as drafted.
+- Hero identity line: Option 1 (see below).
+- Availability target: staff and principal roles.
+- Project drops: none. All 13 projects stay; the "Other builds" list below keeps all 11 non-flagship repos, no deletions.
+- Workday's 40% figure and the Pipeline Sentinel/LoanLens outcome numbers: no objection raised, kept as drafted.
+
 ## Hero
 
-Three one-line identity options, built on "semantic layers + agentic AI," max 14 words, no buzzwords, no "passionate":
+**Chosen: "Semantic layers and agentic AI: governed data that dashboards and agents both trust."** (13 words)
 
-1. **"Semantic layers and agentic AI: governed data that dashboards and agents both trust."** (13 words)
-2. **"I architect the semantic layer that Cortex agents and BI dashboards both run on."** (14 words)
-3. **"Fifteen years turning enterprise data into one governed layer AI agents can trust."** (13 words)
+Other options considered, kept here for reference only:
+- "I architect the semantic layer that Cortex agents and BI dashboards both run on." (14 words)
+- "Fifteen years turning enterprise data into one governed layer AI agents can trust." (13 words)
 
 ### Hero rail
 - **Role:** Solutions Architect, Data & AI (Contract), Intuitive Surgical
 - **Location:** Milpitas, CA, remote-friendly
-- **Availability:** [ASK: current site says "open to senior & staff roles"; this pack's own review-persona targets "Principal Data & AI Engineer." Confirm the target level before I lock this line.]
+- **Availability:** Open to staff and principal roles
 
 ---
 
@@ -36,7 +43,7 @@ Three one-line identity options, built on "semantic layers + agentic AI," max 14
   2. Prioritized modeling using actual query and usage history instead of a full upfront domain model. Trade-off: narrower initial scope (5 domains, not all of SAP ECC), but every shipped view maps to verified real consumption.
 - **Outcome (system, scale, before, after):** Semantic layer over SAP ECC, 5 operational domains. Before: metric definitions duplicated across stored procedures, views, and Tableau extracts, no single source of truth. After: 8 governed semantic views serving Tableau, 5 production Cortex agents, and power users from one definition.
 
-**[ASK: confidentiality sign-off required before this goes live, per your own instruction in CLAUDE.md.]** Everything above is already on the live site's About/Experience copy or the resume; nothing new is disclosed. Flag anything you want generalized further or removed outright.
+**Confidentiality: approved as drafted.** Everything above is already on the live site's About/Experience copy or the resume; nothing new is disclosed.
 
 ### 2. Pipeline Sentinel
 **Provenance: Personal build, synthetic data**
@@ -79,12 +86,12 @@ Three one-line identity options, built on "semantic layers + agentic AI," max 14
 - **Real-Time Retail Sales Pipeline:** Kafka-to-Snowflake streaming pipeline with dbt incremental models, load-tested at 25 events/sec in Docker Compose.
 - **Marketing AI Intelligence Engine:** 4-layer GenAI pipeline turning campaign data into executive summaries, inspired by production AI work at Workday.
 - **Customer Churn Analysis & Prediction:** SHAP-explainable churn model with LLM-generated, per-customer retention strategy served via FastAPI.
-- **GPT-4o AI Chatbot:** Multi-turn chatbot baseline deployed on Render. **Suggest dropping:** least differentiated build; doesn't show anything the agentic projects don't show better.
-- **Kids AI Explorer:** 4-week AI-literacy curriculum for kids 6 to 12, live on Vercel with Gemini and Claude-powered chat. **Suggest dropping from this site** (strong work, wrong audience): consumer/EdTech product reads as scope-dilution against a Staff/Principal Data & AI pitch.
+- **GPT-4o AI Chatbot:** Multi-turn chatbot baseline deployed on Render, a reusable starting point for conversational AI.
+- **Kids AI Explorer:** 4-week AI-literacy curriculum for kids 6 to 12, live on Vercel with Gemini and Claude-powered chat.
 - **Marginalia:** Paste a URL, get a TL;DR and a saved reading list, on a zero-cost, self-hostable stack.
-- **KinSync:** Family scheduling hub with a Vertex AI Reasoning Engine assistant and live Maps route cards via A2UI. **Suggest dropping from this site** for the same reason as Kids AI Explorer.
+- **KinSync:** Family scheduling hub with a Vertex AI Reasoning Engine assistant and live Maps route cards via A2UI.
 
-**[ASK]:** "drop" above means cut from this redesign entirely, not just demote further. Confirm, since it's a real deletion of content people may have linked to.
+All 13 projects are kept (confirmed; no drops). The "other builds" index above lists all 11 non-flagship repos.
 
 ---
 
