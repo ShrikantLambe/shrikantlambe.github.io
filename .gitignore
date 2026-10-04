@@ -18,3 +18,8 @@ Shrikant_Profile.png
 
 # Playwright MCP screenshot output
 .playwright-mcp/
+
+# Local agent skill installs (regenerate with: npx skills add Leonxlnx/taste-skill)
+.agents/
+.claude/
+skills-lock.json

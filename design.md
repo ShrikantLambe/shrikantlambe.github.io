@@ -60,3 +60,12 @@ Respect prefers-reduced-motion.
 - Fade-and-slide-up on scroll for every section.
 - Uniform rounded cards with soft grey shadows.
 - Accenting one word in a headline with color or italics.
+- Em-dash (—) anywhere on the page: headlines, eyebrows, labels, body
+  copy, quotes, captions, buttons, alt text. Zero, no exceptions.
+  Restructure with a period, comma, colon, or parentheses instead.
+  En-dash (–) as a separator is banned too; date and number ranges use
+  a plain hyphen (2020-2026, not 2020–2026). Added per the taste-skill
+  design skill (tasteskill.dev): this is flagged as the single most
+  common AI-writing tell. Both CONTENT.md and the current live site
+  use it extensively as a title/subtitle separator, which is exactly
+  the pattern to retire, not carry into the redesign.
