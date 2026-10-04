@@ -11,7 +11,15 @@ Thumbs.db
 
 # Internal planning docs — keep local, don't ship to GitHub Pages
 portfolio_revamp_brief.md
+Portfolio Redesign Prompt Pack — shrikantlambe.vercel.app.md
+Shrikant_Lambe_Technical_Portfolio_Second_Pass_Review.docx
 
 # Unused / orphaned profile images (keep canonical: profile.png, profile-sm.png)
 Profile_Shrikant.png
 Shrikant_Profile.png
+
+# Claude Code local tooling (skills CLI, Playwright MCP output)
+.agents/
+.claude/
+.playwright-mcp/
+skills-lock.json
