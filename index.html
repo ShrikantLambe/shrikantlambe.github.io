@@ -105,10 +105,16 @@
   @supports (animation-timeline: view()) {
     @keyframes reveal-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
     .reveal { animation: reveal-in linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+    @keyframes word-in { from { opacity: 0; transform: translateY(0.25em); } to { opacity: 1; transform: none; } }
+    h2.kinetic .word {
+      display: inline-block; animation: word-in linear both; animation-timeline: view();
+      animation-range: entry calc(var(--i, 0) * 2%) entry calc(var(--i, 0) * 2% + 30%);
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
     .avail .dot, .af-step.run .ico { animation: none !important; }
+    h2.kinetic .word { animation: none !important; opacity: 1 !important; transform: none !important; }
   }
 
   /* ---- NAV ---- */
@@ -442,7 +448,7 @@
     <div class="about-grid reveal">
       <div>
         <div class="about-eyebrow">about</div>
-        <h2 class="about-heading">From dashboards<br/>to <span class="ac">decision systems.</span></h2>
+        <h2 class="about-heading kinetic"><span class="word" style="--i:0">From</span> <span class="word" style="--i:1">dashboards</span><br/><span class="word" style="--i:2">to</span> <span class="word ac" style="--i:3">decision</span> <span class="word ac" style="--i:4">systems.</span></h2>
         <div class="about-body">
           <p>I started in BI when "analytics" meant Excel and Tableau. Fifteen years later, I'm building the layer above the dashboard — semantic models, agentic pipelines, and AI interfaces that turn governed data into executive decisions.</p>
           <p>Right now, I'm architecting a Snowflake-native semantic layer over SAP ECC at <strong>Intuitive Surgical</strong> — 8 semantic views feeding 5 production Cortex agents that answer manufacturing-ops questions in natural language. Before that, I led BI Analytics at <strong>Workday</strong>, shipping an AI Companion that let execs query marketing performance in natural language against a governed semantic layer. At <strong>Lyft</strong> I built the growth analytics stack behind multi-million-dollar acquisition spend; earlier still, supply chain analytics at Intuitive Surgical and CRM transformation at <strong>Juniper</strong>.</p>
@@ -462,7 +468,7 @@
     <div class="sec-head reveal">
       <div class="left">
         <div class="label">credentials</div>
-        <h2>Verified <span class="ac">credentials.</span></h2>
+        <h2 class="kinetic"><span class="word" style="--i:0">Verified</span> <span class="word ac" style="--i:1">credentials.</span></h2>
       </div>
       <a href="https://www.linkedin.com/in/shrikantlambe/details/certifications/" target="_blank" rel="noopener noreferrer" class="count">12 on LinkedIn ↗</a>
     </div>
@@ -517,7 +523,7 @@
     <div class="sec-head reveal">
       <div class="left">
         <div class="label">featured work</div>
-        <h2>Thirteen systems. <span class="ac">From governed analytics to AI agents.</span></h2>
+        <h2 class="kinetic"><span class="word" style="--i:0">Thirteen</span> <span class="word" style="--i:1">systems.</span> <span class="word ac" style="--i:2">From</span> <span class="word ac" style="--i:3">governed</span> <span class="word ac" style="--i:4">analytics</span> <span class="word ac" style="--i:5">to</span> <span class="word ac" style="--i:6">AI</span> <span class="word ac" style="--i:7">agents.</span></h2>
       </div>
       <div class="count">13 projects</div>
     </div>
@@ -1128,7 +1134,7 @@
     <div class="sec-head reveal">
       <div class="left">
         <div class="label">writing</div>
-        <h2>The Data Brief — <span class="ac">strategy, data, decisions.</span></h2>
+        <h2 class="kinetic"><span class="word" style="--i:0">The</span> <span class="word" style="--i:1">Data</span> <span class="word" style="--i:2">Brief</span> <span class="word" style="--i:3">—</span> <span class="word ac" style="--i:4">strategy,</span> <span class="word ac" style="--i:5">data,</span> <span class="word ac" style="--i:6">decisions.</span></h2>
       </div>
     </div>
     <div class="writing-wrap">
@@ -1230,7 +1236,7 @@
     <div class="sec-head reveal">
       <div class="left">
         <div class="label">experience</div>
-        <h2>15 years · 6 companies · <span class="ac">one arc.</span></h2>
+        <h2 class="kinetic"><span class="word" style="--i:0">15</span> <span class="word" style="--i:1">years</span> <span class="word" style="--i:2">·</span> <span class="word" style="--i:3">6</span> <span class="word" style="--i:4">companies</span> <span class="word" style="--i:5">·</span> <span class="word ac" style="--i:6">one</span> <span class="word ac" style="--i:7">arc.</span></h2>
       </div>
     </div>
     <div class="timeline">
@@ -1312,7 +1318,7 @@
     <div class="sec-head reveal">
       <div class="left">
         <div class="label">stack</div>
-        <h2>Full lifecycle — <span class="ac">warehouse to LLM.</span></h2>
+        <h2 class="kinetic"><span class="word" style="--i:0">Full</span> <span class="word" style="--i:1">lifecycle</span> <span class="word" style="--i:2">—</span> <span class="word ac" style="--i:3">warehouse</span> <span class="word ac" style="--i:4">to</span> <span class="word ac" style="--i:5">LLM.</span></h2>
       </div>
     </div>
     <div class="stack-tiers reveal">
@@ -1364,7 +1370,7 @@
     <div class="contact-row">
       <div class="contact-head reveal">
         <div class="label" style="margin-bottom:24px;">◆ get in touch</div>
-        <h2>Let's build <span class="ac">something that ships.</span></h2>
+        <h2 class="kinetic"><span class="word" style="--i:0">Let's</span> <span class="word" style="--i:1">build</span> <span class="word ac" style="--i:2">something</span> <span class="word ac" style="--i:3">that</span> <span class="word ac" style="--i:4">ships.</span></h2>
         <p>Actively talking to teams building the next layer of the data stack — AI-native analytics, agentic DataOps, fintech data platforms, enterprise LLM infrastructure.</p>
         <div class="pills">
           <span class="pill primary">analytics engineering lead</span>

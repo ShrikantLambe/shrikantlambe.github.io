@@ -40,10 +40,16 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 @supports (animation-timeline: view()) {
   @keyframes reveal-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   .reveal { animation: reveal-in linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+  @keyframes word-in { from { opacity: 0; transform: translateY(0.25em); } to { opacity: 1; transform: none; } }
+  h2.kinetic .word {
+    display: inline-block; animation: word-in linear both; animation-timeline: view();
+    animation-range: entry calc(var(--i, 0) * 2%) entry calc(var(--i, 0) * 2% + 30%);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
   .avail .dot, .af-step.run .ico { animation: none !important; }
+  h2.kinetic .word { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 
 /* ---- NAV ---- */
