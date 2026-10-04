@@ -14,6 +14,17 @@ A static single-page portfolio website hosted on GitHub Pages (`shrikantlambe.gi
 
 There is no build step, no `package.json`, and no CI/CD pipeline.
 
+## Visual QA Workflow
+
+The Playwright MCP server is configured for this project (`claude mcp add playwright -- npx @playwright/mcp@latest`; Chromium binaries are already installed, no extra setup needed). **After any change that touches layout, CSS, or animation, use it before calling the change done:**
+
+1. Navigate to the local `index.html` and screenshot at a desktop width (~1440px) and a mobile width (~390px).
+2. Actually look at both screenshots — check for layout breakage, overlapping elements, illegible text, and whether the intended visual effect is really there, not just assumed from reading the CSS.
+3. For scroll-triggered, timed, or hover-driven effects, screenshot at more than one scroll position / state — a single snapshot at rest can miss an effect that only shows up mid-animation or on interaction.
+4. Critique the result like a reviewer, not the author: would this pass if someone else had shipped it?
+
+This exists because of two real bugs shipped in this project before Playwright was available: a grain overlay that was mathematically invisible due to a `mix-blend-mode` mismatch with the near-black background, and a scroll-triggered heading animation whose `animation-range` was too short to perceive. Both were reasoned about from CSS source and assumed correct; neither was actually looked at until the user manually tested and reported "I see no change." A real screenshot before declaring a visual change done would have caught both immediately.
+
 ## Architecture
 
 `index.html` contains all markup and a large inline `<style>` block (lines 65–368) that is a **full duplicate** of `styles.css` — not just `:root` overrides. `index.html` also has a `<link rel="stylesheet" href="styles.css">` tag (line 36), so the inline block is currently redundant with the external file; when editing any styles, update **both** to keep them from drifting apart. A JS script at the end of the body handles scroll animations, active nav tracking, project filter chips, and GA4 outbound click tracking.
