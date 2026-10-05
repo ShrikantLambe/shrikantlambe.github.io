@@ -4,7 +4,9 @@ Documents the design system **as it actually exists** in `styles.css` / `index.h
 
 ## Identity
 
-Dark, mono-accented, data-dense. Reads as an engineer's tool, not a marketing site — deliberately restrained (near-black + single mint accent, no gradients-as-decoration, no stock icon sets). Keep it that way: resist adding a second accent color, a hero illustration, or decorative gradients "to make it pop." The restraint *is* the design.
+Dark, mono-accented, data-dense. Reads as an engineer's tool, not a marketing site — deliberately restrained (near-black + single mint accent, no stock icon sets). Keep it that way: resist adding a second accent color or a hero illustration.
+
+**2026-10 motion/surface pass (user-requested "modern look + more animation"):** the restraint above governs *color and layout*, not motion — that axis was deliberately expanded. The site now has two very low-opacity (6–8%), single-accent-only ambient radial glows (hero, contact — the two flattest sections) plus cursor-reactive spotlight glow on `.cred-card`/`.flag-preview`, spring-eased hover lifts, and press/active feedback across interactive elements (see Motion below). This was a scoped, explicit exception, not drift: still one accent color, still no stock gradients-as-wallpaper, still nothing that reads as decoration unconnected to an interactive or depth purpose. Don't treat this as license to keep adding — the bar for a new glow/gradient is still "does this serve legibility or interaction feedback," not "would this look cool."
 
 ## Color
 
@@ -62,18 +64,21 @@ Not a strict 4px/8px grid — values are chosen per-component (6, 10, 14, 18, 22
 
 ## Components
 
-- **Buttons** (`.btn`): 12px/18px padding, 6px radius, mono font. `.primary` = solid accent fill; default = outlined/bg-1. Hover always: border/bg lighten one step + `translateY(-1px)`.
-- **Cards** (`.cred-card`, `.flag-preview`, `.nl-card`): `--bg-1` fill, 1px `--line` border, 6–12px radius (never higher — no bubble/pill cards). Hover: border → accent, bg → `--bg-2`, occasionally `translateY(-1px)`.
+- **Buttons** (`.btn`): 12px/18px padding, 6px radius, mono font. `.primary` = solid accent fill; default = outlined/bg-1. Hover: border/bg lighten one step + `translateY(-1px)` (spring-eased, see Motion); `.primary` additionally gets a soft accent-tinted glow shadow on hover. Press (`:active`): `scale(0.97)`.
+- **Cards** (`.cred-card`, `.flag-preview`, `.nl-card`): `--bg-1` fill, 1px `--line` border, 6–12px radius (never higher — no bubble/pill cards). Two different hover treatments, by design, not an inconsistency to fix: `.cred-card` → border `--accent`, bg `--bg-2`, `translateY(-1px)`; `.flag-preview` → border `--line-2`, `translateY(-4px)`, two-layer box-shadow (ambient + a 1px accent ring that fades in) — both its rest and hover states declare the same shadow-layer count so the transition actually eases instead of snapping. Both also get a cursor-reactive spotlight: a `::before`/`::after` radial-gradient overlay positioned at `--mx`/`--my` custom properties (updated by a `mousemove` listener, gated behind `(hover: hover)` so touch devices skip it entirely), accent-tinted at 8–14% opacity, fading in on hover. Both also get a `:active` press-scale (0.97–0.98). `.nl-card` is a static sticky info panel, not a clickable unit — it has no hover state and no spotlight.
 - **Tags/pills** (`.tag`, `.tier-pill`, `.pill`): mono, small, `--bg-1` fill, 4px radius — flat, no shadow, no gradient.
 - **Chips** (filter buttons): same tag styling but interactive; `.active` = solid accent fill (the *only* place a pill goes solid-filled outside of `.btn.primary`).
 - Border-radius scale in practice: 3–4px (tags, small chrome) / 6px (cards, buttons) / 8–12px (large panels only: `.flag-preview`, `.nl-card`). Don't go above 12px anywhere — that's the ceiling that keeps the site feeling like tooling, not a consumer app.
 
 ## Motion
 
-- Reveal-on-scroll: `.reveal` fades + translates 18px on `IntersectionObserver`, staggered 60ms per element, 0.6s ease. This is the *only* animation that should feel "designed" — everything else is a fast utility transition.
-- Hover/interactive transitions: 0.18–0.2s, no exceptions. Don't add anything slower for hover states.
+- Reveal-on-scroll: `.reveal` fades + translates 18px **+ scales from 0.985** on `IntersectionObserver` (or the native `animation-timeline: view()` path), staggered 60ms per element, 0.6s ease. This is the main "designed" entrance — everything else is a fast utility transition.
+- Hover/interactive transitions: 0.18–0.2s for color/background/border/shadow, no exceptions there. Transform-only hover/press feedback (button and card lifts) uses `var(--ease-spring)` (`cubic-bezier(0.34, 1.56, 0.64, 1)`, a slight overshoot) at 0.2–0.25s instead of linear `ease` — this is the one deliberate exception to "no exceptions," scoped to transforms only so color/shadow still settle smoothly without overshoot artifacts. Don't apply the spring curve to anything that isn't a transform.
+- Press/active feedback (`:active { transform: scale(...) }`, 0.95–0.98 depending on element size) is present wherever hover feedback is: `.btn`, `.nav-cta`, `.chip`, `.cred-card`, `.flag-preview`. Add it to any new interactive element in the same family — its absence was a real gap the 2026-10 pass closed.
+- Cursor-reactive spotlight glow on `.cred-card`/`.flag-preview` (see Components) — the one new ambient/decorative-adjacent effect, justified because it's interaction-bound (only visible on hover, tracks the actual cursor) rather than auto-playing.
 - Two `@keyframes` pulses exist (`--accent` dot, `--amber` warning icon) — both are status indicators, not decoration. Don't add a third pulse animation for something that isn't communicating live/active state.
-- `@media (prefers-reduced-motion: reduce)` disables the reveal transition/transform and both pulse animations outright (styles.css, right after `.reveal.in`). Any new animation added to the site needs a corresponding entry in that block.
+- Nav links (`.nav-links a`, desktop only — `min-width: 721px`) get an animated underline (`::after`, `scaleX` 0→1) on hover/`.active`. Deliberately excluded from the mobile dropdown, which already uses row separators as its own affordance.
+- `@media (prefers-reduced-motion: reduce)` disables the reveal transition/transform and both pulse animations outright (styles.css, right after `.reveal.in`). It does **not** disable `:active` press feedback or the hover spotlight — both are discrete, user-triggered, non-auto-playing, and not the kind of motion that reduced-motion targets. Any new *auto-playing or continuous* animation added to the site still needs a corresponding entry in that block.
 
 ## Content voice
 
