@@ -99,6 +99,17 @@
   .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
   @media (max-width: 720px) { .wrap { padding: 0 20px; } }
 
+  /* Section snap: desktop gets the hard JS wheel/keyboard hijack (see the
+     script at the end of body). Touch devices never fire wheel events, so
+     they get this gentler native equivalent instead — proximity (not
+     mandatory) so it nudges toward section boundaries without yanking the
+     viewport away from the middle of a long scroll. */
+  @media (max-width: 720px) {
+    html { scroll-snap-type: y proximity; }
+    .hero, #about, #credentials, #work, #writing, #experience, #stack, #contact { scroll-snap-align: start; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; } }
+
   /* ---- UTILITIES ---- */
   .scroll-bar { position: fixed; top: 57px; left: 0; height: 2px; width: 0%; background: var(--accent); z-index: 51; pointer-events: none; }
   .reveal { opacity: 0; transform: translateY(18px) scale(0.985); transition: opacity .6s ease, transform .6s ease; }
@@ -253,16 +264,19 @@
   .chip.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 500; }
 
   /* ---- FLAGSHIP PROJECTS ---- */
-  .flagship { display: grid; grid-template-columns: 1.05fr 1.25fr; gap: 60px; padding: 60px 0; border-top: 1px solid var(--line); align-items: center; }
+  .flagship {
+    display: grid; grid-template-columns: 1.05fr 1.25fr; grid-template-areas: "head preview" "meta preview";
+    column-gap: 60px; row-gap: 22px; padding: 60px 0; border-top: 1px solid var(--line); align-items: center;
+  }
   .flagship.first-visible { border-top: none; padding-top: 36px; }
-  .flagship.rev { grid-template-columns: 1.25fr 1.05fr; }
-  .flagship.rev .flag-meta { order: 2; }
-  .flagship.rev .flag-preview { order: 1; }
+  .flagship.rev { grid-template-columns: 1.25fr 1.05fr; grid-template-areas: "preview head" "preview meta"; }
+  .flag-head { grid-area: head; }
+  .flag-meta { grid-area: meta; }
 
-  .flag-meta .flag-num { font-family: var(--mono); font-size: 13px; color: var(--accent); margin-bottom: 10px; letter-spacing: -0.01em; }
-  .flag-meta .flag-tag { font-family: var(--mono); font-size: 11px; color: var(--fg-2); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 22px; display: inline-block; padding: 4px 10px; background: var(--bg-1); border: 1px solid var(--line); border-radius: 4px; }
-  .flag-meta h3 { font-size: clamp(22px,2.8vw,36px); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 22px; }
-  .flag-meta h3 .ac { color: var(--accent); font-weight: 400; }
+  .flag-head .flag-num { font-family: var(--mono); font-size: 13px; color: var(--accent); margin-bottom: 10px; letter-spacing: -0.01em; }
+  .flag-head .flag-tag { font-family: var(--mono); font-size: 11px; color: var(--fg-2); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 22px; display: inline-block; padding: 4px 10px; background: var(--bg-1); border: 1px solid var(--line); border-radius: 4px; }
+  .flag-head h3 { font-size: clamp(22px,2.8vw,36px); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; }
+  .flag-head h3 .ac { color: var(--accent); font-weight: 400; }
   .flag-meta .pitch { color: var(--fg-1); font-size: 15px; line-height: 1.65; margin-bottom: 26px; }
   .flag-meta .outcome { font-family: var(--mono); font-size: 12px; color: var(--accent); padding: 8px 12px; background: rgba(var(--accent-rgb),0.06); border: 1px solid rgba(var(--accent-rgb),0.2); border-radius: 4px; margin-bottom: 22px; letter-spacing: -0.01em; }
 
@@ -280,7 +294,7 @@
   .link-row a { font-family: var(--mono); font-size: 12.5px; color: var(--fg-1); padding-bottom: 2px; border-bottom: 1px solid var(--line-2); transition: color .2s, border-color .2s; }
   .link-row a:hover { color: var(--accent); border-color: var(--accent); }
 
-  .flag-preview { position: relative; background: var(--bg-1); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(var(--accent-rgb),0); transition: transform .25s var(--ease-spring), box-shadow .2s ease, border-color .2s ease; }
+  .flag-preview { grid-area: preview; position: relative; background: var(--bg-1); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(var(--accent-rgb),0); transition: transform .25s var(--ease-spring), box-shadow .2s ease, border-color .2s ease; }
   .flag-preview::after {
     content: ""; position: absolute; inset: 0; pointer-events: none;
     background: radial-gradient(280px circle at var(--mx,50%) var(--my,50%), rgba(var(--accent-rgb),0.08), transparent 65%);
@@ -338,8 +352,72 @@
   .code-block .fn { color: var(--amber); } .code-block .str { color: var(--blue); }
 
   @media (max-width: 920px) {
-    .flagship, .flagship.rev { grid-template-columns: 1fr; gap: 36px; padding: 48px 0; }
-    .flagship.rev .flag-meta { order: 1; } .flagship.rev .flag-preview { order: 2; }
+    .flagship, .flagship.rev {
+      grid-template-columns: 1fr; grid-template-areas: "head" "meta" "preview";
+      row-gap: 22px; column-gap: 0; padding: 48px 0;
+    }
+    .flagship .flag-preview, .flagship.rev .flag-preview { margin-top: 14px; }
+  }
+
+  /* ---- WORK: cinematic per-project snap stops (desktop + motion only) ----
+     Each .flagship is its own stop in the generic section-snap system (see
+     script, snapSections) — no special nested mechanism. >= 961px (so the
+     2-column layout always has room) and only when motion is allowed, each
+     card gets a real min-height so it fills (or exceeds — content pushes the
+     page taller, same as any other tall section) one viewport. Below that
+     width, or under reduced motion, .flagship is completely untouched —
+     today's normal card, normal vertical stack. See "Work section: cinematic
+     per-project snap stops" in design.md.
+     Placed here, AFTER the base .flagship/.flag-meta/.flag-preview rules
+     above (not before) deliberately — these share the exact same selectors
+     at equal specificity, so with equal specificity CSS cascade falls back
+     to source order, and a block placed earlier loses to a later one
+     regardless of which is wrapped in a media query. Moving a rule here
+     without noticing this will silently stop overriding anything. */
+  @media (min-width: 961px) and (prefers-reduced-motion: no-preference) {
+    /* Title moves out of the two-column content entirely and spans the full
+       card width as its own row — smaller than a single-column headline
+       needs to be (that version needed extra size to read as bold when
+       squeezed into just the left column) but reads just as commanding with
+       the whole row to itself, wrapping to far fewer lines. This is also
+       *why* align-items: start (not the base rule's center) still matters
+       below: .flag-meta (pitch/specs/tags/links) and .flag-preview can still
+       differ in height even with the title gone, and centering would leave
+       the shorter one floating in empty space. */
+    .flagship {
+      min-height: calc(100vh - 58px); grid-template-columns: 0.85fr 1.35fr;
+      grid-template-areas: "head head" "meta preview";
+      column-gap: 72px; row-gap: 40px; padding: 72px 0; align-items: start;
+    }
+    .flagship.first-visible { padding-top: 56px; }
+    .flagship.rev { grid-template-columns: 1.35fr 0.85fr; grid-template-areas: "head head" "preview meta"; }
+    .flag-head .flag-tag { margin-bottom: 20px; }
+    .flag-head h3 { font-size: clamp(32px, 4vw, 52px); letter-spacing: -0.03em; }
+    .flag-meta .pitch { max-width: 52ch; font-size: 16.5px; line-height: 1.7; margin-bottom: 30px; }
+    /* The preview mockup is the dominant visual now, not a side element — it
+       owns the pin-and-scale entrance effect below, so its own hover-lift
+       (transform: translateY, defined with the rest of .flag-preview) is
+       switched off here to avoid two things fighting over `transform` on the
+       same element — the exact bug that broke two earlier attempts at this
+       section. */
+    .flag-preview:hover { transform: none; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(var(--accent-rgb),0); }
+    /* Base state for the IntersectionObserver fallback (browsers without
+       animation-timeline) — mirrors .reveal/.reveal.in exactly: starts
+       scaled down, JS adds .in once in view, transition carries it to full
+       size. @supports below overrides this with the real scroll-linked
+       animation for capable browsers, same layering as .reveal uses. */
+    .flag-preview { transform: scale(0.82); transition: transform .6s ease; }
+    .flag-preview.in { transform: scale(1); }
+  }
+  /* Pin-and-scale: reuses the same native scroll-linked technique as .reveal
+     and the kinetic headings above, rather than inventing scroll-math JS.
+     "entry" naturally spans close to one full snap transition since each
+     card is ~viewport height, same reasoning as the kinetic-heading ranges. */
+  @supports (animation-timeline: view()) {
+    @keyframes flag-pin-scale { from { transform: scale(0.82); } to { transform: scale(1); } }
+    @media (min-width: 961px) and (prefers-reduced-motion: no-preference) {
+      .flag-preview { animation: flag-pin-scale linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+    }
   }
 
   /* ---- WRITING ---- */
@@ -576,11 +654,13 @@
     </div>
 
     <!-- 11: HR Analytics Copilot -->
-    <article class="flagship first-visible reveal" data-category="ai-agents product">
-      <div class="flag-meta">
+    <article class="flagship first-visible" data-category="ai-agents product">
+      <div class="flag-head">
         <div class="flag-num">11 / hr-copilot</div>
         <span class="flag-tag">AI Agent · Recruiting Analytics</span>
         <h3>HR Analytics Copilot <span class="ac">— a dashboard that writes its own SQL.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">A recruiting-funnel dashboard with a dual-path AI assistant: numeric questions are answered by an LLM writing SQL that runs client-side against DuckDB-WASM, returning both the number and the query that produced it; interpretive questions are answered from a findings knowledge base with citations. There's no backend database — data lives in local CSVs — and the LLM key stays inside a single server-side API route, never reaching the client bundle. Ships with a full demo mode so the live app works end-to-end with zero key and zero flaky-network risk.</p>
         <div class="outcome">🔍 SQL-writing assistant + citation-grounded insights · zero backend DB · demo mode needs no API key</div>
         <div class="key-specs">
@@ -622,11 +702,13 @@
     </article>
 
     <!-- 12: Coffee Barista Agent (rev) -->
-    <article class="flagship rev reveal" data-category="ai-agents product">
-      <div class="flag-meta">
+    <article class="flagship rev" data-category="ai-agents product">
+      <div class="flag-head">
         <div class="flag-num">12 / barista</div>
         <span class="flag-tag">AI Agent · Conversational</span>
         <h3>Coffee Barista Agent <span class="ac">— an ADK agent that won't recommend off-menu.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">A conversational ordering assistant built on Google's Agent Development Kit, served through a Streamlit chat UI. The agent is grounded in an actual menu via a get_menu tool call — it asks one clarifying question when a request is vague (hot or cold, sweet or strong) and respects allergen and dietary tags instead of free-associating a drink. A companion script embeds the menu with Vertex AI text-embedding-005 into Firestore, laying the groundwork for semantic menu search.</p>
         <div class="outcome">☕ Menu-grounded recommendations · allergen-aware · Vertex AI embeddings for semantic search</div>
         <div class="key-specs">
@@ -663,11 +745,13 @@
     </article>
 
     <!-- 07: Pipeline Sentinel -->
-    <article class="flagship reveal" data-category="ai-agents data-engineering">
-      <div class="flag-meta">
+    <article class="flagship" data-category="ai-agents data-engineering">
+      <div class="flag-head">
         <div class="flag-num">07 / sentinel</div>
         <span class="flag-tag">Multi-Agent · DataOps</span>
         <h3>Pipeline Sentinel <span class="ac">— a self-healing agent for Airflow.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">Five specialized agents — Monitor, Diagnosis, Blast Radius, Remediation, Reflection — coordinate through shared state to diagnose and resolve pipeline failures without paging a human. Pattern memory prevents repeat incidents. A confidence gate auto-remediates only low-risk, high-signal cases; everything else escalates with a full audit trail. Independent build — the numbers below are from its own test/demo scenarios, not a company-monitored production system.</p>
         <div class="outcome">⚡ Demo scenario: resolves failures in ~11s at 94% confidence · escalates everything else with a full audit trail</div>
         <div class="key-specs">
@@ -708,11 +792,13 @@
     </article>
 
     <!-- 08: LoanLens (rev) -->
-    <article class="flagship rev reveal" data-category="fintech data-engineering">
-      <div class="flag-meta">
+    <article class="flagship rev" data-category="fintech data-engineering">
+      <div class="flag-head">
         <div class="flag-num">08 / loanlens</div>
         <span class="flag-tag">FinTech · Data Platform</span>
         <h3>LoanLens <span class="ac">— portfolio intelligence for a simulated Series C lender.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">10,000 loans, 1.35M payment events, 3 SPVs. Modeled in dbt, reconciled end-to-end to &lt;0.1% tolerance, narrated by Claude. SPV covenant monitoring, 36-cohort vintage analysis, anomaly detection, and investor-grade PDF memo export. Designed and shipped as a two-day sprint.</p>
         <div class="outcome">📊 1.35M payment events · 3 SPVs reconciled to &lt;0.1% · investor-grade PDF memo in one click</div>
         <div class="key-specs">
@@ -757,11 +843,13 @@
     </article>
 
     <!-- 06: Growth Intelligence Agent -->
-    <article class="flagship reveal" data-category="ai-agents analytics-engineering">
-      <div class="flag-meta">
+    <article class="flagship" data-category="ai-agents analytics-engineering">
+      <div class="flag-head">
         <div class="flag-num">06 / growth-agent</div>
         <span class="flag-tag">Agentic AI · SaaS Analytics</span>
         <h3>Growth Intelligence Agent <span class="ac">— a virtual revenue analyst.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">Autonomously monitors SaaS growth metrics across 6 categories (new logo, expansion, retention), detects anomalies with severity scoring, and surfaces RAG-grounded strategic recommendations from company playbooks — all through a natural-language interface. Thinks like an analyst, cites like a playbook.</p>
         <div class="outcome">🤖 Surfaces playbook-grounded recommendations autonomously across 6 metric categories</div>
         <div class="key-specs">
@@ -803,11 +891,13 @@
     </article>
 
     <!-- 05: Snowflake Cortex (rev) -->
-    <article class="flagship rev reveal" data-category="analytics-engineering">
-      <div class="flag-meta">
+    <article class="flagship rev" data-category="analytics-engineering">
+      <div class="flag-head">
         <div class="flag-num">05 / cortex</div>
         <span class="flag-tag">Snowflake · Enterprise AI</span>
         <h3>AI-Native Data Platform <span class="ac">on Snowflake Cortex.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">A reference architecture and live demo for running governed AI natively inside the Snowflake Data Cloud — Cortex LLM functions (COMPLETE, SENTIMENT, CLASSIFY), Cortex Search, and Cortex Analyst, with live interactive demos. Zero data egress is a design property of the in-warehouse pattern, not a third-party-audited guarantee — this is a personal architecture blueprint, not a deployed enterprise system.</p>
         <div class="outcome">🏗 Architecture blueprint: zero data egress by design · end-to-end governed AI patterns · live interactive demo on GitHub Pages</div>
         <div class="key-specs">
@@ -856,11 +946,13 @@
     </article>
 
     <!-- 03: Real-Time Retail Pipeline -->
-    <article class="flagship reveal" data-category="data-engineering">
-      <div class="flag-meta">
+    <article class="flagship" data-category="data-engineering">
+      <div class="flag-head">
         <div class="flag-num">03 / retail-pipeline</div>
         <span class="flag-tag">Data Engineering · Streaming</span>
         <h3>Real-Time Retail Sales Pipeline <span class="ac">— Kafka to warehouse, E2E.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">Production streaming platform: Kafka producer → PySpark Structured Streaming → Snowflake → dbt incremental MERGE → Airflow orchestration with automated data quality gates. Fully containerized via Docker Compose. System design documented as an architecture reference.</p>
         <div class="outcome">🔄 Processes 25 events/sec end-to-end · zero DQ failures · fully containerized with Docker Compose</div>
         <div class="key-specs">
@@ -902,11 +994,13 @@
     </article>
 
     <!-- 02: Marketing AI (rev) -->
-    <article class="flagship rev reveal" data-category="ai-agents analytics-engineering">
-      <div class="flag-meta">
+    <article class="flagship rev" data-category="ai-agents analytics-engineering">
+      <div class="flag-head">
         <div class="flag-num">02 / mktg-ai</div>
         <span class="flag-tag">GenAI · Enterprise</span>
         <h3>Marketing AI Intelligence Engine <span class="ac">— board-ready in 30 seconds.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">Inspired by real AI work at Workday. 4-layer GenAI architecture — Semantic → Context/RAG → Insight Engine → LLM Generation — that transforms raw campaign data into board-ready executive summaries. No analyst in the loop required.</p>
         <div class="outcome">⚡ Reduces executive reporting from hours to 30 seconds · inspired by production AI work at Workday</div>
         <div class="key-specs">
@@ -945,11 +1039,13 @@
     </article>
 
     <!-- 01: Customer Churn -->
-    <article class="flagship reveal" data-category="ai-agents analytics-engineering">
-      <div class="flag-meta">
+    <article class="flagship" data-category="ai-agents analytics-engineering">
+      <div class="flag-head">
         <div class="flag-num">01 / churn</div>
         <span class="flag-tag">ML + AI · Flagship</span>
         <h3>Customer Churn Analysis <span class="ac">&amp; Prediction Copilot.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">End-to-end ML system for telecom churn prediction — SHAP explainability per prediction, LLM-generated retention strategies per customer, and a FastAPI microservice. Inspired by real patterns from enterprise data work at Workday. CI/CD via GitHub Actions.</p>
         <div class="outcome">🎯 Per-customer SHAP explainability + LLM retention strategy in a single FastAPI call</div>
         <div class="key-specs">
@@ -989,11 +1085,13 @@
     </article>
 
     <!-- 04: GPT-4o Chatbot (rev) -->
-    <article class="flagship rev reveal" data-category="ai-agents">
-      <div class="flag-meta">
+    <article class="flagship rev" data-category="ai-agents">
+      <div class="flag-head">
         <div class="flag-num">04 / chatbot</div>
         <span class="flag-tag">AI · Deployed</span>
         <h3>GPT-4o AI Chatbot <span class="ac">— multi-turn, deployed on Render.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">Production web chatbot with multi-turn memory, animated typing indicators, and a responsive dark UI. Flask + Gunicorn backend deployed on Render. One-line system prompt swap for any domain — built as a reusable baseline for enterprise conversational AI.</p>
         <div class="outcome">🚀 Live on Render · multi-turn context window · one-line system prompt swap for any domain</div>
         <div class="key-specs">
@@ -1031,11 +1129,13 @@
     </article>
 
     <!-- 09: Kids AI Explorer -->
-    <article class="flagship reveal" data-category="product">
-      <div class="flag-meta">
+    <article class="flagship" data-category="product">
+      <div class="flag-head">
         <div class="flag-num">09 / kids-ai</div>
         <span class="flag-tag">Product · EdTech</span>
         <h3>Kids AI Explorer <span class="ac">— AI literacy for ages 6–12.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">A 4-week, 12-activity curriculum that teaches children foundational AI concepts through hands-on exploration guided by Sparky, a robot mascot. Anonymous auth on first visit with optional cross-device sync, parent coaching guides per week, real AI chat powered by Gemini or Claude, and printable completion certificates. Shipped from scratch to live on Vercel in a single sprint.</p>
         <div class="outcome">🎓 4 weeks · 12 activities · Gemini + Claude powered chat · live on Vercel</div>
         <div class="key-specs">
@@ -1077,11 +1177,13 @@
     </article>
 
     <!-- 10: Marginalia (rev) -->
-    <article class="flagship rev reveal" data-category="product">
-      <div class="flag-meta">
+    <article class="flagship rev" data-category="product">
+      <div class="flag-head">
         <div class="flag-num">10 / marginalia</div>
         <span class="flag-tag">Product · Read-it-later</span>
         <h3>Marginalia <span class="ac">— your reading list, summarized by AI.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">Paste a URL, Marginalia fetches and strips the article via Mozilla Readability, generates a TL;DR and tags via Gemini 2.5 Flash, then saves it to a personal reading list with an editorial aesthetic. Server-side API routes keep credentials off the client. Zero-cost stack: Next.js, Supabase, Stack Auth, and Vercel — all free tier, all self-hostable.</p>
         <div class="outcome">📚 URL → TL;DR in one click · $0 infra cost · editorial typography with Crimson Pro</div>
         <div class="key-specs">
@@ -1123,11 +1225,13 @@
     </article>
 
     <!-- 13: KinSync -->
-    <article class="flagship reveal" data-category="ai-agents product">
-      <div class="flag-meta">
+    <article class="flagship" data-category="ai-agents product">
+      <div class="flag-head">
         <div class="flag-num">13 / kinsync</div>
         <span class="flag-tag">AI Agent · Family Logistics</span>
         <h3>KinSync <span class="ac">— a family command hub with a Reasoning Engine assistant.</span></h3>
+      </div>
+      <div class="flag-meta reveal">
         <p class="pitch">A scheduling hub for multi-child households — daily briefs, driver assignments, packing lists, and live Google Maps directions — backed by a conversational assistant built on Google ADK and deployed to Vertex AI Reasoning Engine. The assistant talks to the frontend over the A2A protocol using A2UI, rendering interactive Maps route cards and conflict detection directly inside the chat drawer instead of as plain text.</p>
         <div class="outcome">🗓️ Conflict-aware scheduling assistant · live Maps route cards via A2UI · Vertex AI Reasoning Engine backend</div>
         <div class="key-specs">
@@ -1486,6 +1590,100 @@
       });
     }, { threshold: 0.05 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Same fallback for the .flag-preview pin-and-scale effect (see CSS:
+    // .flag-preview.in, right after the @media block with its base state).
+    const previewObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); previewObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.flag-preview').forEach(el => previewObs.observe(el));
+  }
+
+  // Full-page section snap — mimics fullPage.js-style hard snapping between
+  // major sections/projects, scoped to wheel + keyboard input only. Touch
+  // devices never fire 'wheel' events, so this never engages on
+  // mobile/tablet — those get a softer native CSS scroll-snap instead (see
+  // styles.css, max-width: 720px). A section taller than the viewport
+  // still scrolls natively inside itself; the hijack only fires when the
+  // viewport is already at that section's top/bottom edge, so content
+  // browsing, Ctrl+F and normal in-section scrolling are unaffected.
+  // Disabled outright under prefers-reduced-motion, which this kind of
+  // scroll-hijacking is exactly the kind of thing that preference exists for.
+  //
+  // Each of the 13 project cards is its own stop in this same list (>=
+  // 961px + motion-allowed — see .flagship's min-height rule in CSS), not a
+  // separate nested mechanism: computeSnapSections() is top-level (not
+  // inside the reduced-motion check below) because applyFilter(), further
+  // down, needs to rebuild this list whenever a filter chip hides/shows
+  // cards, regardless of whether the hijack itself is active.
+  history.scrollRestoration = 'manual';
+  let snapSections = [];
+  function computeSnapSections() {
+    const fixed = [...document.querySelectorAll('.hero, #about, #credentials')];
+    const projects = [...document.querySelectorAll('.flagship')].filter(c => c.style.display !== 'none');
+    const rest = [...document.querySelectorAll('#writing, #experience, #stack, #contact')];
+    snapSections = [...fixed, ...projects, ...rest];
+  }
+  computeSnapSections();
+
+  if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    const EDGE_SLOP = 2;
+    const SNAP_LOCK_MS = 850;
+    let snapping = false;
+
+    // getBoundingClientRect(), not offsetTop: offsetTop is relative to the
+    // nearest positioned ancestor (offsetParent), not the document. .hero,
+    // #about etc. are direct children of <body> (no positioned ancestor,
+    // so offsetTop happens to already be document-absolute), but .flagship
+    // sits inside .wrap, which has `position: relative` — its offsetTop is
+    // relative to .wrap, a completely different coordinate space. Mixing
+    // both kinds of element in one offsetTop-based comparison silently
+    // breaks for exactly the entries that are nested deeper. This bites
+    // only once .flagship joined snapSections directly — getBoundingClientRect
+    // is correct regardless of ancestor positioning, so used everywhere here.
+    function absTop(el) { return el.getBoundingClientRect().top + window.scrollY; }
+    function currentSnapIndex() {
+      const y = window.scrollY;
+      for (let i = snapSections.length - 1; i >= 0; i--) {
+        if (y >= absTop(snapSections[i]) - EDGE_SLOP) return i;
+      }
+      return 0;
+    }
+    function atTop(i) { return window.scrollY <= absTop(snapSections[i]) + EDGE_SLOP; }
+    function atBottom(i) {
+      const sec = snapSections[i];
+      return (window.scrollY + window.innerHeight) >= (absTop(sec) + sec.offsetHeight - EDGE_SLOP);
+    }
+    function goTo(i) {
+      if (i < 0 || i >= snapSections.length) return;
+      snapping = true;
+      snapSections[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.setTimeout(() => { snapping = false; }, SNAP_LOCK_MS);
+    }
+
+    window.addEventListener('wheel', (e) => {
+      if (snapping) { e.preventDefault(); return; }
+      const i = currentSnapIndex();
+      if (e.deltaY > 0 && atBottom(i) && i < snapSections.length - 1) {
+        e.preventDefault(); goTo(i + 1);
+      } else if (e.deltaY < 0 && atTop(i) && i > 0) {
+        e.preventDefault(); goTo(i - 1);
+      }
+    }, { passive: false });
+
+    window.addEventListener('keydown', (e) => {
+      if (snapping) return;
+      const a = document.activeElement;
+      if (a && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA' || a.tagName === 'SELECT' || a.isContentEditable)) return;
+      const i = currentSnapIndex();
+      if ((e.key === 'ArrowDown' || e.key === 'PageDown') && atBottom(i) && i < snapSections.length - 1) {
+        e.preventDefault(); goTo(i + 1);
+      } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && atTop(i) && i > 0) {
+        e.preventDefault(); goTo(i - 1);
+      }
+    });
   }
 
   // Hero stat count-up — plays once on load (the strip sits above the fold on
@@ -1562,6 +1760,7 @@
       if (match && !foundFirst) { article.classList.add('first-visible'); foundFirst = true; }
     });
     localStorage.setItem('projectFilter', filter);
+    computeSnapSections();
   }
 
   const chips = [...document.querySelectorAll('.chip')];
